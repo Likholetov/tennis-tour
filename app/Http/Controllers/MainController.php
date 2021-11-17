@@ -15,4 +15,14 @@ class MainController extends Controller
     {
         return view('about');
     }
+
+    public function calendar()
+    {
+        return view('calendar');
+    }
+
+    public function contacts()
+    {
+        return view('contacts');
+    }
 }

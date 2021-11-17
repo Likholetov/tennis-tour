@@ -48,12 +48,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}" role="button">
-                    Кабинет
-                    <i class="fas fa-user ml-1"></i>
-                </a>                                    
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="{{ route('logout') }}" role="button" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                     Выход
@@ -105,7 +99,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('user.index') }}" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-user"></i>
                             <p>
                                 Пользователи

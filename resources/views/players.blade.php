@@ -241,6 +241,7 @@
                   </select>
                </form>
                <ul class="players__list">
+                  @foreach ($players as $player)
                   <a href="{{ route('player') }}" class="players__item">
                      <div class="players__elem">
                         <img src="images/dist/avatar.png" alt="" class="avatar">
@@ -306,8 +307,10 @@
                         </p>
                      </div>
                   </a>
+                  @endforeach
                </ul>
             </div>
+            @if (false)
             <div class="players__block-birthday">
                <div class="tennis__title">
                   Дни рождения
@@ -413,6 +416,8 @@
                   </li>
                </ul>
             </div>
+            @endif
+            
          </div>
       </div>
    </section>

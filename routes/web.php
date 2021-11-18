@@ -28,7 +28,8 @@ Route::get('/glory', [App\Http\Controllers\MainController::class, 'glory'])->nam
 Route::get('/news', [App\Http\Controllers\MainController::class, 'news'])->name('news');
 Route::get('/schedule', [App\Http\Controllers\MainController::class, 'schedule'])->name('schedule');
 Route::get('/players', [App\Http\Controllers\MainController::class, 'players'])->name('players');
-Route::get('/player', [App\Http\Controllers\MainController::class, 'player'])->name('player');
+Route::get('/player/{player}', [App\Http\Controllers\MainController::class, 'player'])->name('player');
 
-
-Route::resource('player', App\Http\Controllers\PlayerController::class)->except(['show']);
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('player', App\Http\Controllers\PlayerController::class)->except(['show']);
+});

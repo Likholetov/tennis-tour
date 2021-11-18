@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Player;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -48,7 +49,9 @@ class MainController extends Controller
 
     public function players()
     {
-        return view('players');
+        $players = Player::all();
+
+        return view('players', compact('players'));
     }
 
     public function player()

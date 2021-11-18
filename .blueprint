@@ -1,0 +1,16 @@
+created:
+    - app/Http/Controllers/PlayerController.php
+    - database/factories/PlayerFactory.php
+    - database/migrations/2021_11_18_075235_create_players_table.php
+    - app/Models/Player.php
+    - tests/Feature/Http/Controllers/PlayerControllerTest.php
+    - app/Http/Requests/PlayerStoreRequest.php
+    - app/Http/Requests/PlayerUpdateRequest.php
+    - resources/views/player/index.blade.php
+    - resources/views/player/create.blade.php
+    - resources/views/player/show.blade.php
+    - resources/views/player/edit.blade.php
+updated:
+    - routes/web.php
+models:
+    Player: { name: 'string:30', patronymic: 'string:30', surname: 'string:100', gender: 'enum:"не указан",мужской,женский', city: 'string:100 nullable', region: 'string:100 nullable', birth: 'date nullable', level: 'integer nullable', start_playing_year: 'integer nullable', start_tournament_year: 'integer nullable', start_tournament_month: 'integer nullable', racket_firm: 'string:50 nullable', racket_model: 'string:50 nullable', best_position_single: 'integer nullable', best_position_single_date: 'date nullable', best_position_pair: 'integer nullable', best_position_pair_date: 'date nullable', partner_id: 'unsignedBigintegereger nullable' }

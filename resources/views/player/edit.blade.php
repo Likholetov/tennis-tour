@@ -26,12 +26,12 @@
 
     <!-- Main content -->
     <section class="content">
-        <form method="post" action="{{ route('player.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('player.update', $player['id'])}}" enctype="multipart/form-data">
             @csrf
             <div class="row mb-3">
                 <div class="col-12">
                     <a href="{{ route('player.index')}}" class="btn btn-secondary">Назад</a>
-                    <input type="submit" value="Добавить игрока" class="btn btn-success float-right">
+                    <input type="submit" value="Сохранить игрока" class="btn btn-success float-right">
                 </div>
             </div>
             <div class="row">
@@ -76,9 +76,13 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            @if($player['img_url'])
+                                <img style="height: 100px; width: 100px; object-fit: cover" src="{{$player['img_url']}}"
+                                     alt="Player image">
+                            @endif
                             <div class="form-group">
                                 <label>Изображение</label>
-                                <input style="height: 46px;" value="{{ $player['image'] }}" name="image" type="file"
+                                <input style="height: 46px;" name="image" type="file"
                                        class="form-control">
                             </div>
                             <div class="form-group">

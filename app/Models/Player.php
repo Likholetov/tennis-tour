@@ -19,6 +19,7 @@ class Player extends Model
         'patronymic',
         'surname',
         'gender',
+        'img_url',
         'city',
         'region',
         'birth',

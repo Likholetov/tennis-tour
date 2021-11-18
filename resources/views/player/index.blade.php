@@ -36,6 +36,9 @@
                         #
                     </th>
                     <th>
+                        ФОТО
+                    </th>
+                    <th>
                         Фамилия
                     </th>
                     <th>
@@ -59,6 +62,14 @@
                 <tr>
                     <td>
                         {{ $loop->iteration }}
+                    </td>
+                    <td>
+                        @if($player['img_url'])
+                            <img style="height: 50px; width: 50px; object-fit: cover" src="{{$player['img_url']}}"
+                                    alt="Player image">
+                        @else
+                        Не загружено
+                        @endif
                     </td>
                     <td>
                         {{ $player->surname }}

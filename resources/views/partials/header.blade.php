@@ -104,9 +104,9 @@
                             <input type="checkbox" id="tournamentsmenu">
                             <label for="tournamentsmenu">Турниры <i class="fas fa-chevron-down"></i></label>
                             <ul class="menus">
-                                <li><a href="schedule.html">Расписание</a></li>
+                                <li><a href="{{ route("schedule") }}">Расписание</a></li>
                                 <li><a href="preview.html">Сейчас проходит</a></li>
-                                <li><a href="calendar.html">Архив турниров</a></li>
+                                <li><a href="{{ route("calendar") }}">Архив турниров</a></li>
                                 <li><a href="result.html">Кубок TennisTour</a></li>
                                 <li><a href="mistake.html">Клубные дни</a></li>
                                 <li><a href="tournament.html">Выездные турниры</a></li>
@@ -129,9 +129,9 @@
                                 <li><a href="player.html">Страница игрока</a></li>-->
                             </ul>
                         </li>
-                        <li><a href="news.html"> Новости </a></li>
-                        <li><a href="players.html"> Игроки </a></li>
-                        <li><a href="gallery.html">Галерея </a></li>
+                        <li><a href="{{ route("news") }}"> Новости </a></li>
+                        <li><a href="{{ route("players") }}"> Игроки </a></li>
+                        <li><a href="{{ route("gallery") }}">Галерея </a></li>
                         <li>
                             <a href="position-series.html" class="dvezuno-navigatos"></a>
                             <input type="checkbox" id="contactsmenu">

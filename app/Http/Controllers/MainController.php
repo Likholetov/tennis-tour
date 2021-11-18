@@ -25,4 +25,34 @@ class MainController extends Controller
     {
         return view('contacts');
     }
+
+    public function gallery()
+    {
+        return view('gallery');
+    }
+
+    public function glory()
+    {
+        return view('glory');
+    }
+
+    public function news()
+    {
+        return view('news');
+    }
+
+    public function schedule()
+    {
+        return view('schedule');
+    }
+
+    public function players()
+    {
+        return view('players');
+    }
+
+    public function player()
+    {
+        return view('player');
+    }
 }

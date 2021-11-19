@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -47,4 +48,9 @@ class Player extends Model
         //'best_position_single_date' => 'date',
         //'best_position_pair_date' => 'date',
     ];
+
+    public function age()
+    {
+        return Carbon::parse($this->attributes['birth'])->age;
+    }
 }

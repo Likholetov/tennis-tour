@@ -28,6 +28,7 @@
     <section class="content">
         <form method="post" action="{{ route('player.update', $player['id'])}}" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="row mb-3">
                 <div class="col-12">
                     <a href="{{ route('player.index')}}" class="btn btn-secondary">Назад</a>

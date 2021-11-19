@@ -54,8 +54,8 @@ class MainController extends Controller
         return view('players', compact('players'));
     }
 
-    public function player()
+    public function player(Player $player)
     {
-        return view('player');
+        return view('player', compact('player'));
     }
 }

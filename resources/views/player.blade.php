@@ -1,6 +1,6 @@
 @extends('layouts.main_layout')
 
-@section('title', 'Главная')
+@section('title', 'Игрок')
 
 @section('main')
 <main class="main">
@@ -41,11 +41,11 @@
                Игроки TennisTour
             </span>
             <span class="current">
-               Вылков Роман
+               {{ $player->surname }} {{ $player->name }}
             </span>
          </div>
          <h2 class="first-section__title">
-            Вылков Роман
+            {{ $player->surname }} {{ $player->name }}
          </h2>
          <div class="first-section__links">
             <a href="#" class="first-section__link">
@@ -222,10 +222,12 @@
          <div class="row">
             <div class="col-lg-4 col-md-12">
                <div class="player-avatar__block">
-                  <img src="images/dist/avatar3.png" alt="" class="avatar">
+                  <img style="object-fit: cover" src="{{ $player->img_url }}" alt="" class="avatar">
+                  @if (isset($player->level))
                   <div class="button yellow-btn">
-                     4 уровень
+                     {{ $player->level }} уровень
                   </div>
+                  @endif
                   <div class="player-avatar__achievements-block">
                      <h5>
                         Достижения
@@ -476,7 +478,11 @@
                         </p>
                         <div class="line"></div>
                         <b>
-                           22 марта 1973 г. (48 лет)
+                           @if (isset($player->birth))
+                           {{ Date::parse($player->birth)->format('j F Y г.') }} ({{ $player->age() }} лет)
+                           @else
+                           Не указана
+                           @endif
                         </b>
                      </li>
                      <li class="player-info__item">
@@ -485,7 +491,11 @@
                         </p>
                         <div class="line"></div>
                         <b>
-                           Одинцово, Московская область
+                           @if (isset($player->city))
+                           {{ $player->city }}, {{ $player->region }}
+                           @else
+                           Не указан
+                           @endif
                         </b>
                      </li>
                      <li class="player-info__item">
@@ -493,27 +503,45 @@
                            Участвует в турнире с
                         </p>
                         <div class="line"></div>
-                        <b>
-                           июля 2010 года
+                        @if (isset($player->start_tournament_year))
+                        <b style="text-transform: lowercase">
+                           {{ $player->start_tournament_month }} {{ $player->start_tournament_year }} года
                         </b>
+                        @else
+                        <b>
+                           Не указан
+                           </b>
+                        @endif
                      </li>
                      <li class="player-info__item">
                         <p>
                            Играет в теннис с
                         </p>
                         <div class="line"></div>
+                        @if (isset($player->start_playing_year))
                         <b>
-                           2006 года
+                           {{ $player->start_playing_year }} года
                         </b>
+                        @else
+                        <b>
+                           Не указан
+                           </b>
+                        @endif
                      </li>
                      <li class="player-info__item">
                         <p>
                            Ракетка
                         </p>
                         <div class="line"></div>
+                        @if (isset($player->racket_model))
                         <b>
-                           Head
+                           {{ $player->racket_model }}
                         </b>
+                        @else
+                        <b>
+                        Не указана
+                        </b>
+                        @endif
                      </li>
                   </ul>
                </div>
@@ -1180,7 +1208,7 @@
          </form>
          <div class="player-rival__block">
             <div class="rival__avatar">
-               <img src="images/dist/avatar.png" alt="" class="avatar">
+               <img src="/images/dist/avatar.png" alt="" class="avatar">
                <b>
                   Вылков Роман
                </b>
@@ -1189,7 +1217,7 @@
                <span>10 - 5</span>
             </div>
             <div class="rival__avatar">
-               <img src="images/dist/avatar1.png" alt="" class="avatar">
+               <img src="/images/dist/avatar1.png" alt="" class="avatar">
                <b>
                   Алексей Мартинец
                </b>

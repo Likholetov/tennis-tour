@@ -13,11 +13,11 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<link rel="icon" href="images/dist/logo.png">
-	<meta property="og:image" content="images/dist/preview.jpg">
+	<link rel="icon" href="/images/dist/logo.png">
+	<meta property="og:image" content="/images/dist/preview.jpg">
 
 
-	<link rel="stylesheet" href="css/main.min.css">
+	<link rel="stylesheet" href="/css/main.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -48,15 +48,15 @@
 			<div class="swiper-wrapper">
 				<div class="swiper-slide slider-img__slide">
 					<div class="slider-img__bg" date-swiper-parallax="20%"
-						style="background-image: url(images/dist/back1.png);"></div>
+						style="background-image: url(/images/dist/back1.png);"></div>
 				</div>
 				<div class="swiper-slide slider-img__slide">
 					<div class="slider-img__bg" date-swiper-parallax="20%"
-						style="background-image: url(images/dist/back1.png);"></div>
+						style="background-image: url(/images/dist/back1.png);"></div>
 				</div>
 				<div class="swiper-slide slider-img__slide">
 					<div class="slider-img__bg" date-swiper-parallax="20%"
-						style="background-image: url(images/dist/back1.png);"></div>
+						style="background-image: url(/images/dist/back1.png);"></div>
 				</div>
 			</div>
 		</div>
@@ -73,8 +73,8 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-<script src="js/codehim.dropdown.js"></script>
-<script src="js/app.min.js"></script>
+<script src="/js/codehim.dropdown.js"></script>
+<script src="/js/app.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"

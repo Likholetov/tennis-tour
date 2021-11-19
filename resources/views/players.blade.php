@@ -1,6 +1,6 @@
 @extends('layouts.main_layout')
 
-@section('title', 'Главная')
+@section('title', 'Игроки')
 
 @section('main')
 <main class="main">
@@ -242,19 +242,24 @@
                </form>
                <ul class="players__list">
                   @foreach ($players as $player)
-                  <a href="{{ route('player') }}" class="players__item">
+                  <a href="{{ route('player', $player->id) }}" class="players__item">
                      <div class="players__elem">
-                        <img src="images/dist/avatar.png" alt="" class="avatar">
+                        <img src="{{ $player->img_url ?? "images/dist/avatar.png"}}" alt="" class="avatar">
                         <div class="desc">
                            <p class="name">
-                              Вылков Роман
+                              {{ $player->surname }} {{ $player->name }}
                            </p>
                            <p class="birthday">
-                              22 марта 1973 г. (48 лет)
+                              @if (isset($player->birth))
+                              {{ Date::parse($player->birth)->format('j F Y г.') }} ({{ $player->age() }} лет)
+                              @else
+                              Не указано
+                              @endif
                            </p>
+                           @if (isset($player->level))
                            <div class="fourth-place-elem place-elem">
                               <span class="place">
-                                 <b>4</b>
+                                 <b>{{ $player->level }}</b>
                                  <svg class="medal__icon" style="enable-background:new 0 0 512 512;"
                                     xml:space="preserve" xmlns="http://www.w3.org/2000/svg" width="28" height="35"
                                     viewBox="0 0 512 512">
@@ -289,28 +294,31 @@
                                  уровень
                               </div>
                            </div>
-                          
+                           @endif
                         </div>
                      </div>
                      <div class="players__date">
+                        @if (isset($player->start_playing_year))
                         <p>
                            <b>
-                              с 2006 г.
+                              с {{ $player->start_playing_year }} г.
                            </b>
                            играет в теннис
-                        </p>
+                        </p> 
+                        @endif
+                        @if (isset($player->start_tournament_year))
                         <p>
                            <b>
-                              с 2010 г.
+                              с {{ $player->start_tournament_year }} г.
                            </b>
                            учавствутет в турнире
                         </p>
+                        @endif
                      </div>
                   </a>
                   @endforeach
                </ul>
             </div>
-            @if (false)
             <div class="players__block-birthday">
                <div class="tennis__title">
                   Дни рождения
@@ -416,7 +424,6 @@
                   </li>
                </ul>
             </div>
-            @endif
             
          </div>
       </div>

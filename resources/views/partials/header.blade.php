@@ -97,7 +97,7 @@
                 <input type="checkbox" id="navigau-gorizon">
                 
                 <div class="kamevlu-kesaned">
-                  <div class="kogotipuv"><a href="/"><img src="images/dist/logo.png" alt=""></a></div>
+                  <div class="kogotipuv"><a href="/"><img src="/images/dist/logo.png" alt=""></a></div>
                     <ul class="links">
                         <li>
                             <a href="#" class="dvezuno-navigatos"></a>

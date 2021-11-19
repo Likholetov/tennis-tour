@@ -244,7 +244,7 @@
                   @foreach ($players as $player)
                   <a href="{{ route('player', $player->id) }}" class="players__item">
                      <div class="players__elem">
-                        <img src="{{ $player->img_url ?? "images/dist/avatar.png"}}" alt="" class="avatar">
+                        <img style="object-fit: cover" src="{{ $player->img_url ?? "images/dist/avatar.png"}}" alt="" class="avatar">
                         <div class="desc">
                            <p class="name">
                               {{ $player->surname }} {{ $player->name }}

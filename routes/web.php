@@ -17,7 +17,7 @@ Auth::routes(
     ['register' => false]
 );
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
 
 Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('index');
 Route::get('/about', [App\Http\Controllers\MainController::class, 'about'])->name('about');

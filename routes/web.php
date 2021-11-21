@@ -17,8 +17,6 @@ Auth::routes(
     ['register' => false]
 );
 
-Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
-
 Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('index');
 Route::get('/about', [App\Http\Controllers\MainController::class, 'about'])->name('about');
 Route::get('/calendar', [App\Http\Controllers\MainController::class, 'calendar'])->name('calendar');
@@ -31,5 +29,7 @@ Route::get('/players', [App\Http\Controllers\MainController::class, 'players'])-
 Route::get('/player/{player}', [App\Http\Controllers\MainController::class, 'player'])->name('player');
 
 Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
+    Route::get('/calendar', [App\Http\Controllers\HomeController::class, 'calendar'])->name('calendar');
     Route::resource('player', App\Http\Controllers\PlayerController::class)->except(['show']);
 });

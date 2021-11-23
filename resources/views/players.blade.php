@@ -230,6 +230,7 @@
       <div class="container">
          <div class="players__row">
             <div class="players__block">
+               Поиск
                <form action="#" class="players__form">
                   <input type="text" class="players__input players__input-search" placeholder="ФИО">
                   <select id="level">
@@ -239,6 +240,7 @@
                      <option value="3">3</option>
                      <option value="4">4</option>
                   </select>
+                  <input type="text" class="players__input players__input-search" placeholder="Город">
                </form>
                <ul class="players__list">
                   @foreach ($players as $player)

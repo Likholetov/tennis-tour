@@ -38,11 +38,11 @@
 	<link rel="stylesheet" type="text/css"
 		href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
-
-
+		<script src="{{ asset('js/app.js') }}" defer></script>
+		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body style="zoom:0.85">
 	<section id="merit__slider">
 		<div class="merit__slider-img">
 			<div class="swiper-wrapper">
@@ -62,7 +62,7 @@
 		</div>
 	</section>
 	@include('partials.header')
-    <div class="wrapper">
+    <div id="app" class="wrapper">
         @yield('main')
         @include('partials.footer')
     </div>

@@ -2376,7 +2376,7 @@ img.glory-img {
     border-radius: 7px;
 }
 .select-hidden {
-    display: none;
+    // display: none;
     visibility: hidden;
     padding-right: 10px;
 }
@@ -2593,7 +2593,7 @@ img.glory-img {
     background-color: #fff;
     -webkit-box-shadow: 0 38px 39.69px 9.31px rgba(182, 182, 182, 0.25);
     box-shadow: 0 38px 39.69px 9.31px rgba(182, 182, 182, 0.25);
-    height: 872px;
+    height: fit-content;
     padding: 30px 32px;
 }
 .birthday__list {
@@ -2609,7 +2609,7 @@ img.glory-img {
     max-height: 180px;
 }
 .birthday__list:last-child {
-    max-height: 500px;
+    //max-height: 500px;
 }
 .birthday__list .tennis__title {
     margin-bottom: 10px;

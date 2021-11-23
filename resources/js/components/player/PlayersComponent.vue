@@ -3,18 +3,20 @@
         <div class="mb-2">Поиск</div>
         <form action="#" class="players__form">
             <input
+                v-model="fio"
                 type="text"
                 class="players__input players__input-search"
                 placeholder="ФИО"
             />
-            <select id="level">
-                <option value="hide">Уровень игрока</option>
+            <select v-model="level" id="level">
+                <option selected value="">Уровень игрока</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
             </select>
             <input
+                v-model="city"
                 type="text"
                 class="players__input players__input-search"
                 placeholder="Город"
@@ -111,6 +113,23 @@
                 </div>
             </a>
         </ul>
+        <div class="w100 d-flex justify-content-center mt-3">
+            <button
+                v-if="laravelData.links && laravelData.links.next"
+                @click="perPagePlus(10)"
+                type="button"
+                class="btn btn-primary btn-lg btn-block"
+            >
+                Показать еще
+            </button>
+        </div>
+        <div class="w100 d-flex justify-content-center mt-3">
+            <pagination
+                :limit="3"
+                :data="laravelData"
+                @pagination-change-page="getPlayers"
+            ></pagination>
+        </div>
     </div>
 </template>
 
@@ -123,22 +142,52 @@ export default {
         return {
             loading: false,
             // filters
-            name: "",
+            fio: "",
             level: "",
             city: "",
             // sort
             // todo: sort
             // table
             players: [],
+            // pagination
+            laravelData: {},
+            // per page
+            perPage: 10,
         };
     },
+    watch: {
+        fio: function (val) {
+            this.getPlayers();
+        },
+        level: function (val) {
+            this.getPlayers();
+        },
+        city: function (val) {
+            this.getPlayers();
+        },
+        perPage: function (val) {
+            console.log(val);
+            this.getPlayers();
+        },
+    },
     methods: {
-        getPlayers() {
+        perPagePlus(count) {
+            this.perPage += count;
+        },
+        getPlayers(page = 1) {
             axios
-                .get("/admin/player")
+                .get("/api/players?page=" + page, {
+                    params: {
+                        fio: this.fio,
+                        level: this.level,
+                        city: this.city,
+                        per_page: this.perPage,
+                    },
+                })
                 .then((resp) => {
-                    console.log(resp);
+                    console.log(resp.data);
                     this.players = resp.data.data;
+                    this.laravelData = resp.data;
                 })
                 .catch(function (resp) {
                     console.log(resp);

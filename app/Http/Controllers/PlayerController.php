@@ -18,7 +18,7 @@ class PlayerController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('players');
     }
     /**
      * @param \Illuminate\Http\Request $request
@@ -26,12 +26,12 @@ class PlayerController extends Controller
      */
     public function index(Request $request)
     {
-        $players = Player::all();
+        // $players = Player::all();
 
-        return new PlayerCollection($players);
-        /*$players = Player::simplePaginate(10);
+        // return new PlayerCollection($players);
+        $players = Player::simplePaginate(10);
 
-        return view('player.index', compact('players'));*/
+        return view('player.index', compact('players'));
     }
 
     /**
@@ -116,5 +116,22 @@ class PlayerController extends Controller
         $player->delete();
 
         return redirect()->route('player.index');
+    }
+
+    public function players(Request $request)
+    {
+        $filters = (object) [
+            'fio' => $request->fio,
+            'level' => $request->level,
+            'city' => $request->city
+        ];
+
+        $per_page = $request->get('per_page', 10);
+
+        $players = Player::withFilters(
+            $filters
+        )->orderByRaw('surname DESC')->paginate($per_page);
+
+        return new PlayerCollection($players);
     }
 }

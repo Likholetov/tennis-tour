@@ -237,102 +237,34 @@
                <p class="birthday__prg">
                   Поздравляем с Днём Рождения участников турнира, родившихся
                   <span>
-                     20 апреля
+                     {{Date::parse(\Carbon\Carbon::now()->addHours(3))->format('j F')}}
                   </span>
                </p>
                <ul class="birthday__list">
+                  @foreach ($today as $player)
                   <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
+                     <img src="{{$player->img_url ?? 'images/dist/avatar1.png'}}" alt="" class="avatar-birthday">
                      <p>
-                        Ерофеев Д.
+                        {{ $player->surname }} {{ $player->name[0] }}.
                      </p>
                   </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
+                  @endforeach
                </ul>
                <p class="birthday__prg">
                   Скоро Дни Рождения
                   <span>
-                     (21-30 апреля)
+                     ({{Date::parse(\Carbon\Carbon::now()->addHours(3)->addDay())->format('j F')}} - {{Date::parse(\Carbon\Carbon::now()->addHours(3)->addDay(8))->format('j F')}})
                   </span>
                </p>
                <ul class="birthday__list">
+                  @foreach ($week as $player)
                   <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
+                     <img src="{{$player->img_url ?? 'images/dist/avatar1.png'}}" alt="" class="avatar-birthday">
                      <p>
-                        Ерофеев Д.
+                        {{ $player->surname }} {{ $player->name[0] }}.
                      </p>
                   </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
-                  <li class="birthday__item">
-                     <img src="images/dist/avatar1.png" alt="" class="avatar-birthday">
-                     <p>
-                        Ерофеев Д.
-                     </p>
-                  </li>
+                  @endforeach
                </ul>
             </div>
             

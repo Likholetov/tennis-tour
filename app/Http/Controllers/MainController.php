@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -49,9 +50,13 @@ class MainController extends Controller
 
     public function players()
     {
-        $players = Player::all();
+        $date1 = Carbon::now()->addHours(3)->addDay()->toDateString();
+        $date2 = Carbon::now()->addHours(3)->addDay(8)->toDateString();
 
-        return view('players', compact('players'));
+        $today = Player::whereDate('birth', Carbon::now()->addHours(3))->get();
+        $week = Player::whereBetween('birth', [$date1, $date2])->get();;
+
+        return view('players', compact('today', 'week'));
     }
 
     public function player(Player $player)

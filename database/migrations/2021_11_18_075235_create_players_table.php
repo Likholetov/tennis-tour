@@ -16,12 +16,13 @@ class CreatePlayersTable extends Migration
         Schema::create('players', function (Blueprint $table) {
             $table->id();
             $table->string('name', 30);
-            $table->string('patronymic', 30);
+            $table->string('patronymic', 30)->nullable();
             $table->string('surname', 100);
             $table->enum('gender', ["не указан","мужской","женский"]);
             $table->string('img_url', 100)->nullable();
             $table->string('city', 100)->nullable();
             $table->string('region', 100)->nullable();
+            $table->string('country', 100)->nullable();
             $table->date('birth')->nullable();
             $table->integer('level')->nullable();
             $table->integer('start_playing_year')->nullable();

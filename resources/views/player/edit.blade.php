@@ -56,10 +56,6 @@
                                 <label>Фамилия</label>
                                 <input value="{{ $player['surname'] }}" name="surname" type="text" class="form-control">
                             </div>
-                            <div class="form-group">
-                                <label>Отчество</label>
-                                <input value="{{ $player['patronymic'] }}" name="patronymic" type="text" class="form-control">
-                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -85,6 +81,10 @@
                                 <label>Изображение</label>
                                 <input style="height: 46px;" name="image" type="file"
                                        class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Отчество</label>
+                                <input value="{{ $player['patronymic'] }}" name="patronymic" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="inputStatus">Пол</label>

@@ -55,10 +55,7 @@
                                 <label>Фамилия</label>
                                 <input value="{{ old('surname') }}" name="surname" type="text" class="form-control">
                             </div>
-                            <div class="form-group">
-                                <label>Отчество</label>
-                                <input value="{{ old('patronymic') }}" name="patronymic" type="text" class="form-control">
-                            </div>
+                            
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -75,11 +72,16 @@
                                 </button>
                             </div>
                         </div>
+                        
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Изображение</label>
                                 <input style="height: 46px;" value="{{ old('image') }}" name="image" type="file"
                                        class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Отчество</label>
+                                <input value="{{ old('patronymic') }}" name="patronymic" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="inputStatus">Пол</label>

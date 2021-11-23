@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PlayerStoreRequest;
 use App\Http\Requests\PlayerUpdateRequest;
+use App\Http\Resources\PlayerCollection;
 use App\Models\Player;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +18,7 @@ class PlayerController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index');
     }
     /**
      * @param \Illuminate\Http\Request $request
@@ -25,9 +26,12 @@ class PlayerController extends Controller
      */
     public function index(Request $request)
     {
-        $players = Player::simplePaginate(10);
+        $players = Player::all();
 
-        return view('player.index', compact('players'));
+        return new PlayerCollection($players);
+        /*$players = Player::simplePaginate(10);
+
+        return view('player.index', compact('players'));*/
     }
 
     /**

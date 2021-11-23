@@ -31,6 +31,11 @@ Vue.component(
 );
 
 Vue.component(
+    "players-component",
+    require("./components/player/PlayersComponent.vue").default
+);
+
+Vue.component(
     "calendar-component",
     require("./components/Calendar.vue").default
 );

@@ -28,6 +28,10 @@ Route::get('/schedule', [App\Http\Controllers\MainController::class, 'schedule']
 Route::get('/players', [App\Http\Controllers\MainController::class, 'players'])->name('players');
 Route::get('/player/{player}', [App\Http\Controllers\MainController::class, 'player'])->name('player');
 
+Route::group(['prefix' => 'api'], function () {
+    Route::get('/players', [App\Http\Controllers\PlayerController::class, 'players'])->name('api.players');
+});
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
     Route::get('/calendar', [App\Http\Controllers\HomeController::class, 'calendar'])->name('calendar');

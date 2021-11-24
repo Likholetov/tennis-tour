@@ -198,7 +198,7 @@
                 <b>4</b>
             </div>
             <p class="mistake__prg">Произошла ошибка <br>Такой страницы не существует</p>
-            <a href="index.html" class="button yellow-btn">
+            <a href="/" class="button yellow-btn">
                 На главную
             </a>
         </div>

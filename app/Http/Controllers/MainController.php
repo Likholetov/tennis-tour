@@ -41,12 +41,16 @@ class MainController extends Controller
 
     public function news()
     {
-        return view('news');
+        $posts = Post::all()->take(5);;
+
+        return view('news', compact('posts'));
     }
 
     public function post(Post $post)
     {
-        return view('post', compact('post'));
+        $posts = Post::where('id', '!=', $post->id)->get()->take(6);
+
+        return view('post', compact('post', 'posts'));
     }
 
     public function schedule()

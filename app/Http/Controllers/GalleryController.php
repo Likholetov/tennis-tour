@@ -19,7 +19,7 @@ class GalleryController extends Controller
      */
     public function index(Request $request)
     {
-        $galleries = Gallery::all();
+        $galleries = Gallery::simplePaginate(10);
 
         return view('gallery.index', compact('galleries'));
     }

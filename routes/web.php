@@ -37,9 +37,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
     Route::get('/calendar', [App\Http\Controllers\HomeController::class, 'calendar'])->name('calendar');
     Route::resource('player', App\Http\Controllers\PlayerController::class)->except(['show']);
-    Route::resource('gallery', App\Http\Controllers\GalleryController::class);
-    Route::resource('image', App\Http\Controllers\ImageController::class);
-    Route::resource('post', App\Http\Controllers\PostController::class);
+    Route::resource('gallery', App\Http\Controllers\GalleryController::class)->except(['show']);
+    Route::resource('image', App\Http\Controllers\ImageController::class)->except(['show']);
+    Route::resource('post', App\Http\Controllers\PostController::class)->except(['show']);
 });
 
 

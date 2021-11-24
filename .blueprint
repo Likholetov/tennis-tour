@@ -1,16 +1,41 @@
 created:
-    - app/Http/Controllers/PlayerController.php
-    - database/factories/PlayerFactory.php
-    - database/migrations/2021_11_18_075235_create_players_table.php
-    - app/Models/Player.php
-    - tests/Feature/Http/Controllers/PlayerControllerTest.php
-    - app/Http/Requests/PlayerStoreRequest.php
-    - app/Http/Requests/PlayerUpdateRequest.php
-    - resources/views/player/index.blade.php
-    - resources/views/player/create.blade.php
-    - resources/views/player/show.blade.php
-    - resources/views/player/edit.blade.php
+    - app/Http/Controllers/GalleryController.php
+    - app/Http/Controllers/ImageController.php
+    - app/Http/Controllers/PostController.php
+    - database/factories/GalleryFactory.php
+    - database/factories/ImageFactory.php
+    - database/factories/PostFactory.php
+    - database/migrations/2021_11_24_002638_create_galleries_table.php
+    - database/migrations/2021_11_24_002639_create_images_table.php
+    - database/migrations/2021_11_24_002640_create_posts_table.php
+    - app/Models/Gallery.php
+    - app/Models/Image.php
+    - app/Models/Post.php
+    - tests/Feature/Http/Controllers/GalleryControllerTest.php
+    - tests/Feature/Http/Controllers/ImageControllerTest.php
+    - tests/Feature/Http/Controllers/PostControllerTest.php
+    - app/Http/Requests/GalleryStoreRequest.php
+    - app/Http/Requests/GalleryUpdateRequest.php
+    - app/Http/Requests/ImageStoreRequest.php
+    - app/Http/Requests/ImageUpdateRequest.php
+    - app/Http/Requests/PostStoreRequest.php
+    - app/Http/Requests/PostUpdateRequest.php
+    - resources/views/gallery/index.blade.php
+    - resources/views/gallery/create.blade.php
+    - resources/views/gallery/show.blade.php
+    - resources/views/gallery/edit.blade.php
+    - resources/views/image/index.blade.php
+    - resources/views/image/create.blade.php
+    - resources/views/image/show.blade.php
+    - resources/views/image/edit.blade.php
+    - resources/views/post/index.blade.php
+    - resources/views/post/create.blade.php
+    - resources/views/post/show.blade.php
+    - resources/views/post/edit.blade.php
 updated:
     - routes/web.php
 models:
     Player: { name: 'string:30', patronymic: 'string:30', surname: 'string:100', gender: 'enum:"не указан",мужской,женский', city: 'string:100 nullable', region: 'string:100 nullable', birth: 'date nullable', level: 'integer nullable', start_playing_year: 'integer nullable', start_tournament_year: 'integer nullable', start_tournament_month: 'integer nullable', racket_firm: 'string:50 nullable', racket_model: 'string:50 nullable', best_position_single: 'integer nullable', best_position_single_date: 'date nullable', best_position_pair: 'integer nullable', best_position_pair_date: 'date nullable', partner_id: 'unsignedBigintegereger nullable' }
+    Gallery: { title: 'string:100' }
+    Image: { title: 'string:100 nullable', order: 'integer nullable', gallery_id: 'unsignedBigInteger nullable' }
+    Post: { title: 'string:100', content: text, img_url: 'string:100 nullable' }

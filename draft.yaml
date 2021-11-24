@@ -1,24 +1,43 @@
+# models:
+#   Player:
+#     name: string:30
+#     patronymic: string:30
+#     surname: string:100
+#     gender: enum:"не указан",мужской,женский
+#     city: string:100 nullable
+#     region: string:100 nullable
+#     birth: date nullable
+#     level: integer nullable
+#     start_playing_year: integer nullable
+#     start_tournament_year: integer nullable
+#     start_tournament_month: integer nullable
+#     racket_firm: string:50 nullable
+#     racket_model: string:50 nullable
+#     best_position_single: integer nullable
+#     best_position_single_date: date nullable
+#     best_position_pair: integer nullable
+#     best_position_pair_date: date nullable
+#     partner_id: unsignedBigInteger nullable
+
+# controllers:
+#   Player: 
+#     resource
 models:
-  Player:
-    name: string:30
-    patronymic: string:30
-    surname: string:100
-    gender: enum:"не указан",мужской,женский
-    city: string:100 nullable
-    region: string:100 nullable
-    birth: date nullable
-    level: integer nullable
-    start_playing_year: integer nullable
-    start_tournament_year: integer nullable
-    start_tournament_month: integer nullable
-    racket_firm: string:50 nullable
-    racket_model: string:50 nullable
-    best_position_single: integer nullable
-    best_position_single_date: date nullable
-    best_position_pair: integer nullable
-    best_position_pair_date: date nullable
-    partner_id: unsignedBigInteger nullable
+  Gallery:
+    title: string:100
+  Image:
+    title: string:100 nullable
+    order: integer nullable
+    gallery_id: unsignedBigInteger nullable
+  Post:
+    title: string:100
+    content: text
+    img_url: string:100 nullable
 
 controllers:
-  Player: 
+  Gallery: 
+    resource
+  Image: 
+    resource
+  Post: 
     resource

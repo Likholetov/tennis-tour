@@ -114,6 +114,30 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('gallery.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Галереи
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('post.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-newspaper"></i>
+                            <p>
+                                Новости
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('calendar') }}" class="nav-link">
+                            <i class="nav-icon fas fa-calendar-alt"></i>
+                            <p>
+                                Календарь
+                            </p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

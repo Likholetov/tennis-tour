@@ -131,7 +131,7 @@
                         </li>
                         <li><a href="{{ route("news") }}"> Новости </a></li>
                         <li><a href="{{ route("players") }}"> Игроки </a></li>
-                        <li><a href="{{ route("gallery") }}">Галерея </a></li>
+                        <li><a href="{{ route("galleries") }}">Галерея </a></li>
                         <li>
                             <a href="position-series.html" class="dvezuno-navigatos"></a>
                             <input type="checkbox" id="contactsmenu">

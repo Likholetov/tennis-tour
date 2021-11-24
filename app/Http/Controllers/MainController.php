@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,9 @@ class MainController extends Controller
         return view('contacts');
     }
 
-    public function gallery()
+    public function galleries()
     {
-        return view('gallery');
+        return view('galleries');
     }
 
     public function glory()
@@ -41,6 +42,11 @@ class MainController extends Controller
     public function news()
     {
         return view('news');
+    }
+
+    public function post(Post $post)
+    {
+        return view('post', compact('post'));
     }
 
     public function schedule()

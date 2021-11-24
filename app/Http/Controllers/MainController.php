@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gallery;
 use App\Models\Player;
 use App\Models\Post;
 use Carbon\Carbon;
@@ -31,7 +32,9 @@ class MainController extends Controller
 
     public function galleries()
     {
-        return view('galleries');
+        $galleries = Gallery::all();
+
+        return view('galleries', compact('galleries'));
     }
 
     public function glory()

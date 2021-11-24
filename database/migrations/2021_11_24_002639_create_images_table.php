@@ -18,6 +18,7 @@ class CreateImagesTable extends Migration
             $table->string('title', 100)->nullable();
             $table->integer('order')->nullable();
             $table->unsignedBigInteger('gallery_id')->nullable();
+            $table->string('img_url', 100);
             $table->timestamps();
         });
     }

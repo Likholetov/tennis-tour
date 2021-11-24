@@ -112,15 +112,15 @@
        <div class="container">
          <div class="gallery__list">
              <a href="one-gallery.html" class="gallery__item">
-                <img src="images/dist/gall1.png" alt="" class="gallery-img">
+                <img src="{{ $galleries[0]->images[0]->img_url }}" alt="" class="gallery-img">
                 <p>
-                   Весенний турнир 2021
+                   {{ $galleries[0]->title }}
                 </p>
              </a>
              <a href="one-gallery.html" class="gallery__item">
-                <img src="images/dist/gall2.png" alt="" class="gallery-img">
+                <img src="{{ $galleries[1]->images[0]->img_url }}" alt="" class="gallery-img">
                 <p>
-                   Весенний турнир ветеранов 2021
+                  {{ $galleries[1]->title }}
                 </p>
              </a>
              <a href="one-gallery.html" class="gallery__item">

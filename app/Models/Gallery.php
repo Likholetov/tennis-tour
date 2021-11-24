@@ -26,4 +26,8 @@ class Gallery extends Model
     protected $casts = [
         'id' => 'integer',
     ];
+
+    public function images() {
+        return $this->hasMany(Image::class);
+    }
 }

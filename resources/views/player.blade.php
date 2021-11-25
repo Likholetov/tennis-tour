@@ -34,15 +34,15 @@
       </div>
       <div class="container">
          <div class="first-section__navigation">
-            <span class="main">
+            <a href="#" class="main">
                Главная
-            </span>
-            <span class="main">
+            </a>
+            <a href="#" class="main">
                Игроки TennisTour
-            </span>
-            <span class="current">
+            </a>
+            <a span class="current">
                {{ $player->surname }} {{ $player->name }}
-            </span>
+            </a>
          </div>
          <h2 class="first-section__title">
             {{ $player->surname }} {{ $player->name }}

@@ -34,9 +34,9 @@
       </div>
       <div class="container">
          <div class="first-section__navigation">
-            <span class="main">
+            <a href="#" class="main">
                Главная
-            </span>
+            </a>
             <span class="current">
                Игроки TennisTour
             </span>

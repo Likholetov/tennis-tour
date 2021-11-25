@@ -7,9 +7,9 @@
          <section id="about-first" class="first-section">
             <div class="container">
                <div class="first-section__navigation">
-                  <span class="main">
+                  <a href="#" class="main">
                      Главная
-                  </span>
+                  </a>
                   <span class="current">
                      О нас
                   </span>

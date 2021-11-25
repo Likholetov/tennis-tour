@@ -8,13 +8,19 @@
                 class="players__input players__input-search"
                 placeholder="ФИО"
             />
-            <select v-model="level" id="level">
+            <my-select
+              v-for="(select, index) in selects"
+              :key="index"
+              :select="select"
+              v-on:result="result"
+            ></my-select>     
+            <!-- <select v-model="level" id="level">
                 <option selected value="">Уровень игрока</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
-            </select>
+            </select> -->
             <input
                 v-model="city"
                 type="text"
@@ -113,22 +119,24 @@
                 </div>
             </a>
         </ul>
-        <div class="w100 d-flex justify-content-center mt-3">
-            <button
-                v-if="laravelData.links && laravelData.links.next"
-                @click="perPagePlus(10)"
-                type="button"
-                class="btn btn-primary btn-lg btn-block"
-            >
-                Показать еще
-            </button>
-        </div>
-        <div class="w100 d-flex justify-content-center mt-3">
-            <pagination
-                :limit="3"
-                :data="laravelData"
-                @pagination-change-page="getPlayers"
-            ></pagination>
+        <div class="players__more">
+            <div class="w100 d-flex justify-content-center mt-3">
+                <button
+                    v-if="laravelData.links && laravelData.links.next"
+                    @click="perPagePlus(10)"
+                    type="button"
+                    class="btn btn-primary btn-lg btn-block"
+                >
+                    Показать еще
+                </button>
+            </div>
+            <div class="w100 d-flex justify-content-center mt-3">
+                <pagination
+                    :limit="3"
+                    :data="laravelData"
+                    @pagination-change-page="getPlayers"
+                ></pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -153,7 +161,14 @@ export default {
             laravelData: {},
             // per page
             perPage: 10,
+            selects: [
+                {
+                    value: "Уровень игрока",
+                    list: ["1", "2", "3"],
+                },
+            ],
         };
+        
     },
     watch: {
         fio: function (val) {
@@ -171,6 +186,9 @@ export default {
         },
     },
     methods: {
+        result(item) {
+            console.log("result=>", item);
+        },
         perPagePlus(count) {
             this.perPage += count;
         },

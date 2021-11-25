@@ -34,9 +34,9 @@
        </div>
        <div class="container">
           <div class="first-section__navigation">
-             <span class="main">
+             <a href="#" class="main">
                 Главная
-             </span>
+             </a>
              <span class="current">
                 Новости TennisTour
              </span>
@@ -434,34 +434,12 @@
           <span></span>
           <span></span>
        </div>
-       <div class="container">
+       <div class="container" id="app">
           <div class="news__form">
              <h3 class="news__title">
                 Архив новостей
              </h3>
-             <form action="#" class="players__form">
-                <select id="year">
-                   <option value="hide">Год</option>
-                   <option value="1">1</option>
-                   <option value="2">3</option>
-                   <option value="3">3</option>
-                   <option value="4">4</option>
-                </select>
-                <select id="monthnew">
-                   <option value="hide">Месяц</option>
-                   <option value="1">1</option>
-                   <option value="2">3</option>
-                   <option value="3">3</option>
-                   <option value="4">4</option>
-                </select>
-                <select id="day">
-                   <option value="hide">День</option>
-                   <option value="1">1</option>
-                   <option value="2">3</option>
-                   <option value="3">3</option>
-                   <option value="4">4</option>
-                </select>
-             </form>
+             <news-form></news-form>
           </div>
           <ul class="news__list">
              <li class="news__item">

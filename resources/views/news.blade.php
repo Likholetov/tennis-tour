@@ -210,7 +210,7 @@
        <div class="container">
           <ul class="news__list">
              <li class="news__item">
-                <img style="max-height: 245px; object-fit: cover; width: 100%;" src="{{ $posts[0]->img_url }}" alt="" class="new-img">
+                <img style="height: 245px; object-fit: cover; width: 100%;" src="{{ $posts[0]->img_url }}" alt="" class="new-img">
                 <div class="news__block">
                    <div class="news__date button yellow-btn">
                       <span class="date">

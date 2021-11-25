@@ -39,9 +39,36 @@ class PostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {
-        $post = Post::create($request->validated());
+        //$post = Post::create($request->validated());
 
-        $request->session()->flash('post.id', $post->id);
+        $content = $request->content;
+        $dom = new \DomDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $imageFile = $dom->getElementsByTagName('imageFile');
+    
+        // foreach($imageFile as $item => $image){
+        //     $data = $image->getAttribute('src');
+
+        //     list($type, $data) = explode(';', $data);
+        //     list(, $data)      = explode(',', $data);
+
+        //     $imgeData = base64_decode($data);
+        //     $image_name= "/upload/" . time().$item.'.png';
+        //     $path = public_path() . $image_name;
+        //     file_put_contents($path, $imgeData);
+            
+        //     $image->removeAttribute('src');
+        //     $image->setAttribute('src', $image_name);
+        //     }
+    
+        $content = $dom->saveHTML();
+
+        $post = new Post();
+        $post->img_url = "";
+        $post->title = $request->title;
+        $post->description =  $request->description;
+        $post->content =  $content;
+        $post->save();
 
         return redirect()->route('post.index');
     }
@@ -75,7 +102,7 @@ class PostController extends Controller
     {
         $post->update($request->validated());
 
-        $request->session()->flash('post.id', $post->id);
+        //$request->session()->flash('post.id', $post->id);
 
         return redirect()->route('post.index');
     }

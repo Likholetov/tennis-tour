@@ -27,6 +27,7 @@ class PostUpdateRequest extends FormRequest
             'title' => ['required', 'string', 'max:100'],
             'content' => ['required', 'string'],
             'img_url' => ['string', 'max:100', 'nullable'],
+            'description' => ['string', 'max:255', 'nullable'],
         ];
     }
 }

@@ -116,7 +116,7 @@
          <div class="one-new__container">
             <div class="one-new__column">
                <p class="tennis__prg-small">
-                  {{ $post->content }}
+                  {!! $post->content !!}
                </p>
                @if (isset($post->img_url))
                <h5 class="tennis__subtitle">

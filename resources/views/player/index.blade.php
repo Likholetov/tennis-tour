@@ -2,6 +2,10 @@
 
 @section('title', 'Игроки')
 
+@section('script')
+<script src="{{mix('/js/app.js')}}"></script> 
+@endsection
+
 @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">

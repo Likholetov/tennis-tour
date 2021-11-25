@@ -1,5 +1,5 @@
-$(function() {
-    $(".nav-treeview .nav-link, .nav-link").each(function() {
+$(function () {
+    $(".nav-treeview .nav-link, .nav-link").each(function () {
         var location2 =
             window.location.protocol +
             "//" +
@@ -16,7 +16,7 @@ $(function() {
         }
     });
 
-    $(".delete-btn").click(function() {
+    $(".delete-btn").click(function () {
         var res = confirm(
             "Удаленную запись невозможно будет восстановить. Вы действительно хотите удалить ее?"
         );
@@ -27,9 +27,7 @@ $(function() {
 });
 
 function generatePassword() {
-    const randomstring = Math.random()
-        .toString(36)
-        .substr(2, 10);
+    const randomstring = Math.random().toString(36).substr(2, 10);
 
     $("#password_input").val(randomstring);
 }

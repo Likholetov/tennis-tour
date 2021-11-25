@@ -25,8 +25,7 @@
     <link rel="stylesheet" href="/admin_lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="/admin_lte/plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="/admin_lte/plugins/summernote/summernote-bs4.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -177,6 +176,8 @@
 <script src="/admin_lte/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="/admin_lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- summernote -->
+    <link rel="stylesheet" href="/admin_lte/plugins/summernote/summernote-bs4.min.css">
 <!-- Summernote -->
 <script src="/admin_lte/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
@@ -188,6 +189,15 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/admin_lte/dist/js/pages/dashboard.js"></script>
 <script src="/admin_lte/admin.js"></script>
-<script src="{{mix('/js/app.js')}}"></script>
+@yield('script')
+
+<script>
+	$(document).ready(function () {
+        console.log(1);
+		$("#summernote").summernote({
+            height: 500
+        });
+	});
+</script>
 </body>
 </html>

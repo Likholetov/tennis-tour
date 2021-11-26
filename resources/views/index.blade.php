@@ -240,7 +240,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="info-news__block">
+			<div style="min-height: 0; padding-top: 10px; padding-bottom: 10px" class="info-news__block">
 				<h5 class="info-news__title">
 					Новости TennisTour
 					<a href="#">
@@ -249,14 +249,13 @@
 				</h5>
 				<div class="info-news__list">
 					<div class="info-news__item">
-						<div class="schedule__prg button blue-btn">
-							<span class="date">
-								21.05.2021
-							</span>
-						</div>
 						<div class="schedule__txt">
 							<p class="tennis__prg-small">
-								В Весеннем Марафоне учтены результаты мужских турниров
+								<span style="background-color: #3437da;
+								padding: 8px;
+								border-radius: 5px;
+							}"><span class="date">21.05.2021</span><span class="date">(12:30)</span></span>
+								 В Весеннем Марафоне учтены результаты мужских турниров
 							</p>
 							<a href="#">
 								Подробнее
@@ -267,14 +266,13 @@
 						</div>
 					</div>
 					<div class="info-news__item">
-						<div class="schedule__prg button blue-btn">
-							<span class="date">
-								21.05.2021
-							</span>
-						</div>
 						<div class="schedule__txt">
 							<p class="tennis__prg-small">
-								В Весеннем Марафоне учтены результаты мужских турниров
+								<span style="background-color: #3437da;
+								padding: 8px;
+								border-radius: 5px;
+							}"><span class="date">21.05.2021</span><span class="date">(12:30)</span></span>
+								 В Весеннем Марафоне учтены результаты мужских турниров
 							</p>
 							<a href="#">
 								Подробнее
@@ -285,14 +283,13 @@
 						</div>
 					</div>
 					<div class="info-news__item">
-						<div class="schedule__prg button blue-btn">
-							<span class="date">
-								21.05.2021
-							</span>
-						</div>
 						<div class="schedule__txt">
 							<p class="tennis__prg-small">
-								В Весеннем Марафоне учтены результаты мужских турниров
+								<span style="background-color: #3437da;
+								padding: 8px;
+								border-radius: 5px;
+							}"><span class="date">21.05.2021</span><span class="date">(12:30)</span></span>
+								 В Весеннем Марафоне учтены результаты мужских турниров
 							</p>
 							<a href="#">
 								Подробнее

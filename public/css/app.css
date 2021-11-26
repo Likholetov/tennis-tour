@@ -10805,7 +10805,6 @@ section .container {
 
 .info-slide {
   width: 100% !important;
-  padding: 38px 33px;
 }
 @media screen and (min-width: 1360px) {
   .info-slide {
@@ -17740,12 +17739,16 @@ nav .kamevlu-kesaned .links {
   padding: 15px 31px;
 }
 
-.players__more .btn, .players__more .page-item.active .page-link {
+.players__more .btn,
+.players__more .page-item.active .page-link {
   background: #3437da;
   border-color: #3437da;
   color: #fff;
 }
-.players__more .btn:hover, .players__more .btn:active, .players__more .btn:focus, .players__more .page-item.active .page-link:hover, .players__more .page-item.active .page-link:active, .players__more .page-item.active .page-link:focus {
+.players__more .btn:hover, .players__more .btn:active, .players__more .btn:focus,
+.players__more .page-item.active .page-link:hover,
+.players__more .page-item.active .page-link:active,
+.players__more .page-item.active .page-link:focus {
   background: #6365e7;
   color: #fff;
 }

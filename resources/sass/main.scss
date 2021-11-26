@@ -25,8 +25,10 @@ section {
 }
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
-        "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -134,7 +136,8 @@ code,
 kbd,
 pre,
 samp {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
     font-size: 1em;
 }
 pre {
@@ -742,7 +745,7 @@ section .container {
 }
 .info-slide {
     width: 100% !important;
-    padding: 38px 33px;
+    // padding: 38px 33px;
     @media screen and (min-width: 1360px) {
         padding-top: 18px;
         padding-bottom: 13px;
@@ -2329,7 +2332,7 @@ img.gallery-img {
         border: 3px solid #fff;
         border-radius: 6px;
         object-fit: cover;
-    }    
+    }
 }
 .gallery__item:nth-child(1),
 .gallery__item:nth-child(2) {
@@ -6089,7 +6092,8 @@ img.one-new__img {
     -ms-grid-columns: 210px 210px 210px 210px 210px;
     grid-template-columns: 210px 210px 210px 210px 210px;
     gap: 15px 30px;
-    -ms-grid-rows: 74px 74px 90px 74px 90px 74px 90px 74px 90px 74px 90px 74px 90px 74px 90px;
+    -ms-grid-rows: 74px 74px 90px 74px 90px 74px 90px 74px 90px 74px 90px 74px
+        90px 74px 90px;
     grid-template-rows: 74px 74px 90px 74px 90px 74px 90px 74px 90px 74px 90px 74px 90px 74px 90px;
 }
 .grid-container-a .grid-elem {
@@ -7156,7 +7160,8 @@ nav .kamevlu-kesaned .links {
     }
 }
 .players__more {
-    .btn,  .page-item.active .page-link {
+    .btn,
+    .page-item.active .page-link {
         background: #3437da;
         border-color: #3437da;
         color: #fff;

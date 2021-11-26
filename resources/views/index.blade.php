@@ -8,7 +8,7 @@
 		<div class="container">
 			<div class="info__block">
 				<div class="info-slider">
-					<div class="swiper-wrapper">
+					<div class="swiper-wrapper" style="padding-left: 33px">
 						<div class="swiper-slide info-slide">
 							<div class="info-slide__elem">
 								<h2 class="info-slider__title">

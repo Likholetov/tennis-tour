@@ -118,12 +118,6 @@
                <p class="tennis__prg-small">
                   {!! $post->content !!}
                </p>
-               @if (isset($post->img_url))
-               <h5 class="tennis__subtitle">
-                  <img style="max-width:334px; object-fit: cover" src="{{ $post->img_url }}" alt="" class="one-new-img">
-               </h5>
-               @endif
-               
             </div>
             <div class="one-new__column">
                <ul class="calendar__list-small">

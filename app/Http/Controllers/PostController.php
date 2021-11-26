@@ -44,7 +44,7 @@ class PostController extends Controller
         $content = $request->content;
         $dom = new \DomDocument();
         $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $imageFile = $dom->getElementsByTagName('imageFile');
+        //$imageFile = $dom->getElementsByTagName('imageFile');
     
         // foreach($imageFile as $item => $image){
         //     $data = $image->getAttribute('src');
@@ -63,12 +63,19 @@ class PostController extends Controller
     
         $content = $dom->saveHTML();
 
+        
         $post = new Post();
         $post->img_url = "";
         $post->title = $request->title;
         $post->description =  $request->description;
         $post->content =  $content;
         $post->save();
+
+        if ($request->hasFile('image')) {
+            $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('images/posts/' . $post->id, $filename, 'public');
+            $post->update(['img_url' => "/storage/images/posts/" . $post->id . "/" . $filename]);
+        }
 
         return redirect()->route('post.index');
     }

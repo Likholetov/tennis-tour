@@ -127,6 +127,8 @@ class GalleryController extends Controller
     {
         $gallery->delete();
 
+        Image::where('gallery_id', $gallery->id)->delete();
+
         if (Storage::exists('public/images/galleries/' . $gallery->id)) {
             Storage::deleteDirectory('public/images/galleries/' . $gallery->id);
         }

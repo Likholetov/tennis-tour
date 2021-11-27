@@ -32,7 +32,7 @@ class MainController extends Controller
 
     public function galleries()
     {
-        $galleries = Gallery::all();
+        $galleries = Gallery::withCount('images')->having('images_count', '>', 0)->get();
 
         return view('galleries', compact('galleries'));
     }

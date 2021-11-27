@@ -30,4 +30,9 @@ class Gallery extends Model
     public function images() {
         return $this->hasMany(Image::class)->orderBy('order');;
     }
+
+    public function getImagesCountAttribute()
+    {
+        return $this->hasMany(Image::class)->count();
+    }
 }

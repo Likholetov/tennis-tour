@@ -111,18 +111,23 @@
        </div>
        <div class="container">
          <div class="gallery__list">
-             <a href="one-gallery.html" class="gallery__item">
-                <img src="{{ $galleries[0]->images[0]->img_url }}" alt="" class="gallery-img">
+            @if ($galleries->count() > 0)
+             <a href="one-gallery.html" class="gallery__item big">
+                <img style="width: 100%; height: 100%; max-height: 324px; object-fit: cover" src="{{ $galleries[0]->images[0]->img_url }}" alt="" class="gallery-img">
                 <p>
                    {{ $galleries[0]->title }}
                 </p>
              </a>
-             <a href="one-gallery.html" class="gallery__item">
-                <img src="{{ $galleries[1]->images[0]->img_url }}" alt="" class="gallery-img">
-                <p>
-                  {{ $galleries[1]->title }}
-                </p>
-             </a>
+             @endif
+             @if ($galleries->count() > 1)
+             <a href="one-gallery.html" class="gallery__item big">
+               <img style="width: 100%; height: 100%; max-height: 324px; object-fit: cover" src="{{ $galleries[1]->images[0]->img_url }}" alt="" class="gallery-img">
+               <p>
+                 {{ $galleries[1]->title }}
+               </p>
+            </a>
+             @endif
+             
              <a href="one-gallery.html" class="gallery__item">
                 <img src="images/dist/gall3.png" alt="" class="gallery-img">
                 <p>

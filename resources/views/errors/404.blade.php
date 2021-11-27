@@ -194,7 +194,7 @@
         <div class="container">
             <div class="mistake__txt">
                 <b>4</b>
-                <img src="images/dist/ball.png" alt="" class="mistake__img">
+                <img src="/images/dist/ball.png" alt="" class="mistake__img">
                 <b>4</b>
             </div>
             <p class="mistake__prg">Произошла ошибка <br>Такой страницы не существует</p>

@@ -42,6 +42,9 @@
                         Название
                     </th>
                     <th>
+                        Тэги
+                    </th>
+                    <th>
                     </th>
                 </tr>
             </thead>
@@ -61,6 +64,9 @@
                     </td>
                     <td>
                         {{ $post->title }}
+                    </td>
+                    <td>
+                        {{ $post->tags }}
                     </td>
                     <td class="project-actions text-right">
                         <a class="btn btn-primary btn-sm" href="{{ route('post.edit', $post['id']) }}">

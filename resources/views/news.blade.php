@@ -221,7 +221,7 @@
                       {{ $posts[0]->title }}
                    </p>
                    <p class="tennis__prg-small">
-                     {{ \Illuminate\Support\Str::limit($posts[0]->content, 150, $end='...') }}
+                     {{ $posts[0]->description }}
                    </p>
                    <a href="{{ route('post', $posts[0]->id) }}" class="more-btn button blue-btn">
                       Подробнее
@@ -241,7 +241,7 @@
                      {{ $post->title }}
                   </p>
                   <p class="tennis__prg-small">
-                     {{ \Illuminate\Support\Str::limit($post->content, 150, $end='...') }}
+                     {{ $post->description }}
                   </p>
                   <a href="#" class="more-btn button blue-btn">
                      Подробнее

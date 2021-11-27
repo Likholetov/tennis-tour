@@ -6,6 +6,7 @@ use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -39,32 +40,63 @@ class PostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {
-        //$post = Post::create($request->validated());
+        $post = Post::create($request->validated());
+        //$post = new Post();
 
         $content = $request->content;
-        $dom = new \DomDocument();
-        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        //$imageFile = $dom->getElementsByTagName('imageFile');
-    
-        // foreach($imageFile as $item => $image){
-        //     $data = $image->getAttribute('src');
+        $dom = new \DomDocument("1.0", 'UTF-8');
+        $dom->loadHtml('<?xml encoding="UTF-8">' . $content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-        //     list($type, $data) = explode(';', $data);
-        //     list(, $data)      = explode(',', $data);
+        foreach ($dom->childNodes as $item){
+            if ($item->nodeType == XML_PI_NODE)
+                $dom->removeChild($item); // remove hack
+                $dom->encoding = 'UTF-8'; // insert proper
+        }
+        
+        //identify img element
+        $images = $dom->getelementsbytagname('img');
 
-        //     $imgeData = base64_decode($data);
-        //     $image_name= "/upload/" . time().$item.'.png';
-        //     $path = public_path() . $image_name;
-        //     file_put_contents($path, $imgeData);
+        //loop over img elements, decode their base64 source data (src) and save them to folder,
+        //and then replace base64 src with stored image URL.
+        foreach($images as $k => $img){
+
+            //collect img source data
+            $data = $img->getattribute('src');
+
+            //checking if img source data is image by detecting 'data:image' in string
+            if (strpos($data, 'data:image')!==false){
+            list($type, $data) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
             
-        //     $image->removeAttribute('src');
-        //     $image->setAttribute('src', $image_name);
-        //     }
+            //decode base64
+            $data = base64_decode($data);
+
+            //naming image file
+            $image_name= time().rand(000,999).$k.'.png';
+
+            // image path (path) to use upload file to
+            //$path = 'img/location/'. $image_name;
+
+            //image path (path2) to save to DB so that summernote can display image in edit mode (When editing summernote content) NB: the difference btwn path and path2 is the forward slash "/" in path2
+            //$path2 = '/img/location/'. $image_name;
+            //$request->image->storeAs('images/posts/' . $post->id . '/img/', $image_name, 'public');
+
+            //file_put_contents($path, $data);
+
+            Storage::put('public/images/posts/' . $post->id . '/img/' . $image_name, $data);
+
+            //modify image source data in summernote content before upload to DB
+            $img->removeattribute('src');
+            $img->setattribute('src', "/storage/images/posts/" . $post->id . "/img/" . $image_name);}
+
+            else {
+            // not base64 img
+
+            }
+        }
     
         $content = $dom->saveHTML();
-
         
-        $post = new Post();
         $post->img_url = "";
         $post->title = $request->title;
         $post->description =  $request->description;
@@ -107,9 +139,70 @@ class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, Post $post)
     {
-        $post->update($request->validated());
+        $content = $request->content;
+        $dom = new \DomDocument("1.0", 'UTF-8');
+        $dom->loadHtml('<?xml encoding="UTF-8">' . $content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-        //$request->session()->flash('post.id', $post->id);
+        foreach ($dom->childNodes as $item){
+            if ($item->nodeType == XML_PI_NODE)
+                $dom->removeChild($item); // remove hack
+                $dom->encoding = 'UTF-8'; // insert proper
+        }
+        
+        //identify img element
+        $images = $dom->getelementsbytagname('img');
+
+        //loop over img elements, decode their base64 source data (src) and save them to folder,
+        //and then replace base64 src with stored image URL.
+        foreach($images as $k => $img){
+
+            //collect img source data
+            $data = $img->getattribute('src');
+
+            //checking if img source data is image by detecting 'data:image' in string
+            if (strpos($data, 'data:image')!==false){
+            list($type, $data) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
+            
+            //decode base64
+            $data = base64_decode($data);
+
+            //naming image file
+            $image_name= time().rand(000,999).$k.'.png';
+
+            // image path (path) to use upload file to
+            //$path = 'img/location/'. $image_name;
+
+            //image path (path2) to save to DB so that summernote can display image in edit mode (When editing summernote content) NB: the difference btwn path and path2 is the forward slash "/" in path2
+            //$path2 = '/img/location/'. $image_name;
+            //$request->image->storeAs('images/posts/' . $post->id . '/img/', $image_name, 'public');
+
+            //file_put_contents($path, $data);
+
+            Storage::put('public/images/posts/' . $post->id . '/img/' . $image_name, $data);
+            //modify image source data in summernote content before upload to DB
+            $img->removeattribute('src');
+            $img->setattribute('src', "/storage/images/posts/" . $post->id . "/img/" . $image_name);}
+
+            else {
+            // not base64 img
+
+            }
+        }
+    
+        $content = $dom->saveHTML();
+        
+        //$post->img_url = "";
+        $post->title = $request->title;
+        $post->description =  $request->description;
+        $post->content =  $content;
+        $post->save();
+
+        if ($request->hasFile('image')) {
+            $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('images/posts/' . $post->id, $filename, 'public');
+            $post->update(['img_url' => "/storage/images/posts/" . $post->id . "/" . $filename]);
+        }
 
         return redirect()->route('post.index');
     }
@@ -122,7 +215,9 @@ class PostController extends Controller
     public function destroy(Request $request, Post $post)
     {
         $post->delete();
-
+        if (Storage::exists('public/images/posts/' . $post->id)) {
+            Storage::deleteDirectory('public/images/posts/' . $post->id);
+        }
         return redirect()->route('post.index');
     }
 }

@@ -34,14 +34,14 @@
       </div>
       <div class="container">
          <div class="first-section__navigation">
-            <a href="#" class="main">
+            <a href="/" class="main">
                Главная
             </a>
-            <span class="main">
-               А вы знаете что?
-            </span>
+            <a href="/news" class="main">
+               Новости TennisTour
+            </a>
             <span class="current">
-               Теннис пог
+               {{ $post->title }}
             </span>
          </div>
          <h2 class="first-section__title">
@@ -114,10 +114,8 @@
       </div>
       <div class="container">
          <div class="one-new__container">
-            <div class="one-new__column">
-               <p class="tennis__prg-small">
-                  {!! $post->content !!}
-               </p>
+            <div>
+               {!! $post->content !!}
             </div>
             <div class="one-new__column">
                <ul class="calendar__list-small">

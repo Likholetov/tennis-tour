@@ -114,7 +114,9 @@ class PlayerController extends Controller
     public function destroy(Request $request, Player $player)
     {
         $player->delete();
-
+        if (Storage::exists('public/images/players/' . $player->id)) {
+            Storage::deleteDirectory('public/images/players/' . $player->id);
+        }
         return redirect()->route('player.index');
     }
 

@@ -9,11 +9,11 @@
                 placeholder="ФИО"
             />
             <my-select
-              v-for="(select, index) in selects"
-              :key="index"
-              :select="select"
-              v-on:result="result"
-            ></my-select>     
+                v-for="(select, index) in selects"
+                :key="index"
+                :select="select"
+                v-on:result="result"
+            ></my-select>
             <!-- <select v-model="level" id="level">
                 <option selected value="">Уровень игрока</option>
                 <option value="1">1</option>
@@ -164,11 +164,10 @@ export default {
             selects: [
                 {
                     value: "Уровень игрока",
-                    list: ["1", "2", "3"],
+                    list: ["1", "2", "3", "4"],
                 },
             ],
         };
-        
     },
     watch: {
         fio: function (val) {
@@ -187,7 +186,7 @@ export default {
     },
     methods: {
         result(item) {
-            console.log("result=>", item);
+            this.level = item;
         },
         perPagePlus(count) {
             this.perPage += count;

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GalleryStoreRequest;
 use App\Http\Requests\GalleryUpdateRequest;
 use App\Models\Gallery;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -41,7 +43,25 @@ class GalleryController extends Controller
     {
         $gallery = Gallery::create($request->validated());
 
-        $request->session()->flash('gallery.id', $gallery->id);
+        $i = 1;
+
+        if ($request->hasFile('images')) {
+            foreach ($request->images as $key => $image) {
+                $image_name = time() . rand(000,999) . "." . $image->getClientOriginalExtension();
+
+                $image->storeAs('images/galleries/' . $gallery->id, $image_name, 'public');
+
+                $image = Image::create([
+                    'order' => $i,
+                    'gallery_id' => $gallery->id,
+                    'img_url' => "/storage/images/galleries/" . $gallery->id . "/" . $image_name
+                ]);
+
+                $i++;
+            }
+        }
+
+        //$request->session()->flash('gallery.id', $gallery->id);
 
         return redirect()->route('gallery.index');
     }
@@ -75,7 +95,25 @@ class GalleryController extends Controller
     {
         $gallery->update($request->validated());
 
-        $request->session()->flash('gallery.id', $gallery->id);
+        $i = $gallery->images->count();
+
+        if ($request->hasFile('images')) {
+            foreach ($request->images as $image) {
+                $image_name = time() . rand(000,999) . "." . $image->getClientOriginalExtension();
+
+                $image->storeAs('images/galleries/' . $gallery->id, $image_name, 'public');
+
+                $image = Image::create([
+                    'order' => $i,
+                    'gallery_id' => $gallery->id,
+                    'img_url' => "/storage/images/galleries/" . $gallery->id . "/" . $image_name
+                ]);
+
+                $i++;
+            }
+        }
+
+        //$request->session()->flash('gallery.id', $gallery->id);
 
         return redirect()->route('gallery.index');
     }
@@ -88,6 +126,10 @@ class GalleryController extends Controller
     public function destroy(Request $request, Gallery $gallery)
     {
         $gallery->delete();
+
+        if (Storage::exists('public/images/galleries/' . $gallery->id)) {
+            Storage::deleteDirectory('public/images/galleries/' . $gallery->id);
+        }
 
         return redirect()->route('gallery.index');
     }

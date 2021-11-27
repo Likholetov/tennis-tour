@@ -41,7 +41,7 @@ class ImageController extends Controller
     {
         $image = Image::create($request->validated());
 
-        $request->session()->flash('image.id', $image->id);
+        //$request->session()->flash('image.id', $image->id);
 
         return redirect()->route('image.index');
     }
@@ -75,9 +75,9 @@ class ImageController extends Controller
     {
         $image->update($request->validated());
 
-        $request->session()->flash('image.id', $image->id);
+        //$request->session()->flash('image.id', $image->id);
 
-        return redirect()->route('image.index');
+        return redirect()->route('gallery.edit', $image->gallery_id);
     }
 
     /**
@@ -89,6 +89,6 @@ class ImageController extends Controller
     {
         $image->delete();
 
-        return redirect()->route('image.index');
+        return redirect()->route('gallery.edit', $image->gallery_id);
     }
 }

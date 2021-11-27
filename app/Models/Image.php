@@ -18,6 +18,7 @@ class Image extends Model
         'title',
         'order',
         'gallery_id',
+        'img_url'
     ];
 
     /**

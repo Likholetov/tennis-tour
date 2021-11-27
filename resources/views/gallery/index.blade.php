@@ -55,7 +55,7 @@
                         {{ $gallery->title }}
                     </td>
                     <td>
-                        {{ 0 }}
+                        {{ $gallery->images->count() }}
                     </td>
                     <td class="project-actions text-right">
                         <a class="btn btn-primary btn-sm" href="{{ route('gallery.edit', $gallery['id']) }}">

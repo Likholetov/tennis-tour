@@ -17740,12 +17740,16 @@ nav .kamevlu-kesaned .links {
   padding: 15px 31px;
 }
 
-.players__more .btn, .players__more .page-item.active .page-link {
+.players__more .btn,
+.players__more .page-item.active .page-link {
   background: #3437da;
   border-color: #3437da;
   color: #fff;
 }
-.players__more .btn:hover, .players__more .btn:active, .players__more .btn:focus, .players__more .page-item.active .page-link:hover, .players__more .page-item.active .page-link:active, .players__more .page-item.active .page-link:focus {
+.players__more .btn:hover, .players__more .btn:active, .players__more .btn:focus,
+.players__more .page-item.active .page-link:hover,
+.players__more .page-item.active .page-link:active,
+.players__more .page-item.active .page-link:focus {
   background: #6365e7;
   color: #fff;
 }
@@ -17765,4 +17769,18 @@ nav .kamevlu-kesaned .links {
 .players-gallery__item img {
   border: 3px solid #fff;
   border-radius: 6px;
+  width: 100%;
+}
+
+.gallery__item img {
+  width: 100%;
+  height: 215px;
+}
+@media screen and (max-width: 980px) {
+  .gallery__item {
+    width: calc((100% - 40px) / 2);
+  }
+  .gallery__item img {
+    height: 322px;
+  }
 }

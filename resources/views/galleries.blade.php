@@ -142,7 +142,7 @@
                 </p>
              </a>
              <a href="one-gallery.html" class="gallery__item">
-                <img src="images/dist/gall6.png" alt="" class="gallery-img">
+                <img src="images/dist/avatar.png" alt="" class="gallery-img">
                 <p>
                    Осенний турнир 2020
                 </p>

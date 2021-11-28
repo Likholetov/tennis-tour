@@ -42,5 +42,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('post', App\Http\Controllers\PostController::class)->except(['show']);
 });
 
-
+Route::get('/one-galleries', function () {
+   return view('one-galleries');
+});
 

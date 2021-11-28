@@ -113,7 +113,7 @@
          <div class="gallery__list">
             @if ($galleries->count() > 0)
              <a href="one-gallery.html" class="gallery__item big">
-                <img style="width: 100%; height: 100%; max-height: 324px; object-fit: cover" src="{{ $galleries[0]->images[0]->img_url }}" alt="" class="gallery-img">
+                <img src="{{ $galleries[0]->images[0]->img_url }}" alt="" class="gallery-img">
                 <p>
                    {{ $galleries[0]->title }}
                 </p>
@@ -121,49 +121,22 @@
              @endif
              @if ($galleries->count() > 1)
              <a href="one-gallery.html" class="gallery__item big">
-               <img style="width: 100%; height: 100%; max-height: 324px; object-fit: cover" src="{{ $galleries[1]->images[0]->img_url }}" alt="" class="gallery-img">
+               <img src="{{ $galleries[1]->images[0]->img_url }}" alt="" class="gallery-img">
                <p>
                  {{ $galleries[1]->title }}
                </p>
             </a>
              @endif
-             
+             @foreach ($galleries as $gallery)
+             @if ($loop->index != 0 && $loop->index != 1)
              <a href="one-gallery.html" class="gallery__item">
-                <img src="images/dist/gall3.png" alt="" class="gallery-img">
-                <p>
-                   Осенний турнир 2020
-                </p>
-             </a>
-             <a href="one-gallery.html" class="gallery__item">
-                <img src="images/dist/gall4.png" alt="" class="gallery-img">
-                <p>
-                   Летний турнир 2020
-                </p>
-             </a>
-             <a href="one-gallery.html" class="gallery__item">
-                <img src="images/dist/gall.png" alt="" class="gallery-img">
-                <p>
-                   Весенний турнир 2020
-                </p>
-             </a>
-             <a href="one-gallery.html" class="gallery__item">
-                <img src="images/dist/gall6.png" alt="" class="gallery-img">
-                <p>
-                   Осенний турнир 2020
-                </p>
-             </a>
-             <a href="one-gallery.html" class="gallery__item">
-                <img src="images/dist/gall7.png" alt="" class="gallery-img">
-                <p>
-                   Летний турнир 2020
-                </p>
-             </a>
-             <a href="one-gallery.html" class="gallery__item">
-                <img src="images/dist/gall8.png" alt="" class="gallery-img">
-                <p>
-                   Весенний турнир 2020
-                </p>
-             </a>
+               <img src="{{ $gallery->images[0]->img_url }}" alt="" class="gallery-img">
+               <p>
+                  {{ $gallery->title }}
+               </p>
+            </a>
+            @endif
+             @endforeach
          </div>
       </div>
     </section>

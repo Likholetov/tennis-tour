@@ -47,3 +47,8 @@ Route::get('/one-galleries', function () {
    return view('one-galleries');
 });
 
+
+
+Route::resource('tournament', App\Http\Controllers\TournamentController::class);
+
+Route::resource('category', App\Http\Controllers\CategoryController::class);

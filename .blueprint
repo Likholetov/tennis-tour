@@ -1,37 +1,26 @@
 created:
-    - app/Http/Controllers/GalleryController.php
-    - app/Http/Controllers/ImageController.php
-    - app/Http/Controllers/PostController.php
-    - database/factories/GalleryFactory.php
-    - database/factories/ImageFactory.php
-    - database/factories/PostFactory.php
-    - database/migrations/2021_11_24_002638_create_galleries_table.php
-    - database/migrations/2021_11_24_002639_create_images_table.php
-    - database/migrations/2021_11_24_002640_create_posts_table.php
-    - app/Models/Gallery.php
-    - app/Models/Image.php
-    - app/Models/Post.php
-    - tests/Feature/Http/Controllers/GalleryControllerTest.php
-    - tests/Feature/Http/Controllers/ImageControllerTest.php
-    - tests/Feature/Http/Controllers/PostControllerTest.php
-    - app/Http/Requests/GalleryStoreRequest.php
-    - app/Http/Requests/GalleryUpdateRequest.php
-    - app/Http/Requests/ImageStoreRequest.php
-    - app/Http/Requests/ImageUpdateRequest.php
-    - app/Http/Requests/PostStoreRequest.php
-    - app/Http/Requests/PostUpdateRequest.php
-    - resources/views/gallery/index.blade.php
-    - resources/views/gallery/create.blade.php
-    - resources/views/gallery/show.blade.php
-    - resources/views/gallery/edit.blade.php
-    - resources/views/image/index.blade.php
-    - resources/views/image/create.blade.php
-    - resources/views/image/show.blade.php
-    - resources/views/image/edit.blade.php
-    - resources/views/post/index.blade.php
-    - resources/views/post/create.blade.php
-    - resources/views/post/show.blade.php
-    - resources/views/post/edit.blade.php
+    - app/Http/Controllers/TournamentController.php
+    - app/Http/Controllers/CategoryController.php
+    - database/factories/TournamentFactory.php
+    - database/factories/CategoryFactory.php
+    - database/migrations/2021_11_29_100708_create_tournaments_table.php
+    - database/migrations/2021_11_29_100709_create_categories_table.php
+    - app/Models/Tournament.php
+    - app/Models/Category.php
+    - tests/Feature/Http/Controllers/TournamentControllerTest.php
+    - tests/Feature/Http/Controllers/CategoryControllerTest.php
+    - app/Http/Requests/TournamentStoreRequest.php
+    - app/Http/Requests/TournamentUpdateRequest.php
+    - app/Http/Requests/CategoryStoreRequest.php
+    - app/Http/Requests/CategoryUpdateRequest.php
+    - resources/views/tournament/index.blade.php
+    - resources/views/tournament/create.blade.php
+    - resources/views/tournament/show.blade.php
+    - resources/views/tournament/edit.blade.php
+    - resources/views/category/index.blade.php
+    - resources/views/category/create.blade.php
+    - resources/views/category/show.blade.php
+    - resources/views/category/edit.blade.php
 updated:
     - routes/web.php
 models:
@@ -39,3 +28,5 @@ models:
     Gallery: { title: 'string:100' }
     Image: { title: 'string:100 nullable', order: 'integer nullable', gallery_id: 'unsignedBigInteger nullable' }
     Post: { title: 'string:100', content: text, img_url: 'string:100 nullable' }
+    Tournament: { started_at: timestamp, ended_at: timestamp, title: 'string:255', category_id: unsignedBigInteger, rank: integer }
+    Category: { title: 'string:100' }

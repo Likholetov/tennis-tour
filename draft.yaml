@@ -22,22 +22,38 @@
 # controllers:
 #   Player: 
 #     resource
+# models:
+#   Gallery:
+#     title: string:100
+#   Image:
+#     title: string:100 nullable
+#     order: integer nullable
+#     gallery_id: unsignedBigInteger nullable
+#   Post:
+#     title: string:100
+#     content: text
+#     img_url: string:100 nullable
+
+# controllers:
+#   Gallery: 
+#     resource
+#   Image: 
+#     resource
+#   Post: 
+#     resource
 models:
-  Gallery:
+  Tournament:
+    started_at: timestamp
+    ended_at: timestamp
+    title: string:255
+    category_id: unsignedBigInteger
+    rank: integer
+  Category:
     title: string:100
-  Image:
-    title: string:100 nullable
-    order: integer nullable
-    gallery_id: unsignedBigInteger nullable
-  Post:
-    title: string:100
-    content: text
-    img_url: string:100 nullable
 
 controllers:
-  Gallery: 
+  Tournament:
     resource
-  Image: 
+  Category:
     resource
-  Post: 
-    resource
+    

@@ -28,6 +28,7 @@ Route::get('/post/{post}', [App\Http\Controllers\MainController::class, 'post'])
 Route::get('/schedule', [App\Http\Controllers\MainController::class, 'schedule'])->name('schedule');
 Route::get('/players', [App\Http\Controllers\MainController::class, 'players'])->name('players');
 Route::get('/player/{player}', [App\Http\Controllers\MainController::class, 'player'])->name('player');
+Route::get('/gallery/{gallery}', [App\Http\Controllers\MainController::class, 'gallery'])->name('gallery');
 
 Route::group(['prefix' => 'api'], function () {
     Route::get('/players', [App\Http\Controllers\PlayerController::class, 'players'])->name('api.players');

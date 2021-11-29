@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.admin_layout_post')
 
 @section('title', 'Игроки')
 

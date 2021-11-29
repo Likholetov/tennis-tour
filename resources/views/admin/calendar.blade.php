@@ -16,7 +16,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid" id="calendar">
+      <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
 
           <calendar-component></calendar-component>

@@ -34,7 +34,7 @@
        </div>
        <div class="container">
           <div class="first-section__navigation">
-             <a href="#" class="main">
+             <a href="/" class="main">
                 Главная
              </a>
              <span class="current">
@@ -209,25 +209,27 @@
        </div>
        <div class="container">
           <ul class="news__list">
+             @if ($posts->count() > 0)
              <li class="news__item">
-                <img style="height: 245px; object-fit: cover; width: 100%;" src="{{ $posts[0]->img_url }}" alt="" class="new-img">
-                <div class="news__block">
-                   <div class="news__date button yellow-btn">
-                      <span class="date">
-                        {{ Date::parse($posts[0]->created_at)->format('j.m.Y (H:i)') }}
-                      </span>
-                   </div>
-                   <p class="news__subtitle">
-                      {{ $posts[0]->title }}
-                   </p>
-                   <p class="tennis__prg-small">
-                     {{ $posts[0]->description }}
-                   </p>
-                   <a href="{{ route('post', $posts[0]->id) }}" class="more-btn button blue-btn">
-                      Подробнее
-                   </a>
-                </div>
-             </li>
+               <img style="height: 245px; object-fit: cover; width: 100%;" src="{{ $posts[0]->img_url }}" alt="" class="new-img">
+               <div class="news__block">
+                  <div class="news__date button yellow-btn">
+                     <span class="date">
+                       {{ Date::parse($posts[0]->created_at)->format('j.m.Y (H:i)') }}
+                     </span>
+                  </div>
+                  <p class="news__subtitle">
+                     {{ $posts[0]->title }}
+                  </p>
+                  <p class="tennis__prg-small">
+                    {{ $posts[0]->description }}
+                  </p>
+                  <a href="{{ route('post', $posts[0]->id) }}" class="more-btn button blue-btn">
+                     Подробнее
+                  </a>
+               </div>
+            </li>   
+             @endif
              @foreach ($posts as  $post)
              @if ($loop->index != 0)
              <li class="news__item">

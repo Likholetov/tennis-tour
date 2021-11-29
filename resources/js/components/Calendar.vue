@@ -5,7 +5,7 @@
         <div v-if="error" class="error"></div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading mb-4">
                 <h2>Календарь</h2>
             </div>
 

@@ -76,4 +76,9 @@ class MainController extends Controller
     {
         return view('player', compact('player'));
     }
+
+    public function gallery(Gallery $gallery)
+    {
+        return view('gallery', compact('gallery'));
+    }
 }

@@ -7190,4 +7190,18 @@ nav .kamevlu-kesaned .links {
 .players-gallery__item img {
     border: 3px solid #fff;
     border-radius: 6px;
+    width: 100%;
+}
+.gallery__item {
+    // width: 100%;
+    img {
+        width: 100%;
+        height: 215px;
+    }
+    @media screen and (max-width: 980px) {
+        width: calc((100% - 40px) / 2);
+        img {
+            height: 322px;
+        }
+    }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TournamentStoreRequest;
 use App\Http\Requests\TournamentUpdateRequest;
+use App\Models\Category;
 use App\Models\Tournament;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TournamentController extends Controller
@@ -15,9 +17,9 @@ class TournamentController extends Controller
      */
     public function index(Request $request)
     {
-        $tournaments = Tournament::all();
+        return Tournament::all();
 
-        return view('tournament.index', compact('tournaments'));
+        //return view('tournament.index', compact('tournaments'));
     }
 
     /**
@@ -37,9 +39,9 @@ class TournamentController extends Controller
     {
         $tournament = Tournament::create($request->validated());
 
-        $request->session()->flash('tournament.id', $tournament->id);
+        //$request->session()->flash('tournament.id', $tournament->id);
 
-        return redirect()->route('tournament.index');
+        return $tournament;//redirect()->route('tournament.index');
     }
 
     /**
@@ -71,7 +73,7 @@ class TournamentController extends Controller
     {
         $tournament->update($request->validated());
 
-        $request->session()->flash('tournament.id', $tournament->id);
+        //$request->session()->flash('tournament.id', $tournament->id);
 
         return redirect()->route('tournament.index');
     }
@@ -86,5 +88,15 @@ class TournamentController extends Controller
         $tournament->delete();
 
         return redirect()->route('tournament.index');
+    }
+
+    public function tournamentDate($date)
+    {
+        $dateParsed = Carbon::createFromFormat('d-m-Y', $date);
+        $date = $dateParsed->format('Y-m-d');
+        
+        $categories = Category::all();
+
+        return view('tournament.create', compact('date', 'categories'));
     }
 }

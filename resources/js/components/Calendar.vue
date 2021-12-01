@@ -52,9 +52,16 @@ export default {
             loading: true,
             error: null,
             currentMonth: moment().startOf("month"),
+            events: [],
         };
     },
     props: {
+        tournaments: {
+            type: Array,
+            default: function () {
+                return [];
+            },
+        },
         allEvents: {
             type: Array,
             default: function () {
@@ -83,6 +90,29 @@ export default {
         this.$root.$on(CHANGE_MONTH, function (payload) {
             me.currentMonth = payload;
         });
+
+        axios
+            .get("/admin/tournament")
+            .then((res) => {
+                //window.location.href = `/admin/calendar`;
+
+                res.data.forEach((tournament) => {
+                    console.log(tournament.started_at);
+
+                    this.events.push({
+                        id: tournament.id,
+                        title: tournament.title,
+                        date: new Date(tournament.started_at * 1000),
+                        color: "panel-default",
+                    });
+                });
+
+                console.log(this.events);
+            })
+            .catch((err) => {
+                //this.loading = false;
+                console.log(err);
+            });
     },
     mounted() {
         this.loading = false;
@@ -128,7 +158,7 @@ export default {
             return i18n.locale;
         },
         events: function () {
-            return this.allEvents;
+            return this.events;
         },
     },
     methods: {

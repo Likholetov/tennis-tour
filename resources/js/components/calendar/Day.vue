@@ -80,8 +80,20 @@ export default {
             /*}*/
         },
         showAddEventForm() {
+            window.location.href = `/admin/tournament/date/${this.day.date.format(
+                "D-M-Y"
+            )}`;
+            //console.log(this.day.date.format("Y-M-D"));
+            /*axios
+                .get(`/admin/tournament/date/${this.day.date.format("d-M-Y")}`)
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });*/
             // TODO: Implement add event form
-            alert("Can you help implementing this?");
+            //alert("Can you help implementing this?");
         },
     },
 };

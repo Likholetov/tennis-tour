@@ -40,16 +40,14 @@ Vue.component(
     require("./components/Calendar.vue").default
 );
 
-Vue.component(
-    "my-select",
-    require("./components/Select.vue").default
-);
+Vue.component("my-select", require("./components/Select.vue").default);
+
+Vue.component("news-form", require("./components/NewsForm.vue").default);
 
 Vue.component(
-    "news-form",
-    require("./components/NewsForm.vue").default
+    "tournament-component",
+    require("./components/tournament/TournamentComponent.vue").default
 );
-
 
 // Пагинация
 Vue.component("pagination", require("laravel-vue-pagination"));

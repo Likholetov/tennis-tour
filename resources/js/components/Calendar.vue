@@ -52,7 +52,7 @@ export default {
             loading: true,
             error: null,
             currentMonth: moment().startOf("month"),
-            events: [],
+            eventsList: [],
         };
     },
     props: {
@@ -99,7 +99,7 @@ export default {
                 res.data.forEach((tournament) => {
                     console.log(tournament.started_at);
 
-                    this.events.push({
+                    this.eventsList.push({
                         id: tournament.id,
                         title: tournament.title,
                         date: new Date(tournament.started_at * 1000),
@@ -158,7 +158,7 @@ export default {
             return i18n.locale;
         },
         events: function () {
-            return this.events;
+            return this.eventsList;
         },
     },
     methods: {

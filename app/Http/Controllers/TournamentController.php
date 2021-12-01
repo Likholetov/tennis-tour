@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TournamentStoreRequest;
 use App\Http\Requests\TournamentUpdateRequest;
 use App\Models\Category;
+use App\Models\Player;
 use App\Models\Tournament;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -102,7 +103,8 @@ class TournamentController extends Controller
         $date = $dateParsed->format('Y-m-d');
         
         $categories = Category::all();
+        $players = Player::all();
 
-        return view('tournament.create', compact('date', 'categories'));
+        return view('tournament.create', compact('date', 'categories', 'players'));
     }
 }

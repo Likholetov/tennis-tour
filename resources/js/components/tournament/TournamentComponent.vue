@@ -113,10 +113,99 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <h6 class="mb-2">Добавить нового игрока:</h6>
                     <div class="form-group">
-                        <label>Название</label>
-                        <input name="title" type="text" class="form-control" />
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Фамилия</label>
+                                <input
+                                    v-model="newSurname"
+                                    type="text"
+                                    class="form-control"
+                                />
+                            </div>
+                            <div class="col-3">
+                                <label>Имя</label>
+                                <input
+                                    v-model="newName"
+                                    type="text"
+                                    class="form-control"
+                                />
+                            </div>
+
+                            <div
+                                class="col-6"
+                                style="display: flex; align-items: end"
+                            >
+                                <button
+                                    @click="addNew"
+                                    type="button"
+                                    class="btn btn-success float-left"
+                                >
+                                    Добавить
+                                </button>
+                            </div>
+                        </div>
                     </div>
+                    <h6 class="mb-2">Выбрать существующего игрока:</h6>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Поиск</label>
+                                <v-select
+                                    placeholder="Поиск..."
+                                    v-model="currentPlayer"
+                                    :options="options"
+                                ></v-select>
+                            </div>
+                            <div
+                                class="col-6"
+                                style="display: flex; align-items: end"
+                            >
+                                <button
+                                    @click="addExisting"
+                                    type="button"
+                                    class="btn btn-success float-left"
+                                >
+                                    Добавить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h6 class="mb-2">Список игроков</h6>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Фамилия Имя</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="(player, index) in playersList"
+                                :key="index"
+                            >
+                                <td>
+                                    {{ 1 + index }}
+                                </td>
+                                <td>
+                                    {{ player.label }}
+                                </td>
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="btn btn-danger btn-sm delete-btn"
+                                        @click="deletePlayer(index)"
+                                    >
+                                        Удалить
+                                        <i class="fas fa-trash"> </i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -132,25 +221,65 @@ export default {
     created() {
         this.start = this.date;
         this.category_id = this.categories[0].id;
+
+        this.players.forEach((player) => {
+            this.options.push({
+                label: player.surname + " " + player.name,
+                code: player.id,
+            });
+        });
     },
-    props: ["date", "categories"],
+    props: ["date", "categories", "players"],
     data() {
         return {
+            // tournament info
             title: "",
             start: new Date(),
             time: "00:00",
             category_id: 1,
             rank: "0",
             place: 'ТК "Хасанский"',
-            loading: false,
+            // players
+            playersList: [],
+            // add new player
+            newName: "",
+            newSurname: "",
+            // v-select
+            currentPlayer: "",
+            options: [],
         };
     },
     watch: {
-        time: function (val) {
-            console.log(val);
+        options: {
+            handler: function () {},
+            deep: true,
         },
     },
     methods: {
+        deletePlayer(index) {
+            console.log(index);
+            this.playersList.splice(index, 1);
+        },
+        addNew() {
+            if (this.newSurname == "" || this.newName == "") {
+                return;
+            }
+            this.playersList.push({
+                label: this.newSurname + " " + this.newName,
+                code: 0,
+            });
+
+            this.newName = "";
+            this.newSurname = "";
+        },
+        addExisting() {
+            if (this.currentPlayer == "") {
+                return;
+            }
+            this.playersList.push(this.currentPlayer);
+
+            this.currentPlayer = "";
+        },
         save() {
             console.log(this.time);
             const arrayOfStrings = this.time.split(":");

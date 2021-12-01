@@ -16,10 +16,10 @@ class Tournament extends Model
      */
     protected $fillable = [
         'started_at',
-        'ended_at',
         'title',
         'category_id',
         'rank',
+        'place',
     ];
 
     /**
@@ -30,7 +30,6 @@ class Tournament extends Model
     protected $casts = [
         'id' => 'integer',
         'started_at' => 'timestamp',
-        'ended_at' => 'timestamp',
         'category_id' => 'integer',
     ];
 }

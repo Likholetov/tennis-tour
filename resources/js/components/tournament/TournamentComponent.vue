@@ -37,6 +37,15 @@
                         />
                     </div>
                     <div class="form-group">
+                        <label>Место проведения</label>
+                        <input
+                            v-model="place"
+                            name="place"
+                            type="text"
+                            class="form-control"
+                        />
+                    </div>
+                    <div class="form-group">
                         <label>Дата начала</label>
                         <input
                             v-model="start"
@@ -46,11 +55,11 @@
                         />
                     </div>
                     <div class="form-group">
-                        <label>Дата завершения</label>
+                        <label>Время начала</label>
                         <input
-                            v-model="end"
-                            name="end"
-                            type="date"
+                            v-model="time"
+                            name="time"
+                            type="time"
                             class="form-control"
                         />
                     </div>
@@ -117,10 +126,11 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
     created() {
         this.start = this.date;
-        this.end = this.date;
         this.category_id = this.categories[0].id;
     },
     props: ["date", "categories"],
@@ -128,21 +138,34 @@ export default {
         return {
             title: "",
             start: new Date(),
-            end: new Date(),
+            time: "00:00",
             category_id: 1,
             rank: "0",
+            place: 'ТК "Хасанский"',
             loading: false,
         };
     },
+    watch: {
+        time: function (val) {
+            console.log(val);
+        },
+    },
     methods: {
         save() {
+            console.log(this.time);
+            const arrayOfStrings = this.time.split(":");
+            const hours = parseInt(arrayOfStrings[0]);
+            const minutes = parseInt(arrayOfStrings[1]);
+            let newDateObj = moment(this.start).add(minutes, "m").toDate();
+            newDateObj = moment(this.start).add(hours, "h").toDate();
+
             axios
                 .post("/admin/tournament", {
                     title: this.title,
-                    started_at: this.start,
-                    ended_at: this.end,
+                    started_at: new Date(newDateObj),
                     category_id: this.category_id,
                     rank: this.rank,
+                    place: this.place,
                 })
                 .then((res) => {
                     window.location.href = `/admin/calendar`;

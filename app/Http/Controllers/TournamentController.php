@@ -37,7 +37,13 @@ class TournamentController extends Controller
      */
     public function store(TournamentStoreRequest $request)
     {
-        $tournament = Tournament::create($request->validated());
+        $tournament = new Tournament();//Tournament::create($request->validated());
+        $tournament->title = $request->title;
+        $tournament->category_id = $request->category_id;
+        $tournament->rank = $request->rank;
+        $tournament->place = $request->place;
+        $tournament->started_at = Carbon::parse($request->started_at);
+        $tournament->save();
 
         //$request->session()->flash('tournament.id', $tournament->id);
 

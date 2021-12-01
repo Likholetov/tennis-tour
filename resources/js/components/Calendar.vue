@@ -1,5 +1,5 @@
 <template>
-    <div style="display: block" class="row ml-5 mr-5">
+    <div style="display: block" class="row ml-5 mr-5 mb-5">
         <div v-if="loading">Загрузка...</div>
 
         <div v-if="error" class="error"></div>

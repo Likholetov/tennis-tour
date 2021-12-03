@@ -32,4 +32,9 @@ class Tournament extends Model
         'started_at' => 'timestamp',
         'category_id' => 'integer',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

@@ -18,9 +18,11 @@ class TournamentController extends Controller
      */
     public function index(Request $request)
     {
-        return Tournament::all();
+        //return Tournament::all();
 
-        //return view('tournament.index', compact('tournaments'));
+        $tournaments = Tournament::all();
+
+        return view('tournament.index', compact('tournaments'));
     }
 
     /**
@@ -29,7 +31,11 @@ class TournamentController extends Controller
      */
     public function create(Request $request)
     {
-        return view('tournament.create');
+        $date = Carbon::now();
+        $categories = Category::all();
+        $players = Player::all();
+
+        return view('tournament.create', compact('date', 'categories', 'players'));
     }
 
     /**

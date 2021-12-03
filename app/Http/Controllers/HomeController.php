@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tournament;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -28,6 +29,8 @@ class HomeController extends Controller
 
     public function calendar()
     {
-        return view('admin.calendar');
+        $tournaments = Tournament::all();
+
+        return view('admin.calendar', compact('tournaments'));
     }
 }

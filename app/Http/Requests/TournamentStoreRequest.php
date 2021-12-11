@@ -25,10 +25,13 @@ class TournamentStoreRequest extends FormRequest
     {
         return [
             'started_at' => ['required'],
+            'ended_at' => ['required'],
             'title' => ['required', 'string', 'max:255'],
             'place' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'integer', 'gt:0'],
             'rank' => ['required', 'integer'],
+            'players' => ['nullable'],
+            'groups' => ['nullable']
         ];
     }
 }

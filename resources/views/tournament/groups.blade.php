@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Календарь')
+@section('title', 'Группы')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Добавление турнира</h1>
+                    <h1>Группы</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -26,11 +26,9 @@
 
     <!-- Main content -->
     <section class="content">
-        <tournament-component
-            :date="'{{ $date }}'"
-            :categories="{{ $categories }}"
-            :players="{{ $players }}"
-        ></tournament-component>
+        <groups-component
+            :groups="'{{ $tournament->groups()->with('players')->get() }}'"
+        ></groups-component>
     </section>
     <!-- /.content -->
 @endsection

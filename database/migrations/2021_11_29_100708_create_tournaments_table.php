@@ -16,10 +16,12 @@ class CreateTournamentsTable extends Migration
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
             $table->timestamp('started_at')->nullable();
+            $table->timestamp('ended_at')->nullable();
             $table->string('place', 255)->nullable();
             $table->string('title', 255);
             $table->unsignedBigInteger('category_id');
             $table->integer('rank');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

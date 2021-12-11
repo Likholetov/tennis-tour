@@ -49,6 +49,11 @@ Vue.component(
     require("./components/tournament/TournamentComponent.vue").default
 );
 
+Vue.component(
+    "groups-component",
+    require("./components/tournament/GroupsComponent.vue").default
+);
+
 // Пагинация
 Vue.component("pagination", require("laravel-vue-pagination"));
 

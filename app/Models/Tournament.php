@@ -30,11 +30,22 @@ class Tournament extends Model
     protected $casts = [
         'id' => 'integer',
         'started_at' => 'timestamp',
+        'ended_at' => 'timestamp',
         'category_id' => 'integer',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function players() 
+    {
+        return $this->belongsToMany(Player::class);
+    }
+
+    public function groups()
+    {
+        return$this->hasMany(Group::class);
     }
 }

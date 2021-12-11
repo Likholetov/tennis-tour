@@ -7,7 +7,7 @@
                 type="button"
                 class="btn btn-success float-right"
             >
-                Добавить турнир
+                Сохранить
             </button>
         </div>
         <div class="col-md-12">
@@ -98,6 +98,21 @@
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Групповой этап</label>
+                        <select
+                            class="form-control custom-select"
+                            v-model="groups"
+                        >
+                            <option value="0">Нет группового этапа</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
                         </select>
                     </div>
                 </div>
@@ -230,98 +245,10 @@
             </div>
             <!-- /.card -->
         </div>
-        <div class="col-md-12">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Группы</h3>
-
-                    <div class="card-tools">
-                        <button
-                            type="button"
-                            class="btn btn-tool"
-                            data-card-widget="collapse"
-                            title="Collapse"
-                        >
-                            <i class="fas fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row mb-3">
-                        <div
-                            class="col-6"
-                            style="display: flex; align-items: end"
-                        >
-                            <button
-                                @click="addGroup"
-                                type="button"
-                                class="btn btn-success float-left"
-                            >
-                                Добавить группу
-                            </button>
-                        </div>
-                    </div>
-                    <Container
-                        orientation="horizontal"
-                        @drop="onColumnDrop($event)"
-                        drag-handle-selector=".column-drag-handle"
-                        @drag-start="dragStart"
-                        :drop-placeholder="upperDropPlaceholderOptions"
-                    >
-                        <Draggable
-                            v-for="column in scene.children"
-                            :key="column.id"
-                        >
-                            <div :class="column.props.className">
-                                <div class="card-column-header">
-                                    <span class="column-drag-handle"
-                                        >&#x2630;</span
-                                    >
-                                    {{ column.name }}
-                                </div>
-                                <Container
-                                    group-name="col"
-                                    @drop="(e) => onCardDrop(column.id, e)"
-                                    @drag-start="(e) => log('drag start', e)"
-                                    @drag-end="(e) => log('drag end', e)"
-                                    :get-child-payload="
-                                        getCardPayload(column.id)
-                                    "
-                                    drag-class="card-ghost"
-                                    drop-class="card-ghost-drop"
-                                    :drop-placeholder="dropPlaceholderOptions"
-                                >
-                                    <Draggable
-                                        v-for="card in column.children"
-                                        :key="card.id"
-                                    >
-                                        <div
-                                            :class="card.props.className"
-                                            :style="card.props.style"
-                                            style="padding: 4px"
-                                        >
-                                            <h4>{{ card.name }}</h4>
-                                            <!-- <p class="card-text">
-                                                {{ card.data }}
-                                            </p> -->
-                                        </div>
-                                    </Draggable>
-                                </Container>
-                            </div>
-                        </Draggable>
-                    </Container>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
     </div>
 </template>
 
 <script>
-const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
 const columnNames = ["Нераспределенные", "Группа А", "Группа Б", "Группа В"];
 const cardColors = ["white"];
 
@@ -424,8 +351,55 @@ export default {
                 code: player.id,
             });
         });
+
+        if (this.tournament) {
+            const started = new Date(this.tournament.started_at * 1000);
+            const ended = new Date(this.tournament.ended_at * 1000);
+
+            console.log(this.tournament.started_at);
+
+            this.title = this.tournament.title;
+
+            this.start = moment(started).format("YYYY-MM-DD");
+            this.end = moment(ended).format("YYYY-MM-DD");
+            let minutes;
+            let hours;
+            started.getMinutes() < 10
+                ? (minutes = "0" + started.getMinutes())
+                : (minutes = "" + started.getMinutes());
+            started.getHours() < 10
+                ? (hours = "0" + started.getHours())
+                : (hours = "" + started.getHours());
+            const timeStr = "" + hours + ":" + minutes;
+            this.time = timeStr;
+            this.rank = "" + this.tournament.rank;
+            this.place = this.tournament.place;
+            this.category_id = this.tournament.category_id;
+            this.groups = "" + (this.groupscount - 1);
+        }
+
+        if (this.participants && this.participants.length > 0) {
+            this.participants.forEach((element) => {
+                this.playersList.push({
+                    label:
+                        element.surname +
+                        " " +
+                        element.name +
+                        " " +
+                        element.patronimic,
+                    code: element.id,
+                });
+            });
+        }
     },
-    props: ["date", "categories", "players"],
+    props: [
+        "date",
+        "categories",
+        "players",
+        "participants",
+        "tournament",
+        "groupscount",
+    ],
     data() {
         return {
             // tournament info
@@ -436,6 +410,7 @@ export default {
             category_id: 1,
             rank: "0",
             place: 'ТК "Хасанский"',
+            groups: "0",
             // players
             playersList: [],
             // add new player
@@ -553,29 +528,54 @@ export default {
             this.currentPlayer = "";
         },
         save() {
-            console.log(this.time);
             const arrayOfStrings = this.time.split(":");
             const hours = parseInt(arrayOfStrings[0]);
             const minutes = parseInt(arrayOfStrings[1]);
             let newDateObj = moment(this.start).add(minutes, "m").toDate();
             newDateObj = moment(this.start).add(hours, "h").toDate();
+            let newDateObjEnd = moment(this.end).toDate();
 
-            axios
-                .post("/admin/tournament", {
-                    title: this.title,
-                    started_at: new Date(newDateObj),
-                    category_id: this.category_id,
-                    rank: this.rank,
-                    place: this.place,
-                })
-                .then((res) => {
-                    window.location.href = `/admin/calendar`;
-                    console.log(res);
-                })
-                .catch((err) => {
-                    //this.loading = false;
-                    console.log(err);
-                });
+            if (this.tournament) {
+                axios
+                    .patch(`/admin/tournament/${this.tournament.id}`, {
+                        title: this.title,
+                        started_at: new Date(newDateObj),
+                        ended_at: new Date(newDateObjEnd),
+                        category_id: this.category_id,
+                        rank: this.rank,
+                        place: this.place,
+                        groups: this.groups,
+                        players: this.playersList,
+                    })
+                    .then((res) => {
+                        window.location.href = `/admin/calendar`;
+                        console.log(res);
+                    })
+                    .catch((err) => {
+                        //this.loading = false;
+                        console.log(err);
+                    });
+            } else {
+                axios
+                    .post("/admin/tournament", {
+                        title: this.title,
+                        started_at: new Date(newDateObj),
+                        ended_at: new Date(newDateObjEnd),
+                        category_id: this.category_id,
+                        rank: this.rank,
+                        place: this.place,
+                        groups: this.groups,
+                        players: this.playersList,
+                    })
+                    .then((res) => {
+                        window.location.href = `/admin/calendar`;
+                        console.log(res);
+                    })
+                    .catch((err) => {
+                        //this.loading = false;
+                        console.log(err);
+                    });
+            }
         },
         // drag n drop
         onColumnDrop(dropResult) {

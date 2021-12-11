@@ -36,12 +36,13 @@ Route::group(['prefix' => 'api'], function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
-    Route::get('/calendar', [App\Http\Controllers\HomeController::class, 'calendar'])->name('calendar');
+    Route::get('/calendar', [App\Http\Controllers\HomeController::class, 'calendar'])->name('admin.calendar');
     Route::resource('player', App\Http\Controllers\PlayerController::class)->except(['show']);
     Route::resource('gallery', App\Http\Controllers\GalleryController::class)->except(['show']);
     Route::resource('image', App\Http\Controllers\ImageController::class)->except(['show']);
     Route::resource('post', App\Http\Controllers\PostController::class)->except(['show']);
     //Route::get('/tournament/date/{date}', [App\Http\Controllers\TournamentController::class, 'tournamentDate'])->name('tournament.date');
+    Route::get('/tournament/groups/{tournament}', [App\Http\Controllers\TournamentController::class, 'groups'])->name('tournament.groups');
     Route::resource('tournament', App\Http\Controllers\TournamentController::class);
     //Route::resource('category', App\Http\Controllers\CategoryController::class);
 });

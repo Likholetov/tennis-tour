@@ -76,11 +76,6 @@
                   {{ Date::parse($tournament->started_at)->addHours(3)->format('H:i - j F Y г.') }}
               </td>
                     <td class="project-actions text-right">
-                        @if ($tournament->groups->count() > 0)
-                        <a class="btn btn-primary btn-sm" href="{{ route('tournament.groups', $tournament['id']) }}">
-                            Группы
-                        </a>  
-                        @endif
                         <a class="btn btn-primary btn-sm" href="{{ route('tournament.edit', $tournament['id']) }}">
                             <i class="fas fa-pencil-alt">
                             </i>

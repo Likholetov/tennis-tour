@@ -32,7 +32,7 @@
             :players="{{ $players }}"
             :tournament="{{ $tournament }}"
             :participants="{{ $participants }}"
-            :groupscount="{{ $groupsCount }}"
+            :tournamentgroups="{{ $tournament->groups()->with('players')->get() }}"
         ></tournament-component>
     </section>
     <!-- /.content -->

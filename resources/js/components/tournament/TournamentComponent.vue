@@ -371,6 +371,7 @@ export default {
         });
 
         if (this.tournament) {
+            console.log(this.tournamentgroups);
             const started = new Date(this.tournament.started_at * 1000);
             const ended = new Date(this.tournament.ended_at * 1000);
 
@@ -401,7 +402,7 @@ export default {
                         " " +
                         element.name +
                         " " +
-                        element.patronimic,
+                        element.patronymic,
                     code: element.id,
                 });
             });
@@ -413,7 +414,7 @@ export default {
         "players",
         "participants",
         "tournament",
-        "groupscount",
+        "tournamentgroups",
     ],
     data() {
         return {
@@ -628,6 +629,8 @@ export default {
                         rank: this.rank,
                         place: this.place,
                         players: this.playersList,
+                        groups: this.groups,
+                        is_groups: this.isGroups,
                     })
                     .then((res) => {
                         window.location.href = `/admin/calendar`;
@@ -645,6 +648,8 @@ export default {
                         rank: this.rank,
                         place: this.place,
                         players: this.playersList,
+                        groups: this.groups,
+                        is_groups: this.isGroups,
                     })
                     .then((res) => {
                         window.location.href = `/admin/calendar`;

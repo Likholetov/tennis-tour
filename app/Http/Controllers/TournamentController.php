@@ -45,7 +45,7 @@ class TournamentController extends Controller
      */
     public function store(TournamentStoreRequest $request)
     {
-        $tournament = new Tournament();//Tournament::create($request->validated());
+        $tournament = new Tournament();
         $tournament->title = $request->title;
         $tournament->category_id = $request->category_id;
         $tournament->rank = $request->rank;
@@ -54,29 +54,51 @@ class TournamentController extends Controller
         $tournament->ended_at = Carbon::parse($request->ended_at);
         $tournament->save();
 
-        if ($request->groups != 0) {
-            $zeroGroup = new Group();
-            $zeroGroup->title = "Не распеределено";
-            $zeroGroup->tournament_id = $tournament->id;
-            $zeroGroup->save();
+        $attachedPlayers = [];
 
-            $titles = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж'];
-            $groupsCount = intval($request->groups);
+        if ($request->is_groups == true) {
 
-            for ($i=0; $i < $groupsCount; $i++) { 
+            foreach ($request->groups as $group) {
                 $currentGroup = new Group();
-                $currentGroup->title = $titles[$i];
+                $currentGroup->title = $group['name'];
                 $currentGroup->tournament_id = $tournament->id;
                 $currentGroup->save();
+
+                foreach ($group['players'] as $player) {
+
+                    if (!$player) {
+                        continue;
+                    }
+
+                    array_push($attachedPlayers, $player);
+
+                    if ($player['code'] != 0) {
+                        $currentGroup->players()->attach($player['code']);
+                        $tournament->players()->attach($player['code']);
+                    } else {
+                        $fioArray = explode(" ", $player['label']);
+
+                        $newPlayer = new Player();
+                        $newPlayer->surname = $fioArray[0];
+                        $newPlayer->name = $fioArray[1];
+                        $newPlayer->patronymic = $fioArray[2];
+                        $newPlayer->save();
+
+                        $currentGroup->players()->attach($newPlayer->id);
+                        $tournament->players()->attach($newPlayer->id);
+                    }
+                }
             }
         }
 
         foreach ($request->players as $player) {
+            if ($this->existsInArray($player, $attachedPlayers)) {
+                continue;
+            }
+
             if ($player['code'] != 0) {
                 $tournament->players()->attach($player['code']);
-                if ($request->groups != 0) {
-                    $zeroGroup->players()->attach($player['code']);
-                }
+
                 continue;
             }
 
@@ -89,16 +111,25 @@ class TournamentController extends Controller
             $newPlayer->save();
 
             $tournament->players()->attach($newPlayer->id);
-
-            if ($request->groups != 0) {
-                $zeroGroup->players()->attach($newPlayer->id);
-            }
         }
 
-        //$request->session()->flash('tournament.id', $tournament->id);
-
-        return $tournament;//redirect()->route('tournament.index');
+        return $tournament;
     }
+
+    private function existsInArray($entry, $array) {
+        foreach ($array as $compare) {
+            if ($entry['code'] == 0) {
+                if (strcmp($compare['code'], $entry['code']) == 0  && strcmp($compare['label'], $entry['label']) == 0) {
+                    return true;
+                }
+            } else {
+                if ($compare['code'] == $entry['code']) {
+                    return true;
+                }
+            }
+            
+        return false;
+    }}
 
     /**
      * @param \Illuminate\Http\Request $request
@@ -161,13 +192,13 @@ class TournamentController extends Controller
             $tournament->players()->attach($newPlayer->id);
         }
 
-        if ($tournament->groups->count() - 1 == $request->groups) {
+        /*if ($tournament->groups->count() - 1 == $request->groups) {
             return $tournament;
         }
 
         if ($request->groups == 0 && $tournament->groups->count() != 0) {
             $tournament->groups()->delete();
-        }
+        }*/
 
         //$request->session()->flash('tournament.id', $tournament->id);
 

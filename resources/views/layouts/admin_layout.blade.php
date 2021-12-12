@@ -131,7 +131,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('calendar') }}" class="nav-link">
+                        <a href="{{ route('admin.calendar') }}" class="nav-link">
                             <i class="nav-icon fas fa-calendar-alt"></i>
                             <p>
                                 Календарь

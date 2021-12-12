@@ -100,25 +100,20 @@
                             <option value="4">4</option>
                         </select>
                     </div>
-                    <div class="form-check">
-                        <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="checkbox1"
-                            v-model="isGroups"
-                        />
-                        <label class="form-check-label" for="checkbox1"
-                            >Групповой этап</label
+                    <div class="form-group">
+                        <label>Групповой этап</label>
+                        <select
+                            class="form-control custom-select"
+                            v-model="groups"
                         >
-                    </div>
-                    <div v-if="isGroups" class="form-group mt-3">
-                        <label>Количество игроков в группе</label>
-                        <input
-                            v-model="groupAmount"
-                            name="title"
-                            type="number"
-                            class="form-control"
-                        />
+                            <option value="0">Нет группового этапа</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -215,7 +210,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Фамилия Имя Отчество</th>
+                                <th>Фамилия Имя</th>
                                 <th>Действия</th>
                             </tr>
                         </thead>
@@ -235,11 +230,7 @@
                                         type="button"
                                         class="btn btn-danger btn-sm delete-btn"
                                         @click="
-                                            deletePlayer(
-                                                index,
-                                                player.label,
-                                                player.code
-                                            )
+                                            deletePlayer(index, player.label)
                                         "
                                     >
                                         Удалить
@@ -254,106 +245,97 @@
             </div>
             <!-- /.card -->
         </div>
-        <div v-if="isGroups" class="col-md-12">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Группы</h3>
-
-                    <div class="card-tools">
-                        <button
-                            type="button"
-                            class="btn btn-tool"
-                            data-card-widget="collapse"
-                            title="Collapse"
-                        >
-                            <i class="fas fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div v-for="(group, key) in groups" :key="'group' + key">
-                        <h5 class="mb-2">{{ group.name }}</h5>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Фамилия Имя Отчество</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="(player, index) in group.players"
-                                    :key="group.name + index"
-                                >
-                                    <td>
-                                        {{ 1 + index }}
-                                    </td>
-                                    <td>
-                                        <select
-                                            v-if="group.players[index] == ''"
-                                            class="form-control custom-select"
-                                            v-model="group.players[index]"
-                                        >
-                                            <option value="">Не выбрано</option>
-                                            <option
-                                                v-for="(
-                                                    player, key1
-                                                ) in playersListGroups"
-                                                :key="
-                                                    group.name +
-                                                    index +
-                                                    'player' +
-                                                    key1
-                                                "
-                                                :value="player"
-                                            >
-                                                {{ player.label }}
-                                            </option>
-                                        </select>
-                                        <div
-                                            style="
-                                                display: flex;
-                                                justify-content: space-between;
-                                                align-items: center;
-                                            "
-                                            v-if="group.players[index] != ''"
-                                        >
-                                            {{ group.players[index].label }}
-                                            <button
-                                                type="button"
-                                                class="
-                                                    btn btn-danger btn-sm
-                                                    delete-btn
-                                                "
-                                                @click="
-                                                    removePlayerFromGroup(
-                                                        key,
-                                                        index
-                                                    )
-                                                "
-                                            >
-                                                Удалить
-                                                <i class="fas fa-trash"> </i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
     </div>
 </template>
 
 <script>
+const columnNames = ["Нераспределенные", "Группа А", "Группа Б", "Группа В"];
+const cardColors = ["white"];
+
+const pickColor = () => {
+    const rand = Math.floor(Math.random() * 10);
+    return cardColors[rand];
+};
+
+const generateItems = (count, creator) => {
+    const result = [];
+    for (let i = 0; i < count; i++) {
+        result.push(creator(i));
+    }
+    return result;
+};
+
+// const scene = {
+//     type: "container",
+//     props: {
+//         orientation: "horizontal",
+//     },
+//     children: generateItems(4, (i) => ({
+//         id: `column${i}`,
+//         type: "container",
+//         name: columnNames[i],
+//         props: {
+//             orientation: "vertical",
+//             className: "card-container",
+//         },
+//         children: generateItems(+(Math.random() * 10).toFixed() + 1, (j) => ({
+//             type: "draggable",
+//             id: `${i}${j}`,
+//             props: {
+//                 className: "card",
+//                 style: { backgroundColor: pickColor() },
+//             },
+//             data: lorem.slice(0, Math.floor(Math.random() * 150) + 30),
+//             number: 1 + j,
+//         })),
+//     })),
+// };
+
+const scene = {
+    type: "container",
+    props: {
+        orientation: "horizontal",
+    },
+    children: [
+        {
+            id: `0`,
+            type: "container",
+            name: "Нераспределенные",
+            props: {
+                orientation: "vertical",
+                className: "card-container",
+            },
+            children: [],
+        },
+    ],
+};
+
+const applyDrag = (arr, dragResult) => {
+    const { removedIndex, addedIndex, payload } = dragResult;
+    if (removedIndex === null && addedIndex === null) return arr;
+
+    const result = [...arr];
+    let itemToAdd = payload;
+
+    if (removedIndex !== null) {
+        itemToAdd = result.splice(removedIndex, 1)[0];
+    }
+
+    if (addedIndex !== null) {
+        result.splice(addedIndex, 0, itemToAdd);
+    }
+
+    return result;
+};
+
 import moment from "moment";
+import { Container, Draggable } from "vue-dndrop";
 
 export default {
+    components: { Container, Draggable },
+
     created() {
+        console.log(this.scene);
         this.start = moment(this.date).format("YYYY-MM-DD");
         this.end = moment(this.date).format("YYYY-MM-DD");
         this.category_id = this.categories[0].id;
@@ -374,6 +356,8 @@ export default {
             const started = new Date(this.tournament.started_at * 1000);
             const ended = new Date(this.tournament.ended_at * 1000);
 
+            console.log(this.tournament.started_at);
+
             this.title = this.tournament.title;
 
             this.start = moment(started).format("YYYY-MM-DD");
@@ -391,6 +375,7 @@ export default {
             this.rank = "" + this.tournament.rank;
             this.place = this.tournament.place;
             this.category_id = this.tournament.category_id;
+            this.groups = "" + (this.groupscount - 1);
         }
 
         if (this.participants && this.participants.length > 0) {
@@ -425,6 +410,7 @@ export default {
             category_id: 1,
             rank: "0",
             place: 'ТК "Хасанский"',
+            groups: "0",
             // players
             playersList: [],
             // add new player
@@ -434,149 +420,53 @@ export default {
             // v-select
             currentPlayer: "",
             options: [],
-            // groups
-            playersListGroups: [],
-            isGroups: false,
-            groupAmount: 4,
-            groupTitles: [
-                "Группа А",
-                "Группа Б",
-                "Группа В",
-                "Группа Г",
-                "Группа Д",
-                "Группа Е",
-                "Группа Ж",
-                "Группа З",
-                "Группа И",
-                "Группа К",
-            ],
-            groups: [
-                {
-                    name: "Группа А",
-                    players: ["", "", "", ""],
-                },
-            ],
+            // drag n drop
+
+            upperDropPlaceholderOptions: {
+                className: "cards-drop-preview",
+                animationDuration: "150",
+                showOnTop: true,
+            },
+            dropPlaceholderOptions: {
+                className: "drop-preview",
+                animationDuration: "150",
+                showOnTop: true,
+            },
+            scene,
         };
     },
     watch: {
-        groupAmount: {
-            handler: function () {
-                if (this.groupAmount != "" && this.groupAmount > 0) {
-                    this.groups.forEach((group) => {
-                        if (
-                            group.players.length > Math.trunc(this.groupAmount)
-                        ) {
-                            group.players.length = Math.trunc(this.groupAmount);
-                        } else {
-                            let count =
-                                Math.trunc(this.groupAmount) -
-                                group.players.length;
-                            for (let index = 0; index < count; index++) {
-                                group.players.push("");
-                            }
-                        }
-                    });
-                }
-                this.countGroups();
-            },
-        },
         options: {
             handler: function () {},
             deep: true,
         },
-        groups: {
-            handler: function () {
-                this.refreshSelectListGroups();
-                console.log(1);
-            },
-            deep: true,
-        },
-        playersList: {
-            handler: function () {
-                this.countGroups();
-                this.refreshSelectListGroups();
-            },
-            deep: true,
-        },
-        playersListGroups: {
+        scene: {
             handler: function () {},
             deep: true,
         },
     },
     methods: {
-        removePlayerFromGroup(key, index) {
-            this.groups[key].players[index] = "";
-            this.refreshSelectListGroups();
-            this.newName = " ";
-            this.newName = "";
-        },
-        refreshSelectListGroups() {
-            let selectedPlayers = [];
+        addGroup() {
+            const groupNumber = this.scene.children.length;
 
-            this.groups.forEach((group) => {
-                group.players.forEach((player) => {
-                    if (player != "") {
-                        selectedPlayers.push(player);
-                    }
-                });
+            console.log(groupNumber);
+
+            this.scene.children.push({
+                id: groupNumber,
+                type: "container",
+                name: `Новая группа ${groupNumber}`,
+                props: {
+                    orientation: "vertical",
+                    className: "card-container",
+                },
+                children: [],
             });
-
-            let difference = this.playersList.filter(
-                (x) => !selectedPlayers.includes(x)
-            );
-
-            this.playersListGroups = difference;
         },
-        countGroups() {
-            let groupsCount = Math.ceil(
-                this.playersList.length / this.groupAmount
-            );
-            const currentGroupsCount = this.groups.length;
-
-            console.log("currentGroupsCount " + currentGroupsCount);
-            console.log("groupsCount " + groupsCount);
-
-            if (groupsCount < 1) {
-                groupsCount = 1;
-            }
-
-            if (groupsCount > currentGroupsCount) {
-                const newItemsCount = groupsCount - currentGroupsCount;
-
-                for (let index = 0; index < newItemsCount; index++) {
-                    const newGroupPlayers = [];
-
-                    for (
-                        let index_1 = 0;
-                        index_1 < this.groupAmount;
-                        index_1++
-                    ) {
-                        newGroupPlayers.push("");
-                    }
-
-                    this.groups.push({
-                        name: this.groupTitles[currentGroupsCount],
-                        players: newGroupPlayers,
-                    });
-                }
-            }
-
-            if (groupsCount < currentGroupsCount) {
-                this.groups.length = groupsCount;
-            }
-        },
-        deletePlayer(index, name, id) {
+        deletePlayer(index, name) {
+            console.log(index);
             this.playersList.splice(index, 1);
 
-            this.groups.forEach((group, index) => {
-                group.players.forEach((player, key) => {
-                    if (player.label == name && player.code == id) {
-                        this.groups[index].players[key] = "";
-                    }
-                });
-            });
-
-            console.log(this.groups);
+            this.scene.children.forEach((column) => {});
         },
         addNew() {
             if (
@@ -598,6 +488,22 @@ export default {
 
             const playersCount = this.options.length;
 
+            this.scene.children[0].children.push({
+                type: "draggable",
+                id: `-${playersCount}`,
+                props: {
+                    className: "card",
+                    style: { backgroundColor: pickColor() },
+                },
+                data: "новый игрок",
+                name:
+                    this.newSurname +
+                    " " +
+                    this.newName +
+                    " " +
+                    this.newPatronimic,
+            });
+
             this.newName = "";
             this.newSurname = "";
             this.newPatronimic = "";
@@ -607,6 +513,17 @@ export default {
                 return;
             }
             this.playersList.push(this.currentPlayer);
+
+            this.scene.children[0].children.push({
+                type: "draggable",
+                id: `${this.currentPlayer.code}`,
+                props: {
+                    className: "card",
+                    style: { backgroundColor: pickColor() },
+                },
+                data: "игрок",
+                name: this.currentPlayer.label,
+            });
 
             this.currentPlayer = "";
         },
@@ -627,12 +544,15 @@ export default {
                         category_id: this.category_id,
                         rank: this.rank,
                         place: this.place,
+                        groups: this.groups,
                         players: this.playersList,
                     })
                     .then((res) => {
                         window.location.href = `/admin/calendar`;
+                        console.log(res);
                     })
                     .catch((err) => {
+                        //this.loading = false;
                         console.log(err);
                     });
             } else {
@@ -644,16 +564,78 @@ export default {
                         category_id: this.category_id,
                         rank: this.rank,
                         place: this.place,
+                        groups: this.groups,
                         players: this.playersList,
                     })
                     .then((res) => {
                         window.location.href = `/admin/calendar`;
+                        console.log(res);
                     })
                     .catch((err) => {
+                        //this.loading = false;
                         console.log(err);
                     });
             }
         },
+        // drag n drop
+        onColumnDrop(dropResult) {
+            const scene = Object.assign({}, this.scene);
+            scene.children = applyDrag(scene.children, dropResult);
+            this.scene = scene;
+        },
+
+        onCardDrop(columnId, dropResult) {
+            if (
+                dropResult.removedIndex !== null ||
+                dropResult.addedIndex !== null
+            ) {
+                const scene = Object.assign({}, this.scene);
+                const column = scene.children.filter(
+                    (p) => p.id === columnId
+                )[0];
+                const columnIndex = scene.children.indexOf(column);
+
+                const newColumn = Object.assign({}, column);
+                newColumn.children = applyDrag(newColumn.children, dropResult);
+                scene.children.splice(columnIndex, 1, newColumn);
+
+                this.scene = scene;
+            }
+        },
+
+        getCardPayload(columnId) {
+            return (index) => {
+                return this.scene.children.filter((p) => p.id === columnId)[0]
+                    .children[index];
+            };
+        },
+
+        dragStart() {
+            console.log("drag started");
+        },
+
+        log(...params) {
+            console.log(...params);
+        },
     },
 };
 </script>
+
+<style>
+.dndrop-container {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.card-column-header {
+    margin-bottom: 10px;
+}
+
+.dndrop-draggable-wrapper {
+    width: 200px;
+}
+
+.card-container {
+    width: 200px;
+}
+</style>

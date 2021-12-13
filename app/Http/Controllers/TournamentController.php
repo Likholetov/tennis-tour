@@ -58,6 +58,10 @@ class TournamentController extends Controller
 
         if ($request->is_groups == true) {
 
+            $tournament->is_groups = $request->is_groups;
+            $tournament->group_amount = $request->group_amount;
+            $tournament->save();
+
             foreach ($request->groups as $group) {
                 $currentGroup = new Group();
                 $currentGroup->title = $group['name'];
@@ -118,18 +122,19 @@ class TournamentController extends Controller
 
     private function existsInArray($entry, $array) {
         foreach ($array as $compare) {
-            if ($entry['code'] == 0) {
-                if (strcmp($compare['code'], $entry['code']) == 0  && strcmp($compare['label'], $entry['label']) == 0) {
+            if (strcmp($compare['code'], "0") == 0) {  
+                if (strcmp($compare['label'], $entry['label']) == 0) {
+                    
                     return true;
                 }
             } else {
                 if ($compare['code'] == $entry['code']) {
                     return true;
                 }
-            }
-            
+            }        
+        }
         return false;
-    }}
+    }
 
     /**
      * @param \Illuminate\Http\Request $request

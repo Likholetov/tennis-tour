@@ -392,6 +392,42 @@ export default {
             this.rank = "" + this.tournament.rank;
             this.place = this.tournament.place;
             this.category_id = this.tournament.category_id;
+            this.isGroups = this.tournament.is_groups;
+            this.groupAmount = this.tournament.group_amount;
+
+            if (this.tournamentgroups && this.tournamentgroups.length > 0) {
+                this.groups = [];
+
+                this.tournamentgroups.forEach((group) => {
+                    let playersFromDb = [];
+
+                    group.players.forEach((element) => {
+                        playersFromDb.push({
+                            label:
+                                element.surname +
+                                " " +
+                                element.name +
+                                " " +
+                                element.patronymic,
+                            code: element.id,
+                        });
+                    });
+
+                    if (playersFromDb.length < this.groupAmount) {
+                        let count = this.groupAmount - playersFromDb.length;
+                        for (let index = 0; index < count; index++) {
+                            playersFromDb.push("");
+                        }
+                    }
+
+                    console.log(playersFromDb);
+
+                    this.groups.push({
+                        name: group.title,
+                        players: playersFromDb,
+                    });
+                });
+            }
         }
 
         if (this.participants && this.participants.length > 0) {
@@ -631,9 +667,10 @@ export default {
                         players: this.playersList,
                         groups: this.groups,
                         is_groups: this.isGroups,
+                        group_amount: this.groupAmount,
                     })
                     .then((res) => {
-                        window.location.href = `/admin/calendar`;
+                        //window.location.href = `/admin/calendar`;
                     })
                     .catch((err) => {
                         console.log(err);
@@ -650,9 +687,10 @@ export default {
                         players: this.playersList,
                         groups: this.groups,
                         is_groups: this.isGroups,
+                        group_amount: this.groupAmount,
                     })
                     .then((res) => {
-                        window.location.href = `/admin/calendar`;
+                        //window.location.href = `/admin/calendar`;
                     })
                     .catch((err) => {
                         console.log(err);

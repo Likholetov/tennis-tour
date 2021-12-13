@@ -20,6 +20,9 @@ class Tournament extends Model
         'category_id',
         'rank',
         'place',
+        'is_groups',
+        'group_amount',
+        'status'
     ];
 
     /**

@@ -22,6 +22,8 @@ class CreateTournamentsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->integer('rank');
             $table->tinyInteger('status')->default(0);
+            $table->boolean('is_groups')->default(false);
+            $table->integer('group_amount')->default(4);
             $table->timestamps();
         });
     }

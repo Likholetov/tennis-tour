@@ -670,7 +670,7 @@ export default {
                         group_amount: this.groupAmount,
                     })
                     .then((res) => {
-                        //window.location.href = `/admin/calendar`;
+                        window.location.href = `/admin/calendar`;
                     })
                     .catch((err) => {
                         console.log(err);
@@ -690,7 +690,7 @@ export default {
                         group_amount: this.groupAmount,
                     })
                     .then((res) => {
-                        //window.location.href = `/admin/calendar`;
+                        window.location.href = `/admin/calendar`;
                     })
                     .catch((err) => {
                         console.log(err);

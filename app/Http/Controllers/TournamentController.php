@@ -179,10 +179,57 @@ class TournamentController extends Controller
         $tournament->save();
 
         $tournament->players()->detach();
+        $tournament->groups()->delete();
+
+        $attachedPlayers = [];
+
+        if ($request->is_groups == true) {
+
+            $tournament->is_groups = $request->is_groups;
+            $tournament->group_amount = $request->group_amount;
+            $tournament->save();
+
+            foreach ($request->groups as $group) {
+                $currentGroup = new Group();
+                $currentGroup->title = $group['name'];
+                $currentGroup->tournament_id = $tournament->id;
+                $currentGroup->save();
+
+                foreach ($group['players'] as $player) {
+
+                    if (!$player) {
+                        continue;
+                    }
+
+                    array_push($attachedPlayers, $player);
+
+                    if ($player['code'] != 0) {
+                        $currentGroup->players()->attach($player['code']);
+                        $tournament->players()->attach($player['code']);
+                    } else {
+                        $fioArray = explode(" ", $player['label']);
+
+                        $newPlayer = new Player();
+                        $newPlayer->surname = $fioArray[0];
+                        $newPlayer->name = $fioArray[1];
+                        $newPlayer->patronymic = $fioArray[2];
+                        $newPlayer->save();
+
+                        $currentGroup->players()->attach($newPlayer->id);
+                        $tournament->players()->attach($newPlayer->id);
+                    }
+                }
+            }
+        }
 
         foreach ($request->players as $player) {
+            if ($this->existsInArray($player, $attachedPlayers)) {
+                continue;
+            }
+
             if ($player['code'] != 0) {
                 $tournament->players()->attach($player['code']);
+
                 continue;
             }
 
@@ -197,17 +244,7 @@ class TournamentController extends Controller
             $tournament->players()->attach($newPlayer->id);
         }
 
-        /*if ($tournament->groups->count() - 1 == $request->groups) {
-            return $tournament;
-        }
-
-        if ($request->groups == 0 && $tournament->groups->count() != 0) {
-            $tournament->groups()->delete();
-        }*/
-
-        //$request->session()->flash('tournament.id', $tournament->id);
-
-        return $tournament;//return redirect()->route('tournament.index');
+        return $tournament;
     }
 
     /**

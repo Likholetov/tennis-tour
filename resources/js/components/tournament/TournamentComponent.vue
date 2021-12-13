@@ -513,8 +513,8 @@ export default {
                             }
                         }
                     });
+                    this.countGroups();
                 }
-                this.countGroups();
             },
         },
         options: {
@@ -569,9 +569,6 @@ export default {
                 this.playersList.length / this.groupAmount
             );
             const currentGroupsCount = this.groups.length;
-
-            console.log("currentGroupsCount " + currentGroupsCount);
-            console.log("groupsCount " + groupsCount);
 
             if (groupsCount < 1) {
                 groupsCount = 1;

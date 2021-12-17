@@ -34,7 +34,13 @@
                             name="title"
                             type="text"
                             class="form-control"
+                            v-bind:class="{
+                                'is-invalid': titleError,
+                            }"
                         />
+                        <span class="error invalid-feedback">{{
+                            titleError
+                        }}</span>
                     </div>
                     <div class="form-group">
                         <label>Место проведения</label>
@@ -176,7 +182,13 @@
                                     v-model="newSurname"
                                     type="text"
                                     class="form-control"
+                                    v-bind:class="{
+                                        'is-invalid': newSurnameError,
+                                    }"
                                 />
+                                <span class="error invalid-feedback">{{
+                                    newSurnameError
+                                }}</span>
                             </div>
                             <div class="col-3">
                                 <label>Имя</label>
@@ -184,7 +196,13 @@
                                     v-model="newName"
                                     type="text"
                                     class="form-control"
+                                    v-bind:class="{
+                                        'is-invalid': newNameError,
+                                    }"
                                 />
+                                <span class="error invalid-feedback">{{
+                                    newNameError
+                                }}</span>
                             </div>
                             <div class="col-3">
                                 <label>Отчество</label>
@@ -192,7 +210,13 @@
                                     v-model="newPatronimic"
                                     type="text"
                                     class="form-control"
+                                    v-bind:class="{
+                                        'is-invalid': newPatronimicError,
+                                    }"
                                 />
+                                <span class="error invalid-feedback">{{
+                                    newPatronimicError
+                                }}</span>
                             </div>
 
                             <div
@@ -493,6 +517,11 @@ export default {
                     players: ["", "", "", ""],
                 },
             ],
+            // Errors
+            titleError: "",
+            newNameError: "",
+            newSurnameError: "",
+            newPatronimicError: "",
         };
     },
     watch: {
@@ -613,13 +642,25 @@ export default {
             console.log(this.groups);
         },
         addNew() {
-            if (
-                this.newSurname == "" ||
-                this.newName == "" ||
-                this.newPatronimic == ""
-            ) {
+            this.newSurnameError = "";
+            this.newPatronimicError = "";
+            this.newNameError = "";
+
+            if (this.newSurname == "") {
+                this.newSurnameError = "Введите фамилию";
                 return;
             }
+
+            if (this.newName == "") {
+                this.newNameError = "Введите имя";
+                return;
+            }
+
+            if (this.newPatronimic == "") {
+                this.newPatronimicError = "Введите отчество";
+                return;
+            }
+
             this.playersList.push({
                 label:
                     this.newSurname +
@@ -645,11 +686,18 @@ export default {
             this.currentPlayer = "";
         },
         save() {
+            if (this.title == "") {
+                this.titleError = "Введите называние";
+                return;
+            }
+
             const arrayOfStrings = this.time.split(":");
             const hours = parseInt(arrayOfStrings[0]);
             const minutes = parseInt(arrayOfStrings[1]);
-            let newDateObj = moment(this.start).add(minutes, "m").toDate();
-            newDateObj = moment(this.start).add(hours, "h").toDate();
+            let newDateObj = moment(this.start)
+                .add(minutes, "m")
+                .add(hours, "h")
+                .toDate();
             let newDateObjEnd = moment(this.end).toDate();
 
             if (this.tournament) {

@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Категории')
+@section('title', 'Разряды')
 
 @section('content')
 <!-- Content Header (Page header) -->
@@ -8,10 +8,10 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-            <h1>Категории</h1>
+            <h1>Разряды</h1>
         </div>
         <div class="col-sm-6">
-            <a href="{{ route('category.create')}}" class="btn btn-success float-right">Добавить категорию</a>
+            <a href="{{ route('rank.create')}}" class="btn btn-success float-right">Добавить разряд</a>
         </div>
       </div>
         @if (session('success'))
@@ -43,20 +43,20 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($categories as $category)
+                @foreach ($ranks as $rank)
                 <tr>
                     <td>
                         {{ $loop->iteration }}
                     </td>
                     <td>
-                        {{ $category->title }}
+                        {{ $rank->title }}
                     </td>
                     <td class="project-actions text-right">
-                        <a class="btn btn-primary btn-sm" href="{{ route('category.edit', $category['id']) }}">
+                        <a class="btn btn-primary btn-sm" href="{{ route('rank.edit', $rank['id']) }}">
                             <i class="fas fa-pencil-alt">
                             </i>
                         </a>
-                        <form action="{{ route('category.destroy', $category['id']) }}" method="POST"
+                        <form action="{{ route('rank.destroy', $rank['id']) }}" method="POST"
                             style="display: inline-block">
                             @csrf
                             @method('DELETE')

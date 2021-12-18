@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Категории')
+@section('title', 'Разряды')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Добавление категории</h1>
+                    <h1>Добавление разряда</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -26,12 +26,12 @@
 
     <!-- Main content -->
     <section class="content">
-        <form method="post" action="{{ route('category.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('rank.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="row mb-3">
                 <div class="col-12">
-                    <a href="{{ route('category.index')}}" class="btn btn-secondary">Назад</a>
-                    <input type="submit" value="Добавить категорию" class="btn btn-success float-right">
+                    <a href="{{ route('rank.index')}}" class="btn btn-secondary">Назад</a>
+                    <input type="submit" value="Добавить разряд" class="btn btn-success float-right">
                 </div>
             </div>
             <div class="row">

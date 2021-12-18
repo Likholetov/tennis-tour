@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tournament;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -29,7 +30,7 @@ class HomeController extends Controller
 
     public function calendar()
     {
-        $tournaments = Tournament::all();
+        $tournaments = Tournament::where('started_at', '>=', Carbon::today()->subHours(3))->get()->groupBy('title');
 
         return view('admin.calendar', compact('tournaments'));
     }

@@ -35,8 +35,8 @@ Route::group(['prefix' => 'api'], function () {
 });
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
-    Route::get('/calendar', [App\Http\Controllers\HomeController::class, 'calendar'])->name('admin.calendar');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'calendar'])->name('admin');
+    Route::get('/stat', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.stat');
     Route::resource('player', App\Http\Controllers\PlayerController::class)->except(['show']);
     Route::resource('gallery', App\Http\Controllers\GalleryController::class)->except(['show']);
     Route::resource('image', App\Http\Controllers\ImageController::class)->except(['show']);
@@ -44,13 +44,10 @@ Route::group(['prefix' => 'admin'], function () {
     //Route::get('/tournament/date/{date}', [App\Http\Controllers\TournamentController::class, 'tournamentDate'])->name('tournament.date');
     Route::get('/tournament/groups/{tournament}', [App\Http\Controllers\TournamentController::class, 'groups'])->name('tournament.groups');
     Route::resource('tournament', App\Http\Controllers\TournamentController::class);
-    //Route::resource('category', App\Http\Controllers\CategoryController::class);
+    Route::resource('rank', App\Http\Controllers\RankController::class);
+    Route::resource('category', App\Http\Controllers\CategoryController::class);
 });
 
 Route::get('/one-galleries', function () {
    return view('one-galleries');
 });
-
-
-
-

@@ -18,11 +18,16 @@ class Tournament extends Model
         'started_at',
         'title',
         'category_id',
-        'rank',
+        'rank_id',
         'place',
         'is_groups',
         'group_amount',
-        'status'
+        'status',
+        'players_collapsed',
+        'parameters_collapsed',
+        'settings_collapsed',
+        'groups_collapsed',
+        'gate_collapsed',
     ];
 
     /**
@@ -40,6 +45,11 @@ class Tournament extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function rank()
+    {
+        return $this->belongsTo(Rank::class);
     }
 
     public function players() 

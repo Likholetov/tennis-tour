@@ -29,6 +29,7 @@
         <tournament-component
             :date="'{{ $date }}'"
             :categories="{{ $categories }}"
+            :ranks="{{ $ranks }}"
             :players="{{ $players }}"
         ></tournament-component>
     </section>

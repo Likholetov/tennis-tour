@@ -1,26 +1,15 @@
 created:
-    - app/Http/Controllers/TournamentController.php
-    - app/Http/Controllers/CategoryController.php
-    - database/factories/TournamentFactory.php
-    - database/factories/CategoryFactory.php
-    - database/migrations/2021_11_29_100708_create_tournaments_table.php
-    - database/migrations/2021_11_29_100709_create_categories_table.php
-    - app/Models/Tournament.php
-    - app/Models/Category.php
-    - tests/Feature/Http/Controllers/TournamentControllerTest.php
-    - tests/Feature/Http/Controllers/CategoryControllerTest.php
-    - app/Http/Requests/TournamentStoreRequest.php
-    - app/Http/Requests/TournamentUpdateRequest.php
-    - app/Http/Requests/CategoryStoreRequest.php
-    - app/Http/Requests/CategoryUpdateRequest.php
-    - resources/views/tournament/index.blade.php
-    - resources/views/tournament/create.blade.php
-    - resources/views/tournament/show.blade.php
-    - resources/views/tournament/edit.blade.php
-    - resources/views/category/index.blade.php
-    - resources/views/category/create.blade.php
-    - resources/views/category/show.blade.php
-    - resources/views/category/edit.blade.php
+    - app/Http/Controllers/RankController.php
+    - database/factories/RankFactory.php
+    - database/migrations/2021_12_17_221909_create_ranks_table.php
+    - app/Models/Rank.php
+    - tests/Feature/Http/Controllers/RankControllerTest.php
+    - app/Http/Requests/RankStoreRequest.php
+    - app/Http/Requests/RankUpdateRequest.php
+    - resources/views/rank/index.blade.php
+    - resources/views/rank/create.blade.php
+    - resources/views/rank/show.blade.php
+    - resources/views/rank/edit.blade.php
 updated:
     - routes/web.php
 models:
@@ -30,3 +19,4 @@ models:
     Post: { title: 'string:100', content: text, img_url: 'string:100 nullable' }
     Tournament: { started_at: timestamp, ended_at: timestamp, title: 'string:255', category_id: unsignedBigInteger, rank: integer }
     Category: { title: 'string:100' }
+    Rank: { title: 'string:100' }

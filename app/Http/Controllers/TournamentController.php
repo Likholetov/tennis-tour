@@ -7,6 +7,7 @@ use App\Http\Requests\TournamentUpdateRequest;
 use App\Models\Category;
 use App\Models\Group;
 use App\Models\Player;
+use App\Models\Rank;
 use App\Models\Tournament;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -34,9 +35,10 @@ class TournamentController extends Controller
     {
         $date = Carbon::now();
         $categories = Category::all();
+        $ranks = Rank::all();
         $players = Player::all();
 
-        return view('tournament.create', compact('date', 'categories', 'players'));
+        return view('tournament.create', compact('date', 'categories', 'players', "ranks"));
     }
 
     /**
@@ -48,10 +50,15 @@ class TournamentController extends Controller
         $tournament = new Tournament();
         $tournament->title = $request->title;
         $tournament->category_id = $request->category_id;
-        $tournament->rank = $request->rank;
+        $tournament->rank_id = $request->rank_id;
         $tournament->place = $request->place;
         $tournament->started_at = Carbon::parse($request->started_at);
         $tournament->ended_at = Carbon::parse($request->ended_at);
+        $tournament->parameters_collapsed = $request->parameters_collapsed;
+        $tournament->players_collapsed = $request->players_collapsed;
+        $tournament->settings_collapsed = $request->settings_collapsed;
+        $tournament->groups_collapsed = $request->groups_collapsed;
+        $tournament->gate_collapsed = $request->gate_collapsed;
         $tournament->save();
 
         $attachedPlayers = [];
@@ -158,9 +165,10 @@ class TournamentController extends Controller
 
         $date = Carbon::now();
         $categories = Category::all();
+        $ranks = Rank::all();
         $players = Player::all();
 
-        return view('tournament.edit', compact('tournament', 'date', 'categories', 'players', 'participants', 'groupsCount'));
+        return view('tournament.edit', compact('tournament', 'date', 'categories', 'players', 'participants', 'groupsCount', "ranks"));
     }
 
     /**
@@ -172,10 +180,15 @@ class TournamentController extends Controller
     {
         $tournament->title = $request->title;
         $tournament->category_id = $request->category_id;
-        $tournament->rank = $request->rank;
+        $tournament->rank_id = $request->rank_id;
         $tournament->place = $request->place;
         $tournament->started_at = Carbon::parse($request->started_at);
         $tournament->ended_at = Carbon::parse($request->ended_at);
+        $tournament->parameters_collapsed = $request->parameters_collapsed;
+        $tournament->players_collapsed = $request->players_collapsed;
+        $tournament->settings_collapsed = $request->settings_collapsed;
+        $tournament->groups_collapsed = $request->groups_collapsed;
+        $tournament->gate_collapsed = $request->gate_collapsed;
         $tournament->save();
 
         $tournament->players()->detach();
@@ -256,7 +269,7 @@ class TournamentController extends Controller
     {
         $tournament->delete();
 
-        return redirect()->route('admin.calendar');
+        return redirect()->route('admin');
     }
 
     public function tournamentDate($date)

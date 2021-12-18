@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Редактирование турнира</h1>
+                    <h1>{{ $tournament->title }} {{ $tournament->rank->title ?? "" }} {{ $tournament->category->title ?? "" }} категории</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -29,6 +29,7 @@
         <tournament-component
             :date="'{{ $date }}'"
             :categories="{{ $categories }}"
+            :ranks="{{ $ranks }}"
             :players="{{ $players }}"
             :tournament="{{ $tournament }}"
             :participants="{{ $participants }}"

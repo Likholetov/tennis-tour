@@ -19,11 +19,19 @@ class CreateTournamentsTable extends Migration
             $table->timestamp('ended_at')->nullable();
             $table->string('place', 255)->nullable();
             $table->string('title', 255);
-            $table->unsignedBigInteger('category_id');
-            $table->integer('rank');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->restrictOnUpdate()->nullOnDelete();
+            $table->unsignedBigInteger('rank_id')->nullable();
+            $table->foreign('rank_id')->references('id')->on('ranks')->restrictOnUpdate()->nullOnDelete();
             $table->tinyInteger('status')->default(0);
             $table->boolean('is_groups')->default(false);
             $table->integer('group_amount')->default(4);
+            // interface
+            $table->boolean('parameters_collapsed')->default(false);
+            $table->boolean('players_collapsed')->default(false);
+            $table->boolean('settings_collapsed')->default(false);
+            $table->boolean('groups_collapsed')->default(false);
+            $table->boolean('gate_collapsed')->default(false);
             $table->timestamps();
         });
     }

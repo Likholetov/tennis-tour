@@ -42,18 +42,18 @@
 #   Post: 
 #     resource
 models:
-  Tournament:
-    started_at: timestamp
-    ended_at: timestamp
-    title: string:255
-    category_id: unsignedBigInteger
-    rank: integer
-  Category:
+  # Tournament:
+  #   started_at: timestamp
+  #   ended_at: timestamp
+  #   title: string:255
+  #   category_id: unsignedBigInteger
+  #   rank: integer
+  Rank:
     title: string:100
 
 controllers:
-  Tournament:
-    resource
-  Category:
+  # Tournament:
+  #   resource
+  Rank:
     resource
     

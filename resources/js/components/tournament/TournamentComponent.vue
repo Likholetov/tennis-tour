@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-12 mb-3">
-            <a href="/admin/calendar" class="btn btn-secondary">Назад</a>
+            <a href="/admin" class="btn btn-secondary">Назад</a>
             <button
                 @click="save"
                 type="button"
@@ -11,7 +11,12 @@
             </button>
         </div>
         <div class="col-md-12">
-            <div class="card card-primary">
+            <div
+                class="card card-primary"
+                v-bind:class="{
+                    'collapsed-card': parametersCollapsed,
+                }"
+            >
                 <div class="card-header">
                     <h3 class="card-title">Параметры турнира</h3>
 
@@ -19,10 +24,16 @@
                         <button
                             type="button"
                             class="btn btn-tool"
-                            data-card-widget="collapse"
+                            @click="parametersCollapsed = !parametersCollapsed"
                             title="Collapse"
                         >
-                            <i class="fas fa-minus"></i>
+                            <i
+                                class="fas"
+                                v-bind:class="{
+                                    'fa-plus': parametersCollapsed,
+                                    'fa-minus': !parametersCollapsed,
+                                }"
+                            ></i>
                         </button>
                     </div>
                 </div>
@@ -43,28 +54,10 @@
                         }}</span>
                     </div>
                     <div class="form-group">
-                        <label>Место проведения</label>
-                        <input
-                            v-model="place"
-                            name="place"
-                            type="text"
-                            class="form-control"
-                        />
-                    </div>
-                    <div class="form-group">
                         <label>Дата начала</label>
                         <input
                             v-model="start"
                             name="start"
-                            type="date"
-                            class="form-control"
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label>Дата завершения</label>
-                        <input
-                            v-model="end"
-                            name="end"
                             type="date"
                             class="form-control"
                         />
@@ -78,8 +71,29 @@
                             class="form-control"
                         />
                     </div>
+
+                    <div class="form-check mb-3">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="checkbox2"
+                            v-model="isEnd"
+                        />
+                        <label class="form-check-label" for="checkbox2"
+                            >Более 1 дня</label
+                        >
+                    </div>
+                    <div v-if="isEnd" class="form-group">
+                        <label>Дата завершения</label>
+                        <input
+                            v-model="end"
+                            name="end"
+                            type="date"
+                            class="form-control"
+                        />
+                    </div>
                     <div class="form-group">
-                        <label>Разряд турнира</label>
+                        <label>Категория турнира</label>
                         <select
                             class="form-control custom-select"
                             v-model="category_id"
@@ -94,18 +108,69 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Категория турнира</label>
+                        <label>Разряд турнира</label>
                         <select
                             class="form-control custom-select"
-                            v-model="rank"
+                            v-model="rank_id"
                         >
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                            <option
+                                v-for="rank in ranks"
+                                :key="rank.id"
+                                :value="rank.id"
+                            >
+                                {{ rank.title }}
+                            </option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Место проведения</label>
+                        <input
+                            v-model="place"
+                            name="place"
+                            type="text"
+                            class="form-control"
+                        />
+                    </div>
+                    <button
+                        @click="save"
+                        type="button"
+                        class="btn btn-success float-left mt-3"
+                    >
+                        Сохранить
+                    </button>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <div class="col-md-12">
+            <div
+                class="card card-primary"
+                v-bind:class="{
+                    'collapsed-card': settingsCollapsed,
+                }"
+            >
+                <div class="card-header">
+                    <h3 class="card-title">Настройки</h3>
+
+                    <div class="card-tools">
+                        <button
+                            type="button"
+                            class="btn btn-tool"
+                            @click="settingsCollapsed = !settingsCollapsed"
+                            title="Collapse"
+                        >
+                            <i
+                                class="fas"
+                                v-bind:class="{
+                                    'fa-plus': settingsCollapsed,
+                                    'fa-minus': !settingsCollapsed,
+                                }"
+                            ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
                     <div class="form-check">
                         <input
                             class="form-check-input"
@@ -119,12 +184,18 @@
                     </div>
                     <div v-if="isGroups" class="form-group mt-3">
                         <label>Количество игроков в группе</label>
-                        <input
+                        <select
+                            class="form-control custom-select"
                             v-model="groupAmount"
-                            name="title"
-                            type="number"
-                            class="form-control"
-                        />
+                        >
+                            <option :value="2">2</option>
+                            <option :value="3">3</option>
+                            <option :value="4">4</option>
+                            <option :value="5">5</option>
+                            <option :value="6">6</option>
+                            <option :value="7">7</option>
+                            <option :value="8">8</option>
+                        </select>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -132,7 +203,12 @@
             <!-- /.card -->
         </div>
         <div class="col-md-12">
-            <div class="card card-primary">
+            <div
+                class="card card-primary"
+                v-bind:class="{
+                    'collapsed-card': playersCollapsed,
+                }"
+            >
                 <div class="card-header">
                     <h3 class="card-title">Участники</h3>
 
@@ -140,10 +216,16 @@
                         <button
                             type="button"
                             class="btn btn-tool"
-                            data-card-widget="collapse"
+                            @click="playersCollapsed = !playersCollapsed"
                             title="Collapse"
                         >
-                            <i class="fas fa-minus"></i>
+                            <i
+                                class="fas"
+                                v-bind:class="{
+                                    'fa-plus': playersCollapsed,
+                                    'fa-minus': !playersCollapsed,
+                                }"
+                            ></i>
                         </button>
                     </div>
                 </div>
@@ -279,18 +361,28 @@
             <!-- /.card -->
         </div>
         <div v-if="isGroups" class="col-md-12">
-            <div class="card card-primary">
+            <div
+                class="card card-primary"
+                v-bind:class="{
+                    'collapsed-card': groupsCollapsed,
+                }"
+            >
                 <div class="card-header">
                     <h3 class="card-title">Группы</h3>
-
                     <div class="card-tools">
                         <button
                             type="button"
                             class="btn btn-tool"
-                            data-card-widget="collapse"
+                            @click="groupsCollapsed = !groupsCollapsed"
                             title="Collapse"
                         >
-                            <i class="fas fa-minus"></i>
+                            <i
+                                class="fas"
+                                v-bind:class="{
+                                    'fa-plus': groupsCollapsed,
+                                    'fa-minus': !groupsCollapsed,
+                                }"
+                            ></i>
                         </button>
                     </div>
                 </div>
@@ -370,6 +462,38 @@
             </div>
             <!-- /.card -->
         </div>
+        <div class="col-md-12">
+            <div
+                class="card card-primary"
+                v-bind:class="{
+                    'collapsed-card': gateCollapsed,
+                }"
+            >
+                <div class="card-header">
+                    <h3 class="card-title">Сетки</h3>
+
+                    <div class="card-tools">
+                        <button
+                            type="button"
+                            class="btn btn-tool"
+                            @click="gateCollapsed = !gateCollapsed"
+                            title="Collapse"
+                        >
+                            <i
+                                class="fas"
+                                v-bind:class="{
+                                    'fa-plus': gateCollapsed,
+                                    'fa-minus': !gateCollapsed,
+                                }"
+                            ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body"></div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
     </div>
 </template>
 
@@ -389,7 +513,7 @@ export default {
                     " " +
                     player.name +
                     " " +
-                    player.patronimic,
+                    player.patronymic,
                 code: player.id,
             });
         });
@@ -413,11 +537,16 @@ export default {
                 : (hours = "" + started.getHours());
             const timeStr = "" + hours + ":" + minutes;
             this.time = timeStr;
-            this.rank = "" + this.tournament.rank;
+            this.rank_id = "" + this.tournament.rank_id;
             this.place = this.tournament.place;
             this.category_id = this.tournament.category_id;
             this.isGroups = this.tournament.is_groups;
             this.groupAmount = this.tournament.group_amount;
+            this.parametersCollapsed = this.tournament.parameters_collapsed;
+            this.playersCollapsed = this.tournament.players_collapsed;
+            this.settingsCollapsed = this.tournament.settings_collapsed;
+            this.groupsCollapsed = this.tournament.groups_collapsed;
+            this.gateCollapsed = this.tournament.gate_collapsed;
 
             if (this.tournamentgroups && this.tournamentgroups.length > 0) {
                 this.groups = [];
@@ -471,6 +600,7 @@ export default {
     props: [
         "date",
         "categories",
+        "ranks",
         "players",
         "participants",
         "tournament",
@@ -482,9 +612,10 @@ export default {
             title: "",
             start: new Date(),
             end: new Date(),
+            isEnd: false,
             time: "00:00",
             category_id: 1,
-            rank: "0",
+            rank_id: 1,
             place: 'ТК "Хасанский"',
             // players
             playersList: [],
@@ -522,6 +653,12 @@ export default {
             newNameError: "",
             newSurnameError: "",
             newPatronimicError: "",
+            // interface
+            parametersCollapsed: false,
+            playersCollapsed: false,
+            settingsCollapsed: false,
+            groupsCollapsed: false,
+            gateCollapsed: false,
         };
     },
     watch: {
@@ -698,7 +835,12 @@ export default {
                 .add(minutes, "m")
                 .add(hours, "h")
                 .toDate();
-            let newDateObjEnd = moment(this.end).toDate();
+            let newDateObjEnd;
+            if (this.isEnd) {
+                newDateObjEnd = moment(this.end).toDate();
+            } else {
+                newDateObjEnd = moment(this.start).toDate();
+            }
 
             if (this.tournament) {
                 axios
@@ -707,15 +849,20 @@ export default {
                         started_at: new Date(newDateObj),
                         ended_at: new Date(newDateObjEnd),
                         category_id: this.category_id,
-                        rank: this.rank,
+                        rank_id: this.rank_id,
                         place: this.place,
                         players: this.playersList,
                         groups: this.groups,
                         is_groups: this.isGroups,
                         group_amount: this.groupAmount,
+                        parameters_collapsed: this.parametersCollapsed,
+                        players_collapsed: this.playersCollapsed,
+                        settings_collapsed: this.settingsCollapsed,
+                        groups_collapsed: this.groupsCollapsed,
+                        gate_collapsed: this.gateCollapsed,
                     })
                     .then((res) => {
-                        window.location.href = `/admin/calendar`;
+                        window.location.href = `/admin`;
                     })
                     .catch((err) => {
                         console.log(err);
@@ -727,15 +874,20 @@ export default {
                         started_at: new Date(newDateObj),
                         ended_at: new Date(newDateObjEnd),
                         category_id: this.category_id,
-                        rank: this.rank,
+                        rank_id: this.rank_id,
                         place: this.place,
                         players: this.playersList,
                         groups: this.groups,
                         is_groups: this.isGroups,
                         group_amount: this.groupAmount,
+                        parameters_collapsed: this.parametersCollapsed,
+                        players_collapsed: this.playersCollapsed,
+                        settings_collapsed: this.settingsCollapsed,
+                        groups_collapsed: this.groupsCollapsed,
+                        gate_collapsed: this.gateCollapsed,
                     })
                     .then((res) => {
-                        window.location.href = `/admin/calendar`;
+                        window.location.href = `/admin`;
                     })
                     .catch((err) => {
                         console.log(err);

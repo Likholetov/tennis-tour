@@ -92,9 +92,17 @@
                     data-accordion="false">
                     <li class="nav-item">
                         <a href="{{ route('admin') }}" class="nav-link">
+                            <i class="nav-icon fas fa-calendar-alt"></i>
+                            <p>
+                                Календарь
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.stat') }}" class="nav-link">
                             <i class="nav-icon fas fa-chart-bar"></i>
                             <p>
-                                Главная
+                                Статистика
                             </p>
                         </a>
                     </li>
@@ -115,6 +123,22 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('category.index') }}" class="nav-link">
+                            <i class="nav-icon fa fa-list-alt"></i>
+                            <p>
+                                Категории
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('rank.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-award"></i>
+                            <p>
+                                Разряды
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('gallery.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-images"></i>
                             <p>
@@ -127,14 +151,6 @@
                             <i class="nav-icon fas fa-newspaper"></i>
                             <p>
                                 Новости
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.calendar') }}" class="nav-link">
-                            <i class="nav-icon fas fa-calendar-alt"></i>
-                            <p>
-                                Календарь
                             </p>
                         </a>
                     </li>

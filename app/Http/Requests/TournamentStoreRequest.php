@@ -29,11 +29,16 @@ class TournamentStoreRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'place' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'integer', 'gt:0'],
-            'rank' => ['required', 'integer'],
+            'rank_id' => ['required', 'integer'],
             'players' => ['nullable'],
             'is_groups' => ['nullable'],
             'group_amount' => ['nullable'],
-            'status' => ['nullable']
+            'status' => ['nullable'],
+            'players_collapsed' => ['nullable'],
+            'parameters_collapsed' => ['nullable'],
+            'settings_collapsed' => ['nullable'],
+            'groups_collapsed' => ['nullable'],
+            'gate_collapsed' => ['nullable'],
         ];
     }
 }

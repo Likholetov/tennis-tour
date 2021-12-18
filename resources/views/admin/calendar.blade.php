@@ -25,10 +25,12 @@
 
     <!-- Main content -->
   <section class="content">
-
+    @foreach ($tournaments as $key => $items)
+    <h5 class="m-3">{{$key}}</h3>
     <!-- Default box -->
-    <div class="card">
+    <div class="card mb-5">
       <div class="card-body p-0">
+        
         <table class="table table-striped projects">
             <thead>
                 <tr>
@@ -39,23 +41,23 @@
                         Название
                     </th>
                     <th>
-                        Место
-                    </th>
-                    <th>
                         Разряд
                     </th>
                     <th>
                         Категория
                     </th>
                     <th>
-                      Дата и время начала
+                      Время начала
                   </th>
+                  <th>
+                    Место
+                </th>
                     <th>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tournaments as $tournament)
+                @foreach ($items as $tournament)
                 <tr>
                     <td>
                         {{ $loop->iteration }}
@@ -64,17 +66,18 @@
                         {{ $tournament->title }}
                     </td>
                     <td>
-                        {{ $tournament->place }}
+                        {{ $tournament->rank->title ?? "" }}
                     </td>
                     <td>
-                      {{ $tournament->category->title }}
+                      {{ $tournament->category->title ?? "" }}
                   </td>
-                  <td>
-                    {{ $tournament->rank }}
-                </td>
+                 
                 <td>
-                  {{ Date::parse($tournament->started_at)->addHours(3)->format('H:i - j F Y г.') }}
+                  {{ Date::parse($tournament->started_at)->addHours(3)->format('H:i') }}
               </td>
+              <td>
+                {{ $tournament->place }}
+            </td>
                     <td class="project-actions text-right">
                         <a class="btn btn-primary btn-sm" href="{{ route('tournament.edit', $tournament['id']) }}">
                             <i class="fas fa-pencil-alt">
@@ -94,10 +97,12 @@
                 @endforeach
             </tbody>
         </table>
+        
       </div>
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
+    @endforeach
   </section>
   <!-- /.content -->
 @endsection

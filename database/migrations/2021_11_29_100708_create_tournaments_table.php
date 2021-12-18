@@ -26,12 +26,13 @@ class CreateTournamentsTable extends Migration
             $table->tinyInteger('status')->default(0);
             $table->boolean('is_groups')->default(false);
             $table->integer('group_amount')->default(4);
+            $table->boolean('is_consolation_grid')->default(false);
             // interface
             $table->boolean('parameters_collapsed')->default(false);
             $table->boolean('players_collapsed')->default(false);
             $table->boolean('settings_collapsed')->default(false);
             $table->boolean('groups_collapsed')->default(false);
-            $table->boolean('gate_collapsed')->default(false);
+            $table->boolean('grid_collapsed')->default(false);
             $table->timestamps();
         });
     }

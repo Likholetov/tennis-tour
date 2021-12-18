@@ -58,7 +58,7 @@ class TournamentController extends Controller
         $tournament->players_collapsed = $request->players_collapsed;
         $tournament->settings_collapsed = $request->settings_collapsed;
         $tournament->groups_collapsed = $request->groups_collapsed;
-        $tournament->gate_collapsed = $request->gate_collapsed;
+        $tournament->grid_collapsed = $request->grid_collapsed;
         $tournament->save();
 
         $attachedPlayers = [];
@@ -188,7 +188,7 @@ class TournamentController extends Controller
         $tournament->players_collapsed = $request->players_collapsed;
         $tournament->settings_collapsed = $request->settings_collapsed;
         $tournament->groups_collapsed = $request->groups_collapsed;
-        $tournament->gate_collapsed = $request->gate_collapsed;
+        $tournament->grid_collapsed = $request->grid_collapsed;
         $tournament->save();
 
         $tournament->players()->detach();

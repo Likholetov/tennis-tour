@@ -27,7 +27,7 @@ class Tournament extends Model
         'parameters_collapsed',
         'settings_collapsed',
         'groups_collapsed',
-        'gate_collapsed',
+        'grid_collapsed',
     ];
 
     /**

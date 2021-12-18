@@ -466,7 +466,7 @@
             <div
                 class="card card-primary"
                 v-bind:class="{
-                    'collapsed-card': gateCollapsed,
+                    'collapsed-card': gridCollapsed,
                 }"
             >
                 <div class="card-header">
@@ -476,14 +476,14 @@
                         <button
                             type="button"
                             class="btn btn-tool"
-                            @click="gateCollapsed = !gateCollapsed"
+                            @click="gridCollapsed = !gridCollapsed"
                             title="Collapse"
                         >
                             <i
                                 class="fas"
                                 v-bind:class="{
-                                    'fa-plus': gateCollapsed,
-                                    'fa-minus': !gateCollapsed,
+                                    'fa-plus': gridCollapsed,
+                                    'fa-minus': !gridCollapsed,
                                 }"
                             ></i>
                         </button>
@@ -546,7 +546,7 @@ export default {
             this.playersCollapsed = this.tournament.players_collapsed;
             this.settingsCollapsed = this.tournament.settings_collapsed;
             this.groupsCollapsed = this.tournament.groups_collapsed;
-            this.gateCollapsed = this.tournament.gate_collapsed;
+            this.gridCollapsed = this.tournament.grid_collapsed;
 
             if (this.tournamentgroups && this.tournamentgroups.length > 0) {
                 this.groups = [];
@@ -658,7 +658,7 @@ export default {
             playersCollapsed: false,
             settingsCollapsed: false,
             groupsCollapsed: false,
-            gateCollapsed: false,
+            gridCollapsed: false,
         };
     },
     watch: {
@@ -859,7 +859,7 @@ export default {
                         players_collapsed: this.playersCollapsed,
                         settings_collapsed: this.settingsCollapsed,
                         groups_collapsed: this.groupsCollapsed,
-                        gate_collapsed: this.gateCollapsed,
+                        grid_collapsed: this.gridCollapsed,
                     })
                     .then((res) => {
                         window.location.href = `/admin`;
@@ -884,7 +884,7 @@ export default {
                         players_collapsed: this.playersCollapsed,
                         settings_collapsed: this.settingsCollapsed,
                         groups_collapsed: this.groupsCollapsed,
-                        gate_collapsed: this.gateCollapsed,
+                        grid_collapsed: this.gridCollapsed,
                     })
                     .then((res) => {
                         window.location.href = `/admin`;

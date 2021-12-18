@@ -38,7 +38,7 @@ class TournamentStoreRequest extends FormRequest
             'parameters_collapsed' => ['nullable'],
             'settings_collapsed' => ['nullable'],
             'groups_collapsed' => ['nullable'],
-            'gate_collapsed' => ['nullable'],
+            'grid_collapsed' => ['nullable'],
         ];
     }
 }

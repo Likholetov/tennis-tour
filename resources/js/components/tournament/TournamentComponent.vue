@@ -197,6 +197,40 @@
                             <option :value="8">8</option>
                         </select>
                     </div>
+                    <div class="form-check mt-3">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="checkbox3"
+                            v-model="isConsolationGrid"
+                        />
+                        <label class="form-check-label" for="checkbox3"
+                            >Утешительная сетка</label
+                        >
+                    </div>
+                    <div v-if="isConsolationGrid" class="form-group mt-3">
+                        <label>Утешительная сетка формируется из:</label>
+                        <select
+                            class="form-control custom-select"
+                            v-model="consolationGridFrom"
+                        >
+                            <option value="gate">сетки</option>
+                            <option value="group">групп</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label>Количество игроков в первой секции сетки</label>
+                        <select
+                            class="form-control custom-select"
+                            v-model="gridAmount"
+                        >
+                            <option :value="2">2</option>
+                            <option :value="4">4</option>
+                            <option :value="8">8</option>
+                            <option :value="16">16</option>
+                            <option :value="32">32</option>
+                        </select>
+                    </div>
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -489,7 +523,90 @@
                         </button>
                     </div>
                 </div>
-                <div class="card-body"></div>
+                <div class="card-body">
+                    <div v-for="(item, key2) in grids" :key="'grids' + key2">
+                        <h5 class="mb-3">{{ item.name }}</h5>
+                        <div
+                            v-for="(grid, key) in item.grid"
+                            :key="'grid' + key"
+                        >
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Фамилия Имя Отчество</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="(player, index) in grid.players"
+                                        :key="'grid' + key + 'y' + index"
+                                    >
+                                        <td>
+                                            {{ 1 + index }}
+                                        </td>
+                                        <td>
+                                            <select
+                                                v-if="grid.players[index] == ''"
+                                                class="
+                                                    form-control
+                                                    custom-select
+                                                "
+                                                v-model="grid.players[index]"
+                                            >
+                                                <option value="">
+                                                    Не выбрано
+                                                </option>
+                                                <option
+                                                    v-for="(
+                                                        player, key1
+                                                    ) in playersList"
+                                                    :key="
+                                                        'grid' +
+                                                        index +
+                                                        'player' +
+                                                        key1
+                                                    "
+                                                    :value="player"
+                                                >
+                                                    {{ player.label }}
+                                                </option>
+                                            </select>
+                                            <div
+                                                style="
+                                                    display: flex;
+                                                    justify-content: space-between;
+                                                    align-items: center;
+                                                "
+                                                v-if="grid.players[index] != ''"
+                                            >
+                                                {{ grid.players[index].label }}
+                                                <button
+                                                    type="button"
+                                                    class="
+                                                        btn btn-danger btn-sm
+                                                        delete-btn
+                                                    "
+                                                    @click="
+                                                        removePlayerFromGrid(
+                                                            key2,
+                                                            key,
+                                                            index
+                                                        )
+                                                    "
+                                                >
+                                                    Удалить
+                                                    <i class="fas fa-trash">
+                                                    </i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -648,6 +765,27 @@ export default {
                     players: ["", "", "", ""],
                 },
             ],
+            // Grids
+            gridAmount: 4,
+            isConsolationGrid: false,
+            consolationGridFrom: "gate",
+            grids: [
+                {
+                    name: "Олимпийская сетка",
+                    type: "olympic",
+                    grid: [
+                        {
+                            players: ["", "", "", ""],
+                        },
+                        {
+                            players: ["", ""],
+                        },
+                        {
+                            players: [""],
+                        },
+                    ],
+                },
+            ],
             // Errors
             titleError: "",
             newNameError: "",
@@ -690,8 +828,11 @@ export default {
         groups: {
             handler: function () {
                 this.refreshSelectListGroups();
-                console.log(1);
             },
+            deep: true,
+        },
+        grids: {
+            handler: function () {},
             deep: true,
         },
         playersList: {
@@ -705,11 +846,41 @@ export default {
             handler: function () {},
             deep: true,
         },
+        isConsolationGrid: {
+            handler: function () {
+                if (this.isConsolationGrid) {
+                    this.grids.push({
+                        name: "Утешительная сетка",
+                        type: "consolation",
+                        grid: [
+                            {
+                                players: ["", "", "", ""],
+                            },
+                            {
+                                players: ["", ""],
+                            },
+                            {
+                                players: [""],
+                            },
+                        ],
+                    });
+                } else {
+                    this.grids = this.grids.filter(
+                        (grid) => grid.type != "consolation"
+                    );
+                }
+            },
+        },
     },
     methods: {
         removePlayerFromGroup(key, index) {
             this.groups[key].players[index] = "";
             this.refreshSelectListGroups();
+            this.newName = " ";
+            this.newName = "";
+        },
+        removePlayerFromGrid(key2, key, index) {
+            this.grids[key2].grid[key].players[index] = "";
             this.newName = " ";
             this.newName = "";
         },
@@ -773,6 +944,16 @@ export default {
                     if (player.label == name && player.code == id) {
                         this.groups[index].players[key] = "";
                     }
+                });
+            });
+
+            this.grids.forEach((item, key2) => {
+                item.grid.forEach((grid, index) => {
+                    grid.players.forEach((player, key) => {
+                        if (player.label == name && player.code == id) {
+                            this.grids[key2].grid[key].players[index] = "";
+                        }
+                    });
                 });
             });
 

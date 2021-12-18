@@ -22,6 +22,8 @@ class Tournament extends Model
         'place',
         'is_groups',
         'group_amount',
+        'is_consolation_grid',
+        'consolation_grid_from',
         'status',
         'players_collapsed',
         'parameters_collapsed',

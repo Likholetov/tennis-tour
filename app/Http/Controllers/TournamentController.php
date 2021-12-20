@@ -281,8 +281,8 @@ class TournamentController extends Controller
         return view('tournament.create', compact('date', 'categories', 'players'));
     }
 
-    public function groups(Tournament $tournament)
+    public function results(Tournament $tournament)
     {
-        return view('tournament.groups', compact('tournament'));
+        return view('tournament.results', compact('tournament'));
     }
 }

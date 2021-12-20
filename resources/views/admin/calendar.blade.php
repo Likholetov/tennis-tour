@@ -79,6 +79,10 @@
                 {{ $tournament->place }}
             </td>
                     <td class="project-actions text-right">
+                        <a class="btn btn-primary btn-sm" href="{{ route('tournament.results', $tournament['id']) }}">
+                            <i class="fas fa-pencil-alt">
+                            </i>Результаты
+                        </a>
                         <a class="btn btn-primary btn-sm" href="{{ route('tournament.edit', $tournament['id']) }}">
                             <i class="fas fa-pencil-alt">
                             </i>

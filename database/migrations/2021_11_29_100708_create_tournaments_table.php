@@ -33,7 +33,6 @@ class CreateTournamentsTable extends Migration
             $table->boolean('players_collapsed')->default(false);
             $table->boolean('settings_collapsed')->default(false);
             $table->boolean('groups_collapsed')->default(false);
-            $table->boolean('grid_collapsed')->default(false);
             $table->timestamps();
         });
     }

@@ -744,6 +744,8 @@ export default {
             }
         },
         deletePlayer(index, name, id) {
+            this.options.push(this.playersList[index]);
+
             this.playersList.splice(index, 1);
 
             this.groups.forEach((group, index) => {

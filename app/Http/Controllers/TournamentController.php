@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Group;
 use App\Models\Player;
 use App\Models\Rank;
+use App\Models\TennisMatch;
 use App\Models\Tournament;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -284,5 +285,31 @@ class TournamentController extends Controller
     public function results(Tournament $tournament)
     {
         return view('tournament.results', compact('tournament'));
+    }
+
+    public function resultsSave(Request $request, Tournament $tournament)
+    {
+        $tournamentOldMatches = $tournament->tennis_matches;
+
+        foreach ($request->tennis_matches as $key => $tennis_match) {
+            TennisMatch::create([
+                "expected_court" => $tennis_match['expected_court'],
+                "court" => $tennis_match['court'],
+                "title" => $tennis_match['title'],
+                "tournament_id" => $tournament->id,
+                "player_one_id" => $tennis_match['player1'],
+                "player_two_id" => $tennis_match['player2'],
+                "score" => $tennis_match['score'],
+                "warm_up" => $tennis_match['warm_up'],
+                "start" => $tennis_match['start'],
+                "end" => $tennis_match['end'],
+            ]);
+        }
+
+        foreach ($tournamentOldMatches as $key => $value) {
+            $value->delete();
+        }
+
+        return $tournament;
     }
 }

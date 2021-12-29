@@ -48,12 +48,19 @@ models:
   #   title: string:255
   #   category_id: unsignedBigInteger
   #   rank: integer
-  Rank:
-    title: string:100
-
+  TennisMatch:
+    expected_court: string:20 nullable
+    court: string:20 nullable
+    title: string:50 nullable
+    tournament_id: unsignedBigInteger
+    score: string:50 nullable
+    warm_up: string:10 nullable
+    start: string:10 nullable
+    end: string:10 nullable
+    
 controllers:
   # Tournament:
   #   resource
-  Rank:
+  TennisMatch:
     resource
     

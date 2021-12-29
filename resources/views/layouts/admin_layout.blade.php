@@ -75,6 +75,7 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
+            @auth
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
                     <img style="height: 33px; object-fit: cover"
@@ -85,6 +86,7 @@
                     <a href="#" class="d-block">{{ Auth::user()->name }}</a>
                 </div>
             </div>
+            @endauth
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
@@ -208,7 +210,6 @@
 <script src="/admin_lte/admin.js"></script>
 <script>
 	$(document).ready(function () {
-        console.log(1);
 		$("#summernote").summernote({
             height: 500
         });

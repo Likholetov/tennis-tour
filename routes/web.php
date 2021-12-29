@@ -44,6 +44,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('post', App\Http\Controllers\PostController::class)->except(['show']);
     //Route::get('/tournament/date/{date}', [App\Http\Controllers\TournamentController::class, 'tournamentDate'])->name('tournament.date');
     Route::get('/tournament/results/{tournament}', [App\Http\Controllers\TournamentController::class, 'results'])->name('tournament.results');
+    Route::post('/tournament/results/{tournament}', [App\Http\Controllers\TournamentController::class, 'resultsSave'])->name('tournament.results.save');
     Route::resource('tournament', App\Http\Controllers\TournamentController::class);
     Route::resource('rank', App\Http\Controllers\RankController::class);
     Route::resource('category', App\Http\Controllers\CategoryController::class);
@@ -52,3 +53,5 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/one-galleries', function () {
    return view('one-galleries');
 });
+
+Route::resource('tennis-match', App\Http\Controllers\TennisMatchController::class);

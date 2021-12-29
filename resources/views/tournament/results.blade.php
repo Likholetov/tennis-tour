@@ -7,7 +7,7 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <h1>Результаты турнира {{ $tournament->title }} {{ $tournament->rank->title ?? "" }} {{ $tournament->category->title ?? "" }} категории</h1>
                 </div>
             </div>
@@ -26,7 +26,12 @@
 
     <!-- Main content -->
     <section class="content">
-        Результаты
+        <results-component
+            :tournament="{{ $tournament }}"
+            :groups="{{ $tournament->groups()->with('players')->get() }}"
+            :players="{{ $tournament->players()->get() }}"
+            :existingmatches="{{ $tournament->tennis_matches()->get() }}"
+        ></results-component>
     </section>
     <!-- /.content -->
 @endsection

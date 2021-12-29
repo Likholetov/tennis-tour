@@ -62,4 +62,9 @@ class Tournament extends Model
     {
         return$this->hasMany(Group::class);
     }
+
+    public function tennis_matches()
+    {
+        return$this->hasMany(TennisMatch::class);
+    }
 }

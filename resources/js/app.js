@@ -50,6 +50,11 @@ Vue.component(
 );
 
 Vue.component(
+    "results-component",
+    require("./components/tournament/ResultsComponent.vue").default
+);
+
+Vue.component(
     "groups-component",
     require("./components/tournament/GroupsComponent.vue").default
 );

@@ -136,4 +136,15 @@ class PlayerController extends Controller
 
         return new PlayerCollection($players);
     }
+
+    public function isPlayerExists(Request $request)
+    {
+        $user = Player::where('name', $request->name)->where('patronymic', $request->patronymic)->where('surname', $request->surname)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
+
+        return $user;
+    }
 }

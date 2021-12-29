@@ -218,19 +218,6 @@
                             <option value="group">групп</option>
                         </select>
                     </div>
-                    <div class="form-group mt-3">
-                        <label>Количество игроков в первой секции сетки</label>
-                        <select
-                            class="form-control custom-select"
-                            v-model="gridAmount"
-                        >
-                            <option :value="2">2</option>
-                            <option :value="4">4</option>
-                            <option :value="8">8</option>
-                            <option :value="16">16</option>
-                            <option :value="32">32</option>
-                        </select>
-                    </div>
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -496,121 +483,6 @@
             </div>
             <!-- /.card -->
         </div>
-        <div class="col-md-12">
-            <div
-                class="card card-primary"
-                v-bind:class="{
-                    'collapsed-card': gridCollapsed,
-                }"
-            >
-                <div class="card-header">
-                    <h3 class="card-title">Сетки</h3>
-
-                    <div class="card-tools">
-                        <button
-                            type="button"
-                            class="btn btn-tool"
-                            @click="gridCollapsed = !gridCollapsed"
-                            title="Collapse"
-                        >
-                            <i
-                                class="fas"
-                                v-bind:class="{
-                                    'fa-plus': gridCollapsed,
-                                    'fa-minus': !gridCollapsed,
-                                }"
-                            ></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div v-for="(item, key2) in grids" :key="'grids' + key2">
-                        <h5 class="mb-3">{{ item.name }}</h5>
-                        <div
-                            v-for="(grid, key) in item.grid"
-                            :key="'grid' + key"
-                        >
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Фамилия Имя Отчество</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        v-for="(player, index) in grid.players"
-                                        :key="'grid' + key + 'y' + index"
-                                    >
-                                        <td>
-                                            {{ 1 + index }}
-                                        </td>
-                                        <td>
-                                            <select
-                                                v-if="grid.players[index] == ''"
-                                                class="
-                                                    form-control
-                                                    custom-select
-                                                "
-                                                v-model="grid.players[index]"
-                                            >
-                                                <option value="">
-                                                    Не выбрано
-                                                </option>
-                                                <option
-                                                    v-for="(
-                                                        player, key1
-                                                    ) in playersList"
-                                                    :key="
-                                                        'grid' +
-                                                        index +
-                                                        'player' +
-                                                        key1
-                                                    "
-                                                    :value="player"
-                                                >
-                                                    {{ player.label }}
-                                                </option>
-                                            </select>
-                                            <div
-                                                style="
-                                                    display: flex;
-                                                    justify-content: space-between;
-                                                    align-items: center;
-                                                "
-                                                v-if="grid.players[index] != ''"
-                                            >
-                                                {{ grid.players[index].label }}
-                                                <button
-                                                    type="button"
-                                                    class="
-                                                        btn btn-danger btn-sm
-                                                        delete-btn
-                                                    "
-                                                    @click="
-                                                        removePlayerFromGrid(
-                                                            key2,
-                                                            key,
-                                                            index
-                                                        )
-                                                    "
-                                                >
-                                                    Удалить
-                                                    <i class="fas fa-trash">
-                                                    </i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
     </div>
 </template>
 
@@ -766,26 +638,8 @@ export default {
                 },
             ],
             // Grids
-            gridAmount: 4,
             isConsolationGrid: false,
             consolationGridFrom: "gate",
-            grids: [
-                {
-                    name: "Олимпийская сетка",
-                    type: "olympic",
-                    grid: [
-                        {
-                            players: ["", "", "", ""],
-                        },
-                        {
-                            players: ["", ""],
-                        },
-                        {
-                            players: [""],
-                        },
-                    ],
-                },
-            ],
             // Errors
             titleError: "",
             newNameError: "",
@@ -831,10 +685,6 @@ export default {
             },
             deep: true,
         },
-        grids: {
-            handler: function () {},
-            deep: true,
-        },
         playersList: {
             handler: function () {
                 this.countGroups();
@@ -846,41 +696,11 @@ export default {
             handler: function () {},
             deep: true,
         },
-        isConsolationGrid: {
-            handler: function () {
-                if (this.isConsolationGrid) {
-                    this.grids.push({
-                        name: "Утешительная сетка",
-                        type: "consolation",
-                        grid: [
-                            {
-                                players: ["", "", "", ""],
-                            },
-                            {
-                                players: ["", ""],
-                            },
-                            {
-                                players: [""],
-                            },
-                        ],
-                    });
-                } else {
-                    this.grids = this.grids.filter(
-                        (grid) => grid.type != "consolation"
-                    );
-                }
-            },
-        },
     },
     methods: {
         removePlayerFromGroup(key, index) {
             this.groups[key].players[index] = "";
             this.refreshSelectListGroups();
-            this.newName = " ";
-            this.newName = "";
-        },
-        removePlayerFromGrid(key2, key, index) {
-            this.grids[key2].grid[key].players[index] = "";
             this.newName = " ";
             this.newName = "";
         },
@@ -947,16 +767,6 @@ export default {
                 });
             });
 
-            this.grids.forEach((item, key2) => {
-                item.grid.forEach((grid, index) => {
-                    grid.players.forEach((player, key) => {
-                        if (player.label == name && player.code == id) {
-                            this.grids[key2].grid[key].players[index] = "";
-                        }
-                    });
-                });
-            });
-
             console.log(this.groups);
         },
         addNew() {
@@ -979,27 +789,53 @@ export default {
                 return;
             }
 
-            this.playersList.push({
-                label:
-                    this.newSurname +
-                    " " +
-                    this.newName +
-                    " " +
-                    this.newPatronimic,
-                code: 0,
-            });
+            const fullName =
+                this.newSurname + " " + this.newName + " " + this.newPatronimic;
 
-            const playersCount = this.options.length;
+            if (
+                this.playersList.some(
+                    (player) => player.label.localeCompare(fullName) == 0
+                )
+            ) {
+                this.newSurnameError = "Игрок с таким ФИО уже в списке";
+                return;
+            }
 
-            this.newName = "";
-            this.newSurname = "";
-            this.newPatronimic = "";
+            axios
+                .post("/admin/is-player-exists", {
+                    name: this.newName,
+                    patronymic: this.newPatronimic,
+                    surname: this.newSurname,
+                })
+                .then((res) => {
+                    this.newSurnameError = "Игрок с таким ФИО уже есть в базе";
+                })
+                .catch((err) => {
+                    this.playersList.push({
+                        label:
+                            this.newSurname +
+                            " " +
+                            this.newName +
+                            " " +
+                            this.newPatronimic,
+                        code: 0,
+                    });
+
+                    this.newName = "";
+                    this.newSurname = "";
+                    this.newPatronimic = "";
+                });
         },
         addExisting() {
             if (this.currentPlayer == "") {
                 return;
             }
             this.playersList.push(this.currentPlayer);
+
+            this.options = this.options.filter(
+                (player) =>
+                    this.currentPlayer.label.localeCompare(player.label) != 0
+            );
 
             this.currentPlayer = "";
         },
@@ -1040,7 +876,6 @@ export default {
                         players_collapsed: this.playersCollapsed,
                         settings_collapsed: this.settingsCollapsed,
                         groups_collapsed: this.groupsCollapsed,
-                        grid_collapsed: this.gridCollapsed,
                     })
                     .then((res) => {
                         window.location.href = `/admin`;
@@ -1065,7 +900,6 @@ export default {
                         players_collapsed: this.playersCollapsed,
                         settings_collapsed: this.settingsCollapsed,
                         groups_collapsed: this.groupsCollapsed,
-                        grid_collapsed: this.gridCollapsed,
                     })
                     .then((res) => {
                         window.location.href = `/admin`;

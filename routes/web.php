@@ -37,6 +37,7 @@ Route::group(['prefix' => 'api'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'calendar'])->name('admin');
     Route::get('/stat', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.stat');
+    Route::post('/is-player-exists', [App\Http\Controllers\PlayerController::class, 'isPlayerExists'])->name('is.player.exists');
     Route::resource('player', App\Http\Controllers\PlayerController::class)->except(['show']);
     Route::resource('gallery', App\Http\Controllers\GalleryController::class)->except(['show']);
     Route::resource('image', App\Http\Controllers\ImageController::class)->except(['show']);

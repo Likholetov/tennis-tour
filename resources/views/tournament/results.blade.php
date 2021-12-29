@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Группы')
+@section('title', 'Результаты')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Группы</h1>
+                    <h1>Результаты турнира {{ $tournament->title }} {{ $tournament->rank->title ?? "" }} {{ $tournament->category->title ?? "" }} категории</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -26,9 +26,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <groups-component
-            :groups="'{{ $tournament->groups()->with('players')->get() }}'"
-        ></groups-component>
+        Результаты
     </section>
     <!-- /.content -->
 @endsection

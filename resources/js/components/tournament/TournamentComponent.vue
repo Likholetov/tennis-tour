@@ -147,86 +147,6 @@
             <div
                 class="card card-primary"
                 v-bind:class="{
-                    'collapsed-card': settingsCollapsed,
-                }"
-            >
-                <div class="card-header">
-                    <h3 class="card-title">Настройки</h3>
-
-                    <div class="card-tools">
-                        <button
-                            type="button"
-                            class="btn btn-tool"
-                            @click="settingsCollapsed = !settingsCollapsed"
-                            title="Collapse"
-                        >
-                            <i
-                                class="fas"
-                                v-bind:class="{
-                                    'fa-plus': settingsCollapsed,
-                                    'fa-minus': !settingsCollapsed,
-                                }"
-                            ></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="form-check">
-                        <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="checkbox1"
-                            v-model="isGroups"
-                        />
-                        <label class="form-check-label" for="checkbox1"
-                            >Групповой этап</label
-                        >
-                    </div>
-                    <div v-if="isGroups" class="form-group mt-3">
-                        <label>Количество игроков в группе</label>
-                        <select
-                            class="form-control custom-select"
-                            v-model="groupAmount"
-                        >
-                            <option :value="2">2</option>
-                            <option :value="3">3</option>
-                            <option :value="4">4</option>
-                            <option :value="5">5</option>
-                            <option :value="6">6</option>
-                            <option :value="7">7</option>
-                            <option :value="8">8</option>
-                        </select>
-                    </div>
-                    <div class="form-check mt-3">
-                        <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="checkbox3"
-                            v-model="isConsolationGrid"
-                        />
-                        <label class="form-check-label" for="checkbox3"
-                            >Утешительная сетка</label
-                        >
-                    </div>
-                    <div v-if="isConsolationGrid" class="form-group mt-3">
-                        <label>Утешительная сетка формируется из:</label>
-                        <select
-                            class="form-control custom-select"
-                            v-model="consolationGridFrom"
-                        >
-                            <option value="gate">сетки</option>
-                            <option value="group">групп</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
-        <div class="col-md-12">
-            <div
-                class="card card-primary"
-                v-bind:class="{
                     'collapsed-card': playersCollapsed,
                 }"
             >
@@ -376,6 +296,86 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <div class="col-md-12">
+            <div
+                class="card card-primary"
+                v-bind:class="{
+                    'collapsed-card': settingsCollapsed,
+                }"
+            >
+                <div class="card-header">
+                    <h3 class="card-title">Настройки</h3>
+
+                    <div class="card-tools">
+                        <button
+                            type="button"
+                            class="btn btn-tool"
+                            @click="settingsCollapsed = !settingsCollapsed"
+                            title="Collapse"
+                        >
+                            <i
+                                class="fas"
+                                v-bind:class="{
+                                    'fa-plus': settingsCollapsed,
+                                    'fa-minus': !settingsCollapsed,
+                                }"
+                            ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="checkbox1"
+                            v-model="isGroups"
+                        />
+                        <label class="form-check-label" for="checkbox1"
+                            >Групповой этап</label
+                        >
+                    </div>
+                    <div v-if="isGroups" class="form-group mt-3">
+                        <label>Количество игроков в группе</label>
+                        <select
+                            class="form-control custom-select"
+                            v-model="groupAmount"
+                        >
+                            <option :value="2">2</option>
+                            <option :value="3">3</option>
+                            <option :value="4">4</option>
+                            <option :value="5">5</option>
+                            <option :value="6">6</option>
+                            <option :value="7">7</option>
+                            <option :value="8">8</option>
+                        </select>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="checkbox3"
+                            v-model="isConsolationGrid"
+                        />
+                        <label class="form-check-label" for="checkbox3"
+                            >Утешительная сетка</label
+                        >
+                    </div>
+                    <div v-if="isConsolationGrid" class="form-group mt-3">
+                        <label>Утешительная сетка формируется из:</label>
+                        <select
+                            class="form-control custom-select"
+                            v-model="consolationGridFrom"
+                        >
+                            <option value="gate">сетки</option>
+                            <option value="group">групп</option>
+                        </select>
+                    </div>
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -535,7 +535,6 @@ export default {
             this.playersCollapsed = this.tournament.players_collapsed;
             this.settingsCollapsed = this.tournament.settings_collapsed;
             this.groupsCollapsed = this.tournament.groups_collapsed;
-            this.gridCollapsed = this.tournament.grid_collapsed;
 
             if (this.tournamentgroups && this.tournamentgroups.length > 0) {
                 this.groups = [];
@@ -619,18 +618,7 @@ export default {
             playersListGroups: [],
             isGroups: false,
             groupAmount: 4,
-            groupTitles: [
-                "Группа А",
-                "Группа Б",
-                "Группа В",
-                "Группа Г",
-                "Группа Д",
-                "Группа Е",
-                "Группа Ж",
-                "Группа З",
-                "Группа И",
-                "Группа К",
-            ],
+            groupTitles: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
             groups: [
                 {
                     name: "Группа А",
@@ -650,7 +638,6 @@ export default {
             playersCollapsed: false,
             settingsCollapsed: false,
             groupsCollapsed: false,
-            gridCollapsed: false,
         };
     },
     watch: {
@@ -766,8 +753,6 @@ export default {
                     }
                 });
             });
-
-            console.log(this.groups);
         },
         addNew() {
             this.newSurnameError = "";

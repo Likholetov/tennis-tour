@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('image', App\Http\Controllers\ImageController::class)->except(['show']);
     Route::resource('post', App\Http\Controllers\PostController::class)->except(['show']);
     //Route::get('/tournament/date/{date}', [App\Http\Controllers\TournamentController::class, 'tournamentDate'])->name('tournament.date');
-    Route::get('/tournament/groups/{tournament}', [App\Http\Controllers\TournamentController::class, 'groups'])->name('tournament.groups');
+    Route::get('/tournament/results/{tournament}', [App\Http\Controllers\TournamentController::class, 'results'])->name('tournament.results');
     Route::resource('tournament', App\Http\Controllers\TournamentController::class);
     Route::resource('rank', App\Http\Controllers\RankController::class);
     Route::resource('category', App\Http\Controllers\CategoryController::class);

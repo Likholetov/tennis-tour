@@ -58,7 +58,6 @@ class TournamentController extends Controller
         $tournament->players_collapsed = $request->players_collapsed;
         $tournament->settings_collapsed = $request->settings_collapsed;
         $tournament->groups_collapsed = $request->groups_collapsed;
-        $tournament->grid_collapsed = $request->grid_collapsed;
         $tournament->save();
 
         $attachedPlayers = [];
@@ -188,7 +187,6 @@ class TournamentController extends Controller
         $tournament->players_collapsed = $request->players_collapsed;
         $tournament->settings_collapsed = $request->settings_collapsed;
         $tournament->groups_collapsed = $request->groups_collapsed;
-        $tournament->grid_collapsed = $request->grid_collapsed;
         $tournament->save();
 
         $tournament->players()->detach();
@@ -283,8 +281,8 @@ class TournamentController extends Controller
         return view('tournament.create', compact('date', 'categories', 'players'));
     }
 
-    public function groups(Tournament $tournament)
+    public function results(Tournament $tournament)
     {
-        return view('tournament.groups', compact('tournament'));
+        return view('tournament.results', compact('tournament'));
     }
 }

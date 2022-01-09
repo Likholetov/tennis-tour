@@ -253,11 +253,36 @@
 <script>
 export default {
     created() {
-        console.log(this.groups);
-        console.log(this.players);
+        // console.log(this.groups);
+        // console.log(this.players);
 
         if (this.existingmatches.length > 0) {
-            this.existingmatches.forEach((existingmatch) => {
+            this.existingmatches.forEach((round) => {
+                const roundTmp = {
+                    order: round.order,
+                    collapsed: round.collapsed,
+                    tennisMatches: [],
+                };
+
+                round.tennis_matches.forEach((existingmatch) => {
+                    roundTmp.tennisMatches.push({
+                        expected_court: existingmatch.expected_court,
+                        court: existingmatch.court,
+                        title: existingmatch.title,
+                        player1: existingmatch.player_one_id,
+                        player2: existingmatch.player_two_id,
+                        score: existingmatch.score,
+                        warm_up: existingmatch.warm_up,
+                        start: existingmatch.start,
+                        end: existingmatch.end,
+                        collapsed: existingmatch.collapsed,
+                    });
+                });
+
+                this.currentTemplate.push(roundTmp);
+            });
+
+            /*this.existingmatches.forEach((existingmatch) => {
                 this.tennisMatches.forEach((tennisMatch, key) => {
                     if (
                         existingmatch.title.localeCompare(tennisMatch.title) ==
@@ -276,7 +301,7 @@ export default {
                         };
                     }
                 });
-            });
+            });*/
         } else {
             this.setGroups();
         }
@@ -287,10 +312,11 @@ export default {
             rounds: [],
             tennisMatches: [],
             playersListGroups: [],
-            currentTemplate: {},
+            currentTemplate: [],
             templates: [
                 {
-                    amount: 4,
+                    min: 2,
+                    max: 4,
                     rounds: [
                         {
                             order: 1,
@@ -384,6 +410,162 @@ export default {
                         },
                     ],
                 },
+                {
+                    min: 5,
+                    max: 5,
+                    rounds: [
+                        {
+                            order: 1,
+                            collapsed: false,
+                            tennisMatches: [
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A1-A5",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A2-A4",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                            ],
+                        },
+                        {
+                            order: 2,
+                            collapsed: false,
+                            tennisMatches: [
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A3-A5",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A1-A4",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                            ],
+                        },
+                        {
+                            order: 3,
+                            collapsed: false,
+                            tennisMatches: [
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A2-A5",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A1-A3",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                            ],
+                        },
+                        {
+                            order: 4,
+                            collapsed: false,
+                            tennisMatches: [
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A4-A5",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A2-A3",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                            ],
+                        },
+                        {
+                            order: 5,
+                            collapsed: false,
+                            tennisMatches: [
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A1-A2",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A3-A4",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                            ],
+                        },
+                    ],
+                },
             ],
         };
     },
@@ -399,7 +581,7 @@ export default {
         save() {
             axios
                 .post("/admin/tournament/results/" + this.tournament.id, {
-                    tennis_matches: this.tennisMatches,
+                    rounds: this.currentTemplate,
                 })
                 .then((res) => {
                     window.location.href = `/admin`;
@@ -410,14 +592,15 @@ export default {
         },
         getSurname(id) {
             if (id == "") {
-                return "нет";
+                return "Х";
             }
 
             const player = this.players.find((pl) => pl.id == id);
 
             if (player === undefined) {
-                return "ошибка";
+                return "Х";
             }
+
             return player.surname;
         },
         setGroups() {
@@ -452,9 +635,9 @@ export default {
         },
         setOnlyGroup() {
             const playersCount = this.groups[0].players.length;
-
+            console.log(playersCount);
             const template = this.templates.find(
-                (tmp) => tmp.amount == playersCount
+                (tmp) => tmp.min <= playersCount && tmp.max >= playersCount
             );
 
             if (template !== undefined) {

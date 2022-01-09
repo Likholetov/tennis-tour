@@ -28,7 +28,7 @@ class Tournament extends Model
         'players_collapsed',
         'parameters_collapsed',
         'settings_collapsed',
-        'groups_collapsed',
+        'groups_collapsed'
     ];
 
     /**
@@ -60,11 +60,11 @@ class Tournament extends Model
 
     public function groups()
     {
-        return$this->hasMany(Group::class);
+        return $this->hasMany(Group::class);
     }
 
-    public function tennis_matches()
+    public function rounds()
     {
-        return$this->hasMany(TennisMatch::class);
+        return $this->hasMany(Round::class);
     }
 }

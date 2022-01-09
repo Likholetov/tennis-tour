@@ -18,7 +18,7 @@ class CreateTennisMatchesTable extends Migration
             $table->string('expected_court', 20)->nullable();
             $table->string('court', 20)->nullable();
             $table->string('title', 50)->nullable();
-            $table->foreignId('tournament_id')->constrained()->onUpdate('cascade')
+            $table->foreignId('round_id')->constrained()->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('player_one_id')->nullable();
             $table->foreign('player_one_id')->references('id')->on('players')->restrictOnUpdate()->nullOnDelete();
@@ -28,6 +28,7 @@ class CreateTennisMatchesTable extends Migration
             $table->string('warm_up', 10)->nullable();
             $table->string('start', 10)->nullable();
             $table->string('end', 10)->nullable();
+            $table->boolean('collapsed')->default(false);
             $table->timestamps();
         });
     }

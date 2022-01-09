@@ -48,10 +48,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('tournament', App\Http\Controllers\TournamentController::class);
     Route::resource('rank', App\Http\Controllers\RankController::class);
     Route::resource('category', App\Http\Controllers\CategoryController::class);
+    Route::resource('tennis-match', App\Http\Controllers\TennisMatchController::class);
+    Route::resource('round', App\Http\Controllers\RoundController::class);
 });
 
 Route::get('/one-galleries', function () {
    return view('one-galleries');
 });
 
-Route::resource('tennis-match', App\Http\Controllers\TennisMatchController::class);

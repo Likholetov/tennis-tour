@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Group;
 use App\Models\Player;
 use App\Models\Rank;
+use App\Models\Round;
 use App\Models\TennisMatch;
 use App\Models\Tournament;
 use Carbon\Carbon;
@@ -315,7 +316,36 @@ class TournamentController extends Controller
 
     public function resultsSave(Request $request, Tournament $tournament)
     {
-        $tournamentOldMatches = $tournament->tennis_matches;
+        $tournamentOldRounds = $tournament->rounds;
+
+        foreach ($request->rounds as $round) {
+            $rnd = Round::create([
+                "order" => $round['order'],
+                "tournament_id" => $tournament->id,
+                "collapsed" => $round['collapsed'],
+            ]);
+
+            foreach ($round['tennisMatches'] as $tennis_match) {
+                TennisMatch::create([
+                    "expected_court" => $tennis_match['expected_court'],
+                    "court" => $tennis_match['court'],
+                    "title" => $tennis_match['title'],
+                    "round_id" => $rnd->id,
+                    "player_one_id" => $tennis_match['player1'],
+                    "player_two_id" => $tennis_match['player2'],
+                    "score" => $tennis_match['score'],
+                    "warm_up" => $tennis_match['warm_up'],
+                    "start" => $tennis_match['start'],
+                    "end" => $tennis_match['end'],
+                    "collapsed" => $tennis_match['collapsed'],
+                ]);
+            }
+        }
+
+        foreach ($tournamentOldRounds as $value) {
+            $value->delete();
+        }
+        /*$tournamentOldMatches = $tournament->tennis_matches;
 
         foreach ($request->tennis_matches as $key => $tennis_match) {
             TennisMatch::create([
@@ -329,12 +359,13 @@ class TournamentController extends Controller
                 "warm_up" => $tennis_match['warm_up'],
                 "start" => $tennis_match['start'],
                 "end" => $tennis_match['end'],
+                "collapsed" => $tennis_match['collapsed'],
             ]);
         }
 
         foreach ($tournamentOldMatches as $key => $value) {
             $value->delete();
-        }
+        }*/
 
         return $tournament;
     }

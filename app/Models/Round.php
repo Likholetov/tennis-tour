@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TennisMatch extends Model
+class Round extends Model
 {
     use HasFactory;
 
@@ -15,17 +15,9 @@ class TennisMatch extends Model
      * @var array
      */
     protected $fillable = [
-        'expected_court',
-        'court',
-        'title',
-        'round_id',
-        'player_one_id',
-        'player_two_id',
-        'score',
-        'warm_up',
-        'start',
-        'end',
-        'collapsed'
+        'order',
+        'tournament_id',
+        'collapsed',
     ];
 
     /**
@@ -35,6 +27,12 @@ class TennisMatch extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'round_id' => 'integer',
+        'tournament_id' => 'integer',
+        'collapsed' => 'boolean',
     ];
+
+    public function tennis_matches()
+    {
+        return $this->hasMany(TennisMatch::class);
+    }
 }

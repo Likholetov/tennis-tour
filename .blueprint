@@ -1,15 +1,15 @@
 created:
-    - app/Http/Controllers/TennisMatchController.php
-    - database/factories/TennisMatchFactory.php
-    - database/migrations/2021_12_29_042616_create_tennis_matches_table.php
-    - app/Models/TennisMatch.php
-    - tests/Feature/Http/Controllers/TennisMatchControllerTest.php
-    - app/Http/Requests/TennisMatchStoreRequest.php
-    - app/Http/Requests/TennisMatchUpdateRequest.php
-    - resources/views/tennisMatch/index.blade.php
-    - resources/views/tennisMatch/create.blade.php
-    - resources/views/tennisMatch/show.blade.php
-    - resources/views/tennisMatch/edit.blade.php
+    - app/Http/Controllers/RoundController.php
+    - database/factories/RoundFactory.php
+    - database/migrations/2022_01_09_224447_create_rounds_table.php
+    - app/Models/Round.php
+    - tests/Feature/Http/Controllers/RoundControllerTest.php
+    - app/Http/Requests/RoundStoreRequest.php
+    - app/Http/Requests/RoundUpdateRequest.php
+    - resources/views/round/index.blade.php
+    - resources/views/round/create.blade.php
+    - resources/views/round/show.blade.php
+    - resources/views/round/edit.blade.php
 updated:
     - routes/web.php
 models:
@@ -21,3 +21,4 @@ models:
     Category: { title: 'string:100' }
     Rank: { title: 'string:100' }
     TennisMatch: { expected_court: 'string:20 nullable', court: 'string:20 nullable', title: 'string:50 nullable', tournament_id: unsignedBigInteger, score: 'string:50 nullable', warm_up: 'string:10 nullable', start: 'string:10 nullable', end: 'string:10 nullable' }
+    Round: { order: integer, tournament_id: unsignedBigInteger, collapsed: boolean }

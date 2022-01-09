@@ -30,7 +30,7 @@
             :tournament="{{ $tournament }}"
             :groups="{{ $tournament->groups()->with('players')->get() }}"
             :players="{{ $tournament->players()->get() }}"
-            :existingmatches="{{ $tournament->tennis_matches()->get() }}"
+            :existingmatches="{{ $tournament->rounds()->with('tennis_matches')->get() }}"
         ></results-component>
     </section>
     <!-- /.content -->

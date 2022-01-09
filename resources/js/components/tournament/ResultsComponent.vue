@@ -12,38 +12,67 @@
         </div>
 
         <div class="col-md-12">
-            <div class="card card-secondary">
+            <div
+                class="card card-secondary"
+                v-for="(round, index) in currentTemplate"
+                :key="'rounds' + index"
+                v-bind:class="{
+                    'collapsed-card': round.collapsed,
+                }"
+            >
                 <div class="card-header">
-                    <h3 class="card-title">Круг 1</h3>
+                    <h3 class="card-title">Круг {{ round.order }}</h3>
 
                     <div class="card-tools">
                         <button
                             type="button"
                             class="btn btn-tool"
-                            data-card-widget="collapse"
+                            @click="round.collapsed = !round.collapsed"
                             title="Collapse"
                         >
-                            <i class="fas fa-minus"></i>
+                            <i
+                                class="fas"
+                                v-bind:class="{
+                                    'fa-plus': round.collapsed,
+                                    'fa-minus': !round.collapsed,
+                                }"
+                            ></i>
                         </button>
                     </div>
                 </div>
                 <div class="card-body" style="padding: 5px">
                     <div
                         class="card card-primary"
-                        v-for="(tennisMatch, key) in tennisMatches"
+                        v-for="(tennisMatch, key) in round.tennisMatches"
                         :key="'tennisMatches' + key"
+                        v-bind:class="{
+                            'collapsed-card': tennisMatch.collapsed,
+                        }"
                     >
                         <div class="card-header">
-                            <h3 class="card-title">{{ tennisMatch.title }}</h3>
+                            <h3 class="card-title">
+                                {{ tennisMatch.title }}
+                                {{ getSurname(tennisMatch.player1) }} -
+                                {{ getSurname(tennisMatch.player2) }}
+                            </h3>
 
                             <div class="card-tools">
                                 <button
                                     type="button"
                                     class="btn btn-tool"
-                                    data-card-widget="collapse"
+                                    @click="
+                                        tennisMatch.collapsed =
+                                            !tennisMatch.collapsed
+                                    "
                                     title="Collapse"
                                 >
-                                    <i class="fas fa-minus"></i>
+                                    <i
+                                        class="fas"
+                                        v-bind:class="{
+                                            'fa-plus': tennisMatch.collapsed,
+                                            'fa-minus': !tennisMatch.collapsed,
+                                        }"
+                                    ></i>
                                 </button>
                             </div>
                         </div>
@@ -61,8 +90,7 @@
                                         <td>
                                             <input
                                                 v-model="
-                                                    tennisMatches[key]
-                                                        .expected_court
+                                                    tennisMatch.expected_court
                                                 "
                                                 type="text"
                                                 class="form-control"
@@ -73,9 +101,7 @@
                                         <td>№ корта</td>
                                         <td>
                                             <input
-                                                v-model="
-                                                    tennisMatches[key].court
-                                                "
+                                                v-model="tennisMatch.court"
                                                 type="text"
                                                 class="form-control"
                                             />
@@ -89,9 +115,7 @@
                                                     form-control
                                                     custom-select
                                                 "
-                                                v-model="
-                                                    tennisMatches[key].player1
-                                                "
+                                                v-model="tennisMatch.player1"
                                             >
                                                 <option value="">
                                                     Не выбрано
@@ -131,9 +155,7 @@
                                                     form-control
                                                     custom-select
                                                 "
-                                                v-model="
-                                                    tennisMatches[key].player2
-                                                "
+                                                v-model="tennisMatch.player2"
                                             >
                                                 <option value="">
                                                     Не выбрано
@@ -169,9 +191,7 @@
                                         <td>Счет</td>
                                         <td>
                                             <input
-                                                v-model="
-                                                    tennisMatches[key].score
-                                                "
+                                                v-model="tennisMatch.score"
                                                 type="text"
                                                 class="form-control"
                                             />
@@ -181,9 +201,7 @@
                                         <td>нач. разм.</td>
                                         <td>
                                             <input
-                                                v-model="
-                                                    tennisMatches[key].warm_up
-                                                "
+                                                v-model="tennisMatch.warm_up"
                                                 type="time"
                                                 class="form-control"
                                             />
@@ -193,9 +211,7 @@
                                         <td>нач. игры</td>
                                         <td>
                                             <input
-                                                v-model="
-                                                    tennisMatches[key].start
-                                                "
+                                                v-model="tennisMatch.start"
                                                 type="time"
                                                 class="form-control"
                                             />
@@ -205,7 +221,7 @@
                                         <td>окон. игры</td>
                                         <td>
                                             <input
-                                                v-model="tennisMatches[key].end"
+                                                v-model="tennisMatch.end"
                                                 type="time"
                                                 class="form-control"
                                             />
@@ -268,11 +284,117 @@ export default {
     props: ["tournament", "groups", "players", "existingmatches"],
     data() {
         return {
+            rounds: [],
             tennisMatches: [],
             playersListGroups: [],
+            currentTemplate: {},
+            templates: [
+                {
+                    amount: 4,
+                    rounds: [
+                        {
+                            order: 1,
+                            collapsed: false,
+                            tennisMatches: [
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A1-A4",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A2-A3",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                            ],
+                        },
+                        {
+                            order: 2,
+                            collapsed: false,
+                            tennisMatches: [
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A1-A3",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A2-A4",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                            ],
+                        },
+                        {
+                            order: 3,
+                            collapsed: false,
+                            tennisMatches: [
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A1-A2",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                                {
+                                    expected_court: "",
+                                    court: "",
+                                    title: "A3-A4",
+                                    player1: "",
+                                    player2: "",
+                                    score: "",
+                                    warm_up: "00:00",
+                                    start: "00:00",
+                                    end: "00:00",
+                                    collapsed: false,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
         };
     },
-    watch: {},
+    watch: {
+        currentTemplate: {
+            handler: function () {
+                console.log(this.currentTemplate);
+            },
+            deep: true,
+        },
+    },
     methods: {
         save() {
             axios
@@ -285,6 +407,18 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+        getSurname(id) {
+            if (id == "") {
+                return "нет";
+            }
+
+            const player = this.players.find((pl) => pl.id == id);
+
+            if (player === undefined) {
+                return "ошибка";
+            }
+            return player.surname;
         },
         setGroups() {
             if (this.groups.length == 1) {
@@ -317,28 +451,15 @@ export default {
             }*/
         },
         setOnlyGroup() {
-            const titles = [
-                "A1-A4",
-                "A2-A3",
-                "A1-A3",
-                "A2-A4",
-                "A1-A2",
-                "A3-A4",
-            ];
+            const playersCount = this.groups[0].players.length;
 
-            titles.forEach((title) => {
-                this.tennisMatches.push({
-                    expected_court: "",
-                    court: "",
-                    title: title,
-                    player1: "",
-                    player2: "",
-                    score: "",
-                    warm_up: "00:00",
-                    start: "00:00",
-                    end: "00:00",
-                });
-            });
+            const template = this.templates.find(
+                (tmp) => tmp.amount == playersCount
+            );
+
+            if (template !== undefined) {
+                this.currentTemplate = template.rounds;
+            }
         },
     },
 };

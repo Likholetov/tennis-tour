@@ -7,10 +7,8 @@
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
-      <div class="col-sm-6">
-          <h1>Турниры</h1>
-      </div>
-      <div class="col-sm-6">
+      <div class="col-sm-12" style="display: flex; justify-content: space-between; align-items:center">
+        <h1>Турниры</h1>
           <a href="{{ route('tournament.create')}}" class="btn btn-success float-right">Добавить турнир</a>
       </div>
     </div>
@@ -35,23 +33,11 @@
             <thead>
                 <tr>
                     <th>
-                        #
+                        Начало
                     </th>
                     <th>
                         Название
                     </th>
-                    <th>
-                        Разряд
-                    </th>
-                    <th>
-                        Категория
-                    </th>
-                    <th>
-                      Время начала
-                  </th>
-                  <th>
-                    Место
-                </th>
                     <th>
                     </th>
                 </tr>
@@ -60,34 +46,21 @@
                 @foreach ($items as $tournament)
                 <tr>
                     <td>
-                        {{ $loop->iteration }}
+                        {{ Date::parse($tournament->started_at)->addHours(3)->format('H:i') }}
                     </td>
                     <td>
-                        {{ $tournament->title }}
+                        {{ $tournament->title }} {{ $tournament->rank->title ?? "" }} {{ $tournament->category->title ?? "" }} категории ({{ $tournament->place }})
                     </td>
-                    <td>
-                        {{ $tournament->rank->title ?? "" }}
-                    </td>
-                    <td>
-                      {{ $tournament->category->title ?? "" }}
-                  </td>
-                 
-                <td>
-                  {{ Date::parse($tournament->started_at)->addHours(3)->format('H:i') }}
-              </td>
-              <td>
-                {{ $tournament->place }}
-            </td>
                     <td class="project-actions text-right">
-                        <a class="btn btn-primary btn-sm" href="{{ route('tournament.results', $tournament['id']) }}">
-                            <i class="fas fa-pencil-alt">
-                            </i>Результаты
+                        <a class="btn btn-success btn-sm mb-2 mb-sm-0" href="{{ route('tournament.results', $tournament['id']) }}">
+                            <i class="fas fa-trophy"></i>
+                            </i>
                         </a>
-                        <a class="btn btn-primary btn-sm" href="{{ route('tournament.edit', $tournament['id']) }}">
+                        <a class="btn btn-primary btn-sm mb-2 mb-sm-0" href="{{ route('tournament.edit', $tournament['id']) }}">
                             <i class="fas fa-pencil-alt">
                             </i>
                         </a>
-                        <form action="{{ route('tournament.destroy', $tournament['id']) }}" method="POST"
+                        <form class="mb-2 mb-sm-0" action="{{ route('tournament.destroy', $tournament['id']) }}" method="POST"
                             style="display: inline-block">
                             @csrf
                             @method('DELETE')

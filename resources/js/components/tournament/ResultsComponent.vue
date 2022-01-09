@@ -10,10 +10,11 @@
                 Сохранить
             </button>
         </div>
+
         <div class="col-md-12">
-            <div class="card card-primary">
+            <div class="card card-secondary">
                 <div class="card-header">
-                    <h3 class="card-title">Результаты</h3>
+                    <h3 class="card-title">Круг 1</h3>
 
                     <div class="card-tools">
                         <button
@@ -26,156 +27,196 @@
                         </button>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="padding: 5px">
                     <div
+                        class="card card-primary"
                         v-for="(tennisMatch, key) in tennisMatches"
                         :key="'tennisMatches' + key"
                     >
-                        <h5 class="mb-2">{{ tennisMatch.title }}</h5>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Параметр</th>
-                                    <th>Значение</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>№ корта (ожид.)</td>
-                                    <td>
-                                        <input
-                                            v-model="
-                                                tennisMatches[key]
-                                                    .expected_court
-                                            "
-                                            type="text"
-                                            class="form-control"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>№ корта</td>
-                                    <td>
-                                        <input
-                                            v-model="tennisMatches[key].court"
-                                            type="text"
-                                            class="form-control"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Группа</td>
-                                    <td>{{ tennisMatch.title }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Игрок 1</td>
-                                    <td>
-                                        <select
-                                            class="form-control custom-select"
-                                            v-model="tennisMatches[key].player1"
-                                        >
-                                            <option value="">Не выбрано</option>
-                                            <option
-                                                v-for="(
-                                                    player, key1
-                                                ) in players"
-                                                :key="
-                                                    'tennisMatch.title'.key +
-                                                    'playerone' +
-                                                    key1
+                        <div class="card-header">
+                            <h3 class="card-title">{{ tennisMatch.title }}</h3>
+
+                            <div class="card-tools">
+                                <button
+                                    type="button"
+                                    class="btn btn-tool"
+                                    data-card-widget="collapse"
+                                    title="Collapse"
+                                >
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Параметр</th>
+                                        <th>Значение</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>№ корта (ожид.)</td>
+                                        <td>
+                                            <input
+                                                v-model="
+                                                    tennisMatches[key]
+                                                        .expected_court
                                                 "
-                                                :value="player.id"
-                                            >
-                                                {{
-                                                    player.surname +
-                                                    " " +
-                                                    player.name[0]
-                                                }}{{
-                                                    player.patronymic
-                                                        ? " " +
-                                                          player.patronymic[0]
-                                                        : ""
-                                                }}
-                                            </option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Игрок 2</td>
-                                    <td>
-                                        <select
-                                            class="form-control custom-select"
-                                            v-model="tennisMatches[key].player2"
-                                        >
-                                            <option value="">Не выбрано</option>
-                                            <option
-                                                v-for="(
-                                                    player, key1
-                                                ) in players"
-                                                :key="
-                                                    'tennisMatch.title'.key +
-                                                    'playertwo' +
-                                                    key1
+                                                type="text"
+                                                class="form-control"
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>№ корта</td>
+                                        <td>
+                                            <input
+                                                v-model="
+                                                    tennisMatches[key].court
                                                 "
-                                                :value="player.id"
+                                                type="text"
+                                                class="form-control"
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Игрок 1</td>
+                                        <td>
+                                            <select
+                                                class="
+                                                    form-control
+                                                    custom-select
+                                                "
+                                                v-model="
+                                                    tennisMatches[key].player1
+                                                "
                                             >
-                                                {{
-                                                    player.surname +
-                                                    " " +
-                                                    player.name[0]
-                                                }}{{
-                                                    player.patronymic
-                                                        ? " " +
-                                                          player.patronymic[0]
-                                                        : ""
-                                                }}
-                                            </option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Счет</td>
-                                    <td>
-                                        <input
-                                            v-model="tennisMatches[key].score"
-                                            type="text"
-                                            class="form-control"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>нач. разм.</td>
-                                    <td>
-                                        <input
-                                            v-model="tennisMatches[key].warm_up"
-                                            type="time"
-                                            class="form-control"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>нач. игры</td>
-                                    <td>
-                                        <input
-                                            v-model="tennisMatches[key].start"
-                                            type="time"
-                                            class="form-control"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>окон. игры</td>
-                                    <td>
-                                        <input
-                                            v-model="tennisMatches[key].end"
-                                            type="time"
-                                            class="form-control"
-                                        />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                                <option value="">
+                                                    Не выбрано
+                                                </option>
+                                                <option
+                                                    v-for="(
+                                                        player, key1
+                                                    ) in players"
+                                                    :key="
+                                                        'tennisMatch.title'
+                                                            .key +
+                                                        'playerone' +
+                                                        key1
+                                                    "
+                                                    :value="player.id"
+                                                >
+                                                    {{
+                                                        player.surname +
+                                                        " " +
+                                                        player.name[0]
+                                                    }}{{
+                                                        player.patronymic
+                                                            ? " " +
+                                                              player
+                                                                  .patronymic[0]
+                                                            : ""
+                                                    }}
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Игрок 2</td>
+                                        <td>
+                                            <select
+                                                class="
+                                                    form-control
+                                                    custom-select
+                                                "
+                                                v-model="
+                                                    tennisMatches[key].player2
+                                                "
+                                            >
+                                                <option value="">
+                                                    Не выбрано
+                                                </option>
+                                                <option
+                                                    v-for="(
+                                                        player, key1
+                                                    ) in players"
+                                                    :key="
+                                                        'tennisMatch.title'
+                                                            .key +
+                                                        'playertwo' +
+                                                        key1
+                                                    "
+                                                    :value="player.id"
+                                                >
+                                                    {{
+                                                        player.surname +
+                                                        " " +
+                                                        player.name[0]
+                                                    }}{{
+                                                        player.patronymic
+                                                            ? " " +
+                                                              player
+                                                                  .patronymic[0]
+                                                            : ""
+                                                    }}
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Счет</td>
+                                        <td>
+                                            <input
+                                                v-model="
+                                                    tennisMatches[key].score
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>нач. разм.</td>
+                                        <td>
+                                            <input
+                                                v-model="
+                                                    tennisMatches[key].warm_up
+                                                "
+                                                type="time"
+                                                class="form-control"
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>нач. игры</td>
+                                        <td>
+                                            <input
+                                                v-model="
+                                                    tennisMatches[key].start
+                                                "
+                                                type="time"
+                                                class="form-control"
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>окон. игры</td>
+                                        <td>
+                                            <input
+                                                v-model="tennisMatches[key].end"
+                                                type="time"
+                                                class="form-control"
+                                            />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
+                    <!-- /.card -->
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -198,9 +239,6 @@ export default {
     created() {
         console.log(this.groups);
         console.log(this.players);
-        if (this.groups.length == 0) {
-            this.setWithoutGroups();
-        }
 
         if (this.existingmatches.length > 0) {
             this.existingmatches.forEach((existingmatch) => {
@@ -223,6 +261,8 @@ export default {
                     }
                 });
             });
+        } else {
+            this.setGroups();
         }
     },
     props: ["tournament", "groups", "players", "existingmatches"],
@@ -246,8 +286,12 @@ export default {
                     console.log(err);
                 });
         },
-        setWithoutGroups() {
-            if (this.players.length <= 4) {
+        setGroups() {
+            if (this.groups.length == 1) {
+                this.setOnlyGroup();
+                return;
+            }
+            /*if (this.players.length <= 4) {
                 const titles = [
                     "A1-A4",
                     "A2-A3",
@@ -270,7 +314,31 @@ export default {
                         end: "00:00",
                     });
                 });
-            }
+            }*/
+        },
+        setOnlyGroup() {
+            const titles = [
+                "A1-A4",
+                "A2-A3",
+                "A1-A3",
+                "A2-A4",
+                "A1-A2",
+                "A3-A4",
+            ];
+
+            titles.forEach((title) => {
+                this.tennisMatches.push({
+                    expected_court: "",
+                    court: "",
+                    title: title,
+                    player1: "",
+                    player2: "",
+                    score: "",
+                    warm_up: "00:00",
+                    start: "00:00",
+                    end: "00:00",
+                });
+            });
         },
     },
 };

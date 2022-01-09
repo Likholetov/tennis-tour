@@ -62,6 +62,7 @@ class TournamentController extends Controller
         $tournament->save();
 
         $attachedPlayers = [];
+        $onlyGroup = null;
 
         if ($request->is_groups == true) {
 
@@ -100,6 +101,11 @@ class TournamentController extends Controller
                     }
                 }
             }
+        } else {
+            $onlyGroup = new Group();
+            $onlyGroup->title = 'A';
+            $onlyGroup->tournament_id = $tournament->id;
+            $onlyGroup->save();
         }
 
         foreach ($request->players as $player) {
@@ -109,7 +115,9 @@ class TournamentController extends Controller
 
             if ($player['code'] != 0) {
                 $tournament->players()->attach($player['code']);
-
+                if ($request->is_groups != true) {
+                    $onlyGroup->players()->attach($player['code']);
+                }
                 continue;
             }
 
@@ -118,10 +126,14 @@ class TournamentController extends Controller
             $newPlayer = new Player();
             $newPlayer->surname = $fioArray[0];
             $newPlayer->name = $fioArray[1];
-            $newPlayer->patronymic = $fioArray[2];
+            $newPlayer->patronymic = $fioArray[2] ?? "";
             $newPlayer->save();
 
             $tournament->players()->attach($newPlayer->id);
+
+            if ($request->is_groups != true) {
+                $onlyGroup->players()->attach($newPlayer->id);
+            }
         }
 
         return $tournament;
@@ -194,6 +206,7 @@ class TournamentController extends Controller
         $tournament->groups()->delete();
 
         $attachedPlayers = [];
+        $onlyGroup = null;
 
         if ($request->is_groups == true) {
 
@@ -224,7 +237,7 @@ class TournamentController extends Controller
                         $newPlayer = new Player();
                         $newPlayer->surname = $fioArray[0];
                         $newPlayer->name = $fioArray[1];
-                        $newPlayer->patronymic = $fioArray[2];
+                        $newPlayer->patronymic = $fioArray[2] ?? "";
                         $newPlayer->save();
 
                         $currentGroup->players()->attach($newPlayer->id);
@@ -232,6 +245,11 @@ class TournamentController extends Controller
                     }
                 }
             }
+        } else {
+            $onlyGroup = new Group();
+            $onlyGroup->title = 'A';
+            $onlyGroup->tournament_id = $tournament->id;
+            $onlyGroup->save();
         }
 
         foreach ($request->players as $player) {
@@ -241,6 +259,10 @@ class TournamentController extends Controller
 
             if ($player['code'] != 0) {
                 $tournament->players()->attach($player['code']);
+
+                if ($request->is_groups != true) {
+                    $onlyGroup->players()->attach($player['code']);
+                }
 
                 continue;
             }
@@ -254,6 +276,10 @@ class TournamentController extends Controller
             $newPlayer->save();
 
             $tournament->players()->attach($newPlayer->id);
+
+            if ($request->is_groups != true) {
+                $onlyGroup->players()->attach($newPlayer->id);
+            }
         }
 
         return $tournament;

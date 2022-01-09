@@ -174,7 +174,7 @@
                     <h6 class="mb-2">Выбрать существующего игрока:</h6>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-8">
                                 <label>Поиск</label>
                                 <v-select
                                     placeholder="Поиск..."
@@ -183,7 +183,7 @@
                                 ></v-select>
                             </div>
                             <div
-                                class="col-6"
+                                class="col-4"
                                 style="display: flex; align-items: end"
                             >
                                 <button
@@ -199,7 +199,7 @@
                     <h6 class="mb-2">Добавить нового игрока:</h6>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-12">
                                 <label>Фамилия</label>
                                 <input
                                     v-model="newSurname"
@@ -213,7 +213,7 @@
                                     newSurnameError
                                 }}</span>
                             </div>
-                            <div class="col-3">
+                            <div class="col-12">
                                 <label>Имя</label>
                                 <input
                                     v-model="newName"
@@ -227,7 +227,7 @@
                                     newNameError
                                 }}</span>
                             </div>
-                            <div class="col-3">
+                            <div class="col-12">
                                 <label>Отчество</label>
                                 <input
                                     v-model="newPatronimic"
@@ -243,7 +243,7 @@
                             </div>
 
                             <div
-                                class="col-3"
+                                class="col-6 mt-2"
                                 style="display: flex; align-items: end"
                             >
                                 <button
@@ -771,10 +771,10 @@ export default {
                 return;
             }
 
-            if (this.newPatronimic == "") {
+            /*if (this.newPatronimic == "") {
                 this.newPatronimicError = "Введите отчество";
                 return;
-            }
+            }*/
 
             const fullName =
                 this.newSurname + " " + this.newName + " " + this.newPatronimic;
@@ -788,7 +788,30 @@ export default {
                 return;
             }
 
-            axios
+            if (
+                this.options.some(
+                    (player) => player.label.localeCompare(fullName) == 0
+                )
+            ) {
+                this.newSurnameError = "Игрок с таким ФИО уже есть в базе";
+                return;
+            }
+
+            this.playersList.push({
+                label:
+                    this.newSurname +
+                    " " +
+                    this.newName +
+                    " " +
+                    this.newPatronimic,
+                code: 0,
+            });
+
+            this.newName = "";
+            this.newSurname = "";
+            this.newPatronimic = "";
+
+            /*axios
                 .post("/admin/is-player-exists", {
                     name: this.newName,
                     patronymic: this.newPatronimic,
@@ -811,7 +834,7 @@ export default {
                     this.newName = "";
                     this.newSurname = "";
                     this.newPatronimic = "";
-                });
+                });*/
         },
         addExisting() {
             if (this.currentPlayer == "") {

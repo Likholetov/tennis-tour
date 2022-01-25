@@ -117,7 +117,7 @@
                                                 "
                                                 v-model="tennisMatch.player1"
                                             >
-                                                <option value="">
+                                                <option value>
                                                     Не выбрано
                                                 </option>
                                                 <option
@@ -157,7 +157,7 @@
                                                 "
                                                 v-model="tennisMatch.player2"
                                             >
-                                                <option value="">
+                                                <option value>
                                                     Не выбрано
                                                 </option>
                                                 <option
@@ -1030,34 +1030,35 @@ const templates = [
                         collapsed: false,
                     },
                     {
-                order: 6,
-                collapsed: false,
-                tennisMatches: [
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "FIN",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
+                        order: 6,
                         collapsed: false,
+                        tennisMatches: [
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "FIN",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "3-M",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                        ],
                     },
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "3-M",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
-                        collapsed: false,
-                    },
-
                 ],
             },
         ],
@@ -1232,7 +1233,6 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-
                 ],
             },
             {
@@ -1263,7 +1263,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(B3-C3)",
@@ -1276,40 +1276,40 @@ const templates = [
                         collapsed: false,
                     },
                     {
-                order: 6,
-                collapsed: false,
-                tennisMatches: [
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "FIN",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
+                        order: 6,
                         collapsed: false,
+                        tennisMatches: [
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "FIN",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "3-M",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                        ],
                     },
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "3-M",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
-                        collapsed: false,
-                    },
-
                 ],
             },
         ],
     },
-//];
-{
+    {
         min: 10,
         max: 12,
         rounds: [
@@ -1341,7 +1341,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C1",
@@ -1369,7 +1369,7 @@ const templates = [
             },
             {
                 order: 2,
-                  collapsed: false,
+                collapsed: false,
                 tennisMatches: [
                     {
                         expected_court: "",
@@ -1395,7 +1395,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C2",
@@ -1423,7 +1423,7 @@ const templates = [
             },
             {
                 order: 3,
-                  collapsed: false,
+                collapsed: false,
                 tennisMatches: [
                     {
                         expected_court: "",
@@ -1449,7 +1449,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C3",
@@ -1527,7 +1527,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(A3-D3)",
@@ -1539,7 +1539,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(B3-C3)",
@@ -1551,7 +1551,6 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-
                 ],
             },
             {
@@ -1582,7 +1581,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "YFIN",
@@ -1595,34 +1594,35 @@ const templates = [
                         collapsed: false,
                     },
                     {
-                order: 6,
-                collapsed: false,
-                tennisMatches: [
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "FIN",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
+                        order: 6,
                         collapsed: false,
+                        tennisMatches: [
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "FIN",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "3-M",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                        ],
                     },
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "3-M",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
-                        collapsed: false,
-                    },
-
                 ],
             },
         ],
@@ -1659,7 +1659,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "A1",
@@ -1683,7 +1683,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "B1",
@@ -1699,7 +1699,7 @@ const templates = [
             },
             {
                 order: 2,
-                  collapsed: false,
+                collapsed: false,
                 tennisMatches: [
                     {
                         expected_court: "",
@@ -1725,7 +1725,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "A2",
@@ -1749,7 +1749,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "B2",
@@ -1791,7 +1791,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "A3",
@@ -1815,7 +1815,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "B3",
@@ -1858,7 +1858,7 @@ const templates = [
                         collapsed: false,
                     },
 
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(E3-D3)",
@@ -1870,8 +1870,6 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-
-
                 ],
             },
             {
@@ -1902,7 +1900,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "D1-E1",
@@ -1914,7 +1912,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "B1-A2C2",
@@ -1926,7 +1924,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(A3-D3E3)",
@@ -1938,7 +1936,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(B3-C3)",
@@ -1950,80 +1948,82 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-            {
-                order: 6,
-                collapsed: false,
-                tennisMatches: [
                     {
-                        expected_court: "",
-                        court: "",
-                        title: "1/2",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
+                        order: 6,
                         collapsed: false,
+                        tennisMatches: [
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "1/2",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "1/2",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "YFIN",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                            {
+                                order: 7,
+                                collapsed: false,
+                                tennisMatches: [
+                                    {
+                                        expected_court: "",
+                                        court: "",
+                                        title: "FIN",
+                                        player1: "",
+                                        player2: "",
+                                        score: "",
+                                        warm_up: "00:00",
+                                        start: "00:00",
+                                        end: "00:00",
+                                        collapsed: false,
+                                    },
+                                    {
+                                        expected_court: "",
+                                        court: "",
+                                        title: "3-M",
+                                        player1: "",
+                                        player2: "",
+                                        score: "",
+                                        warm_up: "00:00",
+                                        start: "00:00",
+                                        end: "00:00",
+                                        collapsed: false,
+                                    },
+                                ],
+                            },
+                        ],
                     },
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "1/2",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
-                        collapsed: false,
-                    },
-                     {
-                        expected_court: "",
-                        court: "",
-                        title: "YFIN",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
-                        collapsed: false,
-                    },
-                    {
-                order: 7,
-                collapsed: false,
-                tennisMatches: [
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "FIN",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
-                        collapsed: false,
-                    },
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "3-M",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
-                        collapsed: false,
-                    },
-
                 ],
             },
         ],
     },
-
     {
         min: 15,
         max: 18,
@@ -2056,7 +2056,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "E1",
@@ -2080,7 +2080,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "A1",
@@ -2092,7 +2092,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C1",
@@ -2108,7 +2108,7 @@ const templates = [
             },
             {
                 order: 2,
-                   collapsed: false,
+                collapsed: false,
                 tennisMatches: [
                     {
                         expected_court: "",
@@ -2134,7 +2134,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "E2",
@@ -2158,7 +2158,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "A2",
@@ -2170,7 +2170,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C2",
@@ -2186,7 +2186,7 @@ const templates = [
             },
             {
                 order: 3,
-                 collapsed: false,
+                collapsed: false,
                 tennisMatches: [
                     {
                         expected_court: "",
@@ -2212,7 +2212,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "E3",
@@ -2236,7 +2236,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "A3",
@@ -2248,7 +2248,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C3",
@@ -2291,7 +2291,7 @@ const templates = [
                         collapsed: false,
                     },
 
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "F1-A2",
@@ -2327,7 +2327,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(D3-E3",
@@ -2339,9 +2339,6 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-
-
-
                 ],
             },
             {
@@ -2372,7 +2369,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "D1-F1A2",
@@ -2384,7 +2381,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "B1-C2E2",
@@ -2396,7 +2393,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(A3-D3F3)",
@@ -2408,7 +2405,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(C3-B3E3)",
@@ -2420,6 +2417,8 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
+                ],
+            },
             {
                 order: 6,
                 collapsed: false,
@@ -2448,7 +2447,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "YFIN",
@@ -2460,7 +2459,9 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                    {
+                ],
+            },
+            {
                 order: 7,
                 collapsed: false,
                 tennisMatches: [
@@ -2488,12 +2489,10 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-
                 ],
             },
         ],
     },
-
     {
         min: 18,
         max: 21,
@@ -2526,7 +2525,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "E1",
@@ -2550,7 +2549,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "F1",
@@ -2562,7 +2561,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C1",
@@ -2590,7 +2589,7 @@ const templates = [
             },
             {
                 order: 2,
-                  collapsed: false,
+                collapsed: false,
                 tennisMatches: [
                     {
                         expected_court: "",
@@ -2616,7 +2615,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "E2",
@@ -2640,7 +2639,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "F2",
@@ -2652,7 +2651,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C2",
@@ -2706,7 +2705,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "E3",
@@ -2730,7 +2729,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "F3",
@@ -2742,7 +2741,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C3",
@@ -2797,7 +2796,7 @@ const templates = [
                         collapsed: false,
                     },
 
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "F2-C1",
@@ -2833,7 +2832,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C2-G2",
@@ -2845,7 +2844,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(G3-D3)",
@@ -2857,7 +2856,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(E3-B3)",
@@ -2869,7 +2868,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(F3-C3)",
@@ -2881,9 +2880,6 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-
-
-
                 ],
             },
             {
@@ -2914,7 +2910,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "D1E2-F1A1",
@@ -2926,7 +2922,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "B1-C2G2",
@@ -2938,7 +2934,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(A3-G3D3)",
@@ -2950,7 +2946,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(E3B3-F3C3)",
@@ -2962,82 +2958,83 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-            {
-                order: 6,
-                collapsed: false,
-                tennisMatches: [
                     {
-                        expected_court: "",
-                        court: "",
-                        title: "1/2",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
+                        order: 6,
                         collapsed: false,
+                        tennisMatches: [
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "1/2",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "1/2",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "YFIN",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                        ],
                     },
                     {
-                        expected_court: "",
-                        court: "",
-                        title: "1/2",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
+                        order: 7,
                         collapsed: false,
+                        tennisMatches: [
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "FIN",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "3-M",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                        ],
                     },
-                     {
-                        expected_court: "",
-                        court: "",
-                        title: "YFIN",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
-                        collapsed: false,
-                    },
-                    {
-                order: 7,
-                collapsed: false,
-                tennisMatches: [
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "FIN",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
-                        collapsed: false,
-                    },
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "3-M",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
-                        collapsed: false,
-                    },
-
                 ],
             },
         ],
     },
     {
-
-
         min: 21,
         max: 24,
         rounds: [
@@ -3069,7 +3066,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "G1",
@@ -3093,7 +3090,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "E1",
@@ -3105,7 +3102,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "B1",
@@ -3129,7 +3126,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C1",
@@ -3145,7 +3142,7 @@ const templates = [
             },
             {
                 order: 2,
-                  collapsed: false,
+                collapsed: false,
                 tennisMatches: [
                     {
                         expected_court: "",
@@ -3171,7 +3168,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "G2",
@@ -3195,7 +3192,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "E2",
@@ -3207,7 +3204,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "B2",
@@ -3231,7 +3228,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C2",
@@ -3273,7 +3270,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "G3",
@@ -3297,7 +3294,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "E3",
@@ -3309,7 +3306,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "B3",
@@ -3333,7 +3330,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "C3",
@@ -3376,7 +3373,7 @@ const templates = [
                         collapsed: false,
                     },
 
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "E1-B2",
@@ -3412,7 +3409,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "F1-A2",
@@ -3424,7 +3421,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "H1-C2",
@@ -3436,7 +3433,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "G2-B1",
@@ -3448,7 +3445,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(A3-H3)",
@@ -3472,7 +3469,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(E3-B3)",
@@ -3484,7 +3481,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                      {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(F3-C3)",
@@ -3496,9 +3493,6 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-
-
-
                 ],
             },
             {
@@ -3529,7 +3523,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "D1E2-F1A2",
@@ -3541,7 +3535,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "H1C2-G2B1",
@@ -3553,7 +3547,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(A3H3-G3D3)",
@@ -3565,7 +3559,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "Y(E3B3-F3C3)",
@@ -3577,6 +3571,8 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
+                ],
+            },
             {
                 order: 6,
                 collapsed: false,
@@ -3605,7 +3601,7 @@ const templates = [
                         end: "00:00",
                         collapsed: false,
                     },
-                     {
+                    {
                         expected_court: "",
                         court: "",
                         title: "YFIN",
@@ -3618,36 +3614,38 @@ const templates = [
                         collapsed: false,
                     },
                     {
-                order: 7,
-                collapsed: false,
-                tennisMatches: [
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "FIN",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
+                        order: 7,
                         collapsed: false,
+                        tennisMatches: [
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "FIN",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                            {
+                                expected_court: "",
+                                court: "",
+                                title: "3-M",
+                                player1: "",
+                                player2: "",
+                                score: "",
+                                warm_up: "00:00",
+                                start: "00:00",
+                                end: "00:00",
+                                collapsed: false,
+                            },
+                        ],
                     },
-                    {
-                        expected_court: "",
-                        court: "",
-                        title: "3-M",
-                        player1: "",
-                        player2: "",
-                        score: "",
-                        warm_up: "00:00",
-                        start: "00:00",
-                        end: "00:00",
-                        collapsed: false,
-                    },
-
                 ],
             },
         ],
     },
+];
 </script>
